@@ -3,88 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suyash Singh — Exabyte Scale Data Engineer</title>
-  <meta name="description" content="Lead Data Engineer at TikTok USDS. Governing 1+ EB of data, building AI-native pipeline agents." />
+  <title>Suyash Singh — Data Engineer · TikTok USDS</title>
+  <meta name="description" content="Data Engineer at TikTok USDS. 1+ EB governed. Atlas, Pluto, ECC Bot — three AI tools in production." />
 
-  <!-- React + ReactDOM from CDN -->
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-  <!-- Babel standalone for JSX transpilation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'EB Garamond', Georgia, serif; background: #f7f5f0; }
 
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap');
+    @keyframes marquee   { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+    @keyframes blink     { 0%,100% { opacity:1; } 50% { opacity:0; } }
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes pulseRing { 0% { transform:scale(1); opacity:.9; } 100% { transform:scale(2.6); opacity:0; } }
+    @keyframes floatBadge{ 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
 
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-100%); }
+    .fade-up-0 { animation: fadeUp .9s .10s cubic-bezier(.4,0,.2,1) both; }
+    .fade-up-1 { animation: fadeUp .9s .25s cubic-bezier(.4,0,.2,1) both; }
+    .fade-up-2 { animation: fadeUp .9s .45s cubic-bezier(.4,0,.2,1) both; }
+    .fade-up-3 { animation: fadeUp .9s .65s cubic-bezier(.4,0,.2,1) both; }
+
+    /* ─── NAV ─── */
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+    /* ─── HERO LAYOUT ─── */
+    .hero-inner     { display: grid; grid-template-columns: 58% 42%; gap: 3rem; align-items: center; position: relative; }
+    .hero-stats     { display: grid; grid-template-columns: repeat(4,1fr); background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 28px rgba(0,0,0,.07); }
+    .hero-stat-cell { padding: 2rem 1.5rem; border-right: 1px solid #e2e8f0; }
+
+    /* ─── PHOTO CARD ─── */
+    .photo-card {
+      position: relative;
+      border-radius: 2px;
+      overflow: visible;
     }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
+    .photo-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 2px;
+      box-shadow: 0 24px 60px rgba(0,82,204,.18), 0 8px 24px rgba(0,0,0,.12);
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .photo-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      display: block;
     }
-    @keyframes pulseRing {
-      0%   { transform: scale(1);   opacity: 0.9; }
-      100% { transform: scale(2.6); opacity: 0; }
+    .photo-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #0c1a3a 0%, #0052cc 60%, #003d99 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .photo-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(0deg, rgba(8,12,20,.92) 0%, transparent 100%);
+      padding: 2.5rem 1.5rem 1.5rem;
+    }
+    .expertise-badge {
+      position: absolute;
+      font-family: 'IBM Plex Mono', monospace; font-size: .58rem; font-weight: 600;
+      letter-spacing: .12em; padding: .35rem .75rem;
+      border-radius: 2px; white-space: nowrap;
+      animation: floatBadge 3s ease-in-out infinite;
     }
 
-    .fade-up-0 { animation: fadeUp 0.9s 0.1s cubic-bezier(.4,0,.2,1) both; }
-    .fade-up-1 { animation: fadeUp 0.9s 0.25s cubic-bezier(.4,0,.2,1) both; }
-    .fade-up-2 { animation: fadeUp 0.9s 0.45s cubic-bezier(.4,0,.2,1) both; }
-    .fade-up-3 { animation: fadeUp 0.9s 0.65s cubic-bezier(.4,0,.2,1) both; }
+    /* ─── AI TOOLS ─── */
+    .ai-panel-grid   { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; }
+    .ai-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,.08); }
+    .tool-summary    { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.06); margin-top: 3rem; }
 
+    /* ─── PIPELINE ─── */
+    .pipeline-layout { display: grid; grid-template-columns: 1fr 2.2fr; gap: 4.5rem; align-items: start; }
+
+    /* ─── WAREHOUSES ─── */
+    .wh-grid { display: grid; grid-template-columns: repeat(7,1fr); border: 1px solid #e2e8f0; }
+
+    /* ─── PATENTS ─── */
+    .patents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-layout { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; }
+
+    /* ─── SKILLS ─── */
+    .skills-grid { display: grid; grid-template-columns: repeat(6,1fr); border: 1px solid #e2e8f0; }
+    .skill-bullet { width: 6px; height: 6px; border-radius: 50%; background: #0052cc; flex-shrink: 0; display: inline-block; }
+
+    /* ─── IMPACT ─── */
+    .impact-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; border-left: 1px solid rgba(255,255,255,.06); }
+
+    /* ─── WRITING ─── */
+    .writing-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+
+    /* ─── HOVER ─── */
     .nav-link { position: relative; }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 1px; background: #0052cc;
-      transition: width 0.3s;
-    }
-    .nav-link:hover::after { width: 100%; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:#0052cc; transition:width .3s; }
+    .nav-link:hover::after { width:100%; }
 
-    .wh-card { transition: all 0.25s; cursor: default; }
+    .wh-card { transition: all .25s; cursor: default; }
     .wh-card:hover { background: #0052cc !important; }
-    .wh-card:hover .wh-id    { color: rgba(255,255,255,0.3) !important; }
+    .wh-card:hover .wh-id    { color: rgba(255,255,255,.3) !important; }
     .wh-card:hover .wh-name  { color: white !important; }
-    .wh-card:hover .wh-role  { color: rgba(255,255,255,0.65) !important; }
-    .wh-card:hover .wh-scale { color: rgba(255,255,255,0.45) !important; }
+    .wh-card:hover .wh-role  { color: rgba(255,255,255,.65) !important; }
+    .wh-card:hover .wh-scale { color: rgba(255,255,255,.45) !important; }
     .wh-card:hover .wh-dot   { background: white !important; }
-    .wh-card:hover .wh-apps  { color: rgba(255,255,255,0.5) !important; border-color: rgba(255,255,255,0.2) !important; }
+    .wh-card:hover .wh-apps  { color: rgba(255,255,255,.5) !important; border-color: rgba(255,255,255,.2) !important; }
 
-    .exp-card { border-left: 2px solid #e2e8f0; transition: border-color 0.3s; }
+    .exp-card { border-left: 2px solid #e2e8f0; transition: border-color .3s; }
     .exp-card:hover { border-color: #0052cc; }
 
-    .cert-chip { transition: all 0.25s; }
-    .cert-chip:hover { background: #0052cc !important; border-color: #0052cc !important; }
-    .cert-chip:hover .cert-name   { color: white !important; }
-    .cert-chip:hover .cert-issuer { color: rgba(255,255,255,0.6) !important; }
-
-    .tool-tab { transition: all 0.2s; cursor: pointer; }
-    .skill-col { transition: background 0.25s; }
+    .skill-col { transition: background .25s; }
     .skill-col:hover { background: #f0f4ff !important; }
 
-    .post-row { transition: background 0.2s; }
-    .post-row:hover { background: rgba(0,82,204,0.12) !important; }
+    .cert-chip { transition: all .25s; }
+    .cert-chip:hover { background: #0052cc !important; border-color: #0052cc !important; }
+    .cert-chip:hover .cert-name   { color: white !important; }
+    .cert-chip:hover .cert-issuer { color: rgba(255,255,255,.6) !important; }
+
+    .post-row { transition: background .2s; }
+    .post-row:hover { background: rgba(0,82,204,.12) !important; }
 
     .pulse-dot::before {
-      content: ''; position: absolute; inset: 0; border-radius: 50%;
-      background: #ff2200; animation: pulseRing 1.6s ease-out infinite;
+      content:''; position:absolute; inset:0; border-radius:50%;
+      background:#ff2200; animation: pulseRing 1.6s ease-out infinite;
     }
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #f7f5f0; }
     ::-webkit-scrollbar-thumb { background: #0052cc; border-radius: 2px; }
+
+    /* ═══════════════════════════════════════
+       MOBILE RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .photo-card { max-width: 420px; margin: 0 auto; }
+      .photo-img-wrap { aspect-ratio: 4/3; }
+      .pipeline-layout { grid-template-columns: 1fr; }
+      .exp-layout { grid-template-columns: 1fr; }
+      .writing-grid { grid-template-columns: 1fr; }
+      .ai-panel-grid { grid-template-columns: 1fr; }
+      .tool-summary { grid-template-columns: 1fr; }
+      .patents-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .hero-stats { grid-template-columns: repeat(2,1fr); }
+      .hero-stat-cell:nth-child(2) { border-right: none; }
+      .hero-stat-cell:nth-child(3) { border-right: 1px solid #e2e8f0; border-top: 1px solid #e2e8f0; }
+      .hero-stat-cell:nth-child(4) { border-top: 1px solid #e2e8f0; border-right: none; }
+
+      .wh-grid { grid-template-columns: repeat(2,1fr); overflow-x: auto; }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .impact-grid { grid-template-columns: repeat(2,1fr); }
+
+      .ai-metrics-grid { grid-template-columns: 1fr 1fr; }
+
+      section { padding: 3.5rem 0 !important; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .impact-grid { grid-template-columns: repeat(2,1fr); }
+    }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="root"></div>
@@ -92,100 +183,95 @@
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    /* ═══════════════════════════════════════════════════════
-       DATA
-    ═══════════════════════════════════════════════════════ */
+    /* ═══════ DATA ═══════ */
     const HERO_STATS = [
-      { label: "DATA GOVERNED", value: "1.0 EB", unit: "+", sub: "≈ 1,000+ Petabytes" },
-      { label: "AI INCIDENTS RESOLVED", value: "200K", unit: "+", sub: "Atlas Auto-Remediation" },
-      { label: "DEPLOYMENTS AUTOMATED", value: "600K", unit: "+", sub: "30% of All TikTok US" },
-      { label: "ANNUAL SAVINGS", value: "$12M", unit: "+", sub: "HDFS + Spark Optimisation" },
+      { label:"DATA GOVERNED",         value:"1.0 EB", unit:"+", sub:"≈ 1,000+ Petabytes" },
+      { label:"AI INCIDENTS RESOLVED", value:"200K",   unit:"+", sub:"Atlas Auto-Remediation" },
+      { label:"DEPLOYMENTS AUTOMATED", value:"600K",   unit:"+", sub:"30% of All TikTok US" },
+      { label:"ANNUAL SAVINGS",        value:"$12M",   unit:"+", sub:"HDFS + Spark Optimisation" },
     ];
 
     const TICKER_ITEMS = [
-      "PYTHON","PYSPARK","SCALA","SQL","APACHE FLINK","KAFKA/BMQ",
-      "APACHE SPARK","AIRFLOW","KUBERNETES","TERRAFORM","SNOWFLAKE",
-      "BIGQUERY","REDSHIFT","CLICKHOUSE","AWS EMR","GCP DATAFLOW",
-      "HADOOP / HDFS","HIVE / PRESTO","LLM AGENTS","ETL DESIGN",
-      "DATA LINEAGE","COPPA COMPLIANCE","REAL-TIME STREAMING","DATA MESH",
+      "PYTHON","PYSPARK","SCALA","SQL","APACHE FLINK","KAFKA/BMQ","APACHE SPARK",
+      "AIRFLOW","KUBERNETES","TERRAFORM","SNOWFLAKE","BIGQUERY","REDSHIFT",
+      "CLICKHOUSE","AWS EMR","GCP DATAFLOW","HADOOP / HDFS","HIVE / PRESTO",
+      "LLM AGENTS","ETL DESIGN","DATA LINEAGE","COPPA COMPLIANCE","REAL-TIME STREAMING","DATA MESH",
     ];
 
     const AI_TOOLS = [
       {
-        code: "TOOL-01", name: "ATLAS", subtitle: "AI Pipeline Intelligence Engine",
-        tagline: "From 1,000 failures/day to under 5.",
-        status: "PATENT PENDING", color: "#0052cc",
-        metrics: [
-          { val: "200K+", label: "Incidents Auto-Resolved" },
-          { val: "90%",   label: "Manual Effort Eliminated" },
-          { val: "<5",    label: "Daily Failures (L30D)" },
-          { val: "0→Prod",label: "Built From Scratch" },
+        code:"TOOL-01", name:"ATLAS", subtitle:"AI Pipeline Intelligence Engine",
+        tagline:"From 1,000 failures/day to under 5.",
+        status:"PATENT", color:"#0052cc",
+        metrics:[
+          { val:"200K+",  label:"Incidents Auto-Resolved" },
+          { val:"90%",    label:"Manual Effort Eliminated" },
+          { val:"<5",     label:"Daily Failures (L30D)" },
+          { val:"0→Prod", label:"Built From Scratch" },
         ],
-        desc: "Atlas is an LLM-driven autonomous agent that monitors, diagnoses, and self-heals ETL pipeline failures across TikTok USDS's entire data infrastructure. By analyzing task metadata, error logs, code lineage, and historical remediation patterns, Atlas understands why a task failed — and automatically resolves it. Deployed on production serving all of TikTok USDS. Patent pending.",
-        tags: ["LLM Agents","ETL Self-Healing","Metadata Graph","Auto-Remediation","Spark","Dorado/Airflow"],
+        desc:"Atlas is an LLM-driven autonomous agent that monitors, diagnoses, and self-heals ETL pipeline failures across TikTok USDS's entire data infrastructure. By analyzing task metadata, error logs, code lineage, and historical remediation patterns, Atlas understands why a task failed — and automatically resolves it. Deployed on production serving all of TikTok USDS.",
+        tags:["LLM Agents","ETL Self-Healing","Metadata Graph","Auto-Remediation","Spark","Dorado/Airflow"],
       },
       {
-        code: "TOOL-02", name: "PLUTO", subtitle: "AI Compliance Deployment Engine",
-        tagline: "5 days → 10 minutes. At 30% of all US deployments.",
-        status: "PATENT PENDING", color: "#003d99",
-        metrics: [
-          { val: "600K+",  label: "Deployments Over 2 Years" },
-          { val: "10K+",   label: "Deployments Per Week" },
-          { val: "30%",    label: "Of All TikTok US Deploys" },
-          { val: "5d→10m", label: "Deployment Time Reduction" },
+        code:"TOOL-02", name:"PLUTO", subtitle:"AI Compliance Deployment Engine",
+        tagline:"5 days → 10 minutes. At 30% of all US deployments.",
+        status:"PATENT", color:"#003d99",
+        metrics:[
+          { val:"600K+",  label:"Deployments Over 2 Years" },
+          { val:"10K+",   label:"Deployments Per Week" },
+          { val:"30%",    label:"Of All TikTok US Deploys" },
+          { val:"5d→10m", label:"Deployment Time Reduction" },
         ],
-        desc: "Pluto is an AI-powered one-click deployment platform that reviews, validates, and deploys infrastructure changes while ensuring all US data compliance rules (COPPA, CT SB3) are maintained. It uses AI to understand deployment context, detect compliance drift, and automate the full review-approve-deploy cycle. Responsible for 30% of all TikTok US deployments — over 600,000 across two years. Patent pending.",
-        tags: ["CI/CD Automation","Compliance AI","Predictive Scaling","COPPA/SB3","One-Click Deploy"],
+        desc:"Pluto is an AI-powered one-click deployment platform that reviews, validates, and deploys infrastructure changes while ensuring all US data compliance rules (COPPA, CT SB3) are maintained. It uses AI to understand deployment context, detect compliance drift, and automate the full review-approve-deploy cycle. Responsible for 30% of all TikTok US deployments — over 600,000 across two years.",
+        tags:["CI/CD Automation","Compliance AI","Predictive Scaling","COPPA/SB3","One-Click Deploy"],
       },
       {
-        code: "TOOL-03", name: "ECC BOT", subtitle: "Real-Time SLA & Infrastructure Monitor",
-        tagline: "Always-on intelligence across all of TikTok USDS.",
-        status: "PRODUCTION", color: "#1a6b3c",
-        metrics: [
-          { val: "140+",    label: "Business Units Monitored" },
-          { val: "15→80+",  label: "NPS Score Improvement" },
-          { val: "120→<15", label: "Quarterly SLA Breaches" },
-          { val: "24/7",    label: "Real-Time Alerting" },
+        code:"TOOL-03", name:"ECC BOT", subtitle:"Real-Time SLA & Infrastructure Monitor",
+        tagline:"Always-on intelligence across all of TikTok USDS.",
+        status:"PRODUCTION", color:"#1a6b3c",
+        metrics:[
+          { val:"140+",    label:"Business Units Monitored" },
+          { val:"15→80+",  label:"NPS Score Improvement" },
+          { val:"120→<15", label:"Quarterly SLA Breaches" },
+          { val:"24/7",    label:"Real-Time Alerting" },
         ],
-        desc: "ECC Bot continuously reviews all SLA thresholds, infrastructure metrics, and pipeline health signals across TikTok USDS. The moment any metric drops below a critical threshold, ECC Bot automatically identifies downstream stakeholder impact, calculates an ETA based on real-time progress data, and fires precise alerts — giving teams the context they need before they even know there's a problem. Deployed on production for the entire TikTok USDS organization.",
-        tags: ["Real-Time Monitoring","SLA Intelligence","Stakeholder Alerting","Impact Analysis","ETA Prediction"],
+        desc:"ECC Bot continuously reviews all SLA thresholds, infrastructure metrics, and pipeline health signals across TikTok USDS. The moment any metric drops below a critical threshold, ECC Bot automatically identifies downstream stakeholder impact, calculates an ETA based on real-time progress data, and fires precise alerts — giving teams the context they need before they even know there's a problem. Deployed on production for the entire TikTok USDS organization.",
+        tags:["Real-Time Monitoring","SLA Intelligence","Stakeholder Alerting","Impact Analysis","ETA Prediction"],
       },
     ];
 
     const WAREHOUSES = [
-      { id:"01", name:"TikTok DW",       role:"Core Platform — Dim Tables", scale:"Primary data warehouse",  apps:"1B+ users",         status:"LIVE" },
-      { id:"02", name:"Libra DW",         role:"A/B Test Platform",          scale:"3M+ instances / month",   apps:"All experiments",   status:"LIVE" },
-      { id:"03", name:"Risk Control DW",  role:"Trust & Safety",             scale:"Real-time safeguards",    apps:"User bans & scores",status:"LIVE" },
-      { id:"04", name:"Gauth DW",         role:"New-App Infrastructure",     scale:"Foundational layer",      apps:"Gauth platform",    status:"LIVE" },
-      { id:"05", name:"CapCut DW",        role:"Creative Platform",          scale:"0 → Production",          apps:"CapCut users",      status:"LIVE" },
-      { id:"06", name:"Lemon8 DW",        role:"Lifestyle Platform",         scale:"0 → Production",          apps:"Lemon8 users",      status:"LIVE" },
-      { id:"07", name:"Live Services",    role:"TikTok Live / Streaming",    scale:"Real-time events",        apps:"Live creators",     status:"LIVE" },
+      { id:"01", name:"TikTok DW",      role:"Core Platform — Dim Tables", scale:"Primary data warehouse", apps:"1B+ users",          status:"LIVE" },
+      { id:"02", name:"Libra DW",        role:"A/B Test Platform",          scale:"3M+ instances / month",  apps:"All experiments",    status:"LIVE" },
+      { id:"03", name:"Risk Control DW", role:"Trust & Safety",             scale:"Real-time safeguards",   apps:"User bans & scores", status:"LIVE" },
+      { id:"04", name:"Gauth DW",        role:"New-App Infrastructure",     scale:"Foundational layer",     apps:"Gauth platform",     status:"LIVE" },
+      { id:"05", name:"CapCut DW",       role:"Creative Platform",          scale:"0 → Production",         apps:"CapCut users",       status:"LIVE" },
+      { id:"06", name:"Lemon8 DW",       role:"Lifestyle Platform",         scale:"0 → Production",         apps:"Lemon8 users",       status:"LIVE" },
+      { id:"07", name:"Live Services",   role:"TikTok Live / Streaming",    scale:"Real-time events",       apps:"Live creators",      status:"LIVE" },
     ];
 
     const PIPELINE_NODES = [
-      { id:"src",   label:"Sources",    x:5,  y:50, color:"#0052cc", icon:"⬡" },
-      { id:"bmq",   label:"BMQ/Kafka",  x:22, y:25, color:"#0066ff", icon:"≋" },
-      { id:"ing",   label:"Ingestion",  x:22, y:75, color:"#0066ff", icon:"↓" },
-      { id:"flink", label:"Flink",      x:42, y:25, color:"#003d99", icon:"⚡" },
-      { id:"spark", label:"Spark",      x:42, y:75, color:"#003d99", icon:"⚙" },
-      { id:"dw",    label:"7 DWs",      x:65, y:50, color:"#0052cc", icon:"▦" },
-      { id:"atlas", label:"Atlas AI",   x:82, y:25, color:"#0052cc", icon:"◈" },
-      { id:"out",   label:"Consumers",  x:95, y:50, color:"#001f66", icon:"◉" },
+      { id:"src",   label:"Sources",   x:5,  y:50, color:"#0052cc", icon:"⬡" },
+      { id:"bmq",   label:"BMQ/Kafka", x:22, y:25, color:"#0066ff", icon:"≋" },
+      { id:"ing",   label:"Ingestion", x:22, y:75, color:"#0066ff", icon:"↓" },
+      { id:"flink", label:"Flink",     x:42, y:25, color:"#003d99", icon:"⚡" },
+      { id:"spark", label:"Spark",     x:42, y:75, color:"#003d99", icon:"⚙" },
+      { id:"dw",    label:"7 DWs",     x:65, y:50, color:"#0052cc", icon:"▦" },
+      { id:"atlas", label:"Atlas AI",  x:82, y:25, color:"#0052cc", icon:"◈" },
+      { id:"out",   label:"Consumers", x:95, y:50, color:"#001f66", icon:"◉" },
     ];
     const PIPELINE_EDGES = [
-      ["src","bmq"],["src","ing"],
-      ["bmq","flink"],["ing","spark"],
-      ["flink","dw"],["spark","dw"],
-      ["dw","atlas"],["dw","out"],["atlas","out"],
+      ["src","bmq"],["src","ing"],["bmq","flink"],["ing","spark"],
+      ["flink","dw"],["spark","dw"],["dw","atlas"],["dw","out"],["atlas","out"],
     ];
 
     const EXPERIENCE = [
       {
-        period:"JUL 2022 — PRESENT", title:"Lead Data Engineer",
-        org:"TikTok USDS · San Jose, CA", highlight:"Rockstar Award 2023 & 2024", active:true,
+        period:"JUL 2022 — PRESENT", title:"Data Engineer",
+        org:"TikTok USDS · San Jose, CA", highlight:"Rockstar Award 2024 · Spot Bonus 2023", active:true,
         points:[
           "Own 1+ EB of data infrastructure across 8 data warehouses serving 140+ business units with strict COPPA & CT SB3 compliance — governing 100K+ daily batch tasks and 100+ BMQ/Kafka topics and Flink streaming jobs.",
-          "Shipped Atlas (200K+ auto-resolved incidents, patent pending), Pluto (600K+ deployments = 30% of all TikTok US, patent pending), and ECC Bot (real-time SLA intelligence across all of TikTok USDS) — all built 0→production.",
+          "Shipped Atlas (200K+ auto-resolved incidents, patent), Pluto (600K+ deployments = 30% of all TikTok US, patent), and ECC Bot (real-time SLA intelligence across all of TikTok USDS) — all built 0→production.",
           "Launched CapCut DW, Lemon8 DW, and TikTok Live Services from the ground up, plus maintained the main TikTok DW, Libra A/B Test DW, Risk Control DW, and Gauth DW.",
           "Delivered $8M+/year in HDFS savings and $4M+/year in Spark/YARN optimisations — $12M+ annual total — while reducing quarterly SLA breaches from 120+ to <15 and NPS from 15 to 80+.",
           "Partnered with NCMEC and AUSA to build child-safety datasets and enforcement pipelines; architected compliance systems that shielded TikTok from $200M+ in potential regulatory exposure.",
@@ -232,57 +318,49 @@
     ];
 
     const CERTIFICATIONS = [
-      { name:"Apache Airflow", issuer:"Astronomer", icon:"✈" },
-      { name:"Snowflake SnowPro Core", issuer:"Snowflake", icon:"❄" },
-      { name:"Databricks", issuer:"Databricks", icon:"◈" },
-      { name:"Fivetran", issuer:"Fivetran", icon:"⟳" },
-      { name:"Alteryx Designer Core", issuer:"Alteryx", icon:"◆" },
+      { name:"Apache Airflow",      issuer:"Astronomer",  icon:"✈" },
+      { name:"Snowflake SnowPro",   issuer:"Snowflake",   icon:"❄" },
+      { name:"Databricks",          issuer:"Databricks",  icon:"◈" },
+      { name:"Fivetran",            issuer:"Fivetran",    icon:"⟳" },
+      { name:"Alteryx Designer",    issuer:"Alteryx",     icon:"◆" },
     ];
 
     const WRITING_POSTS = [
-      { num:"01", title:"How I Govern 1 Exabyte at TikTok — Architecture Breakdown", tag:"Engineering", read:"12 min" },
-      { num:"02", title:"Atlas: Teaching an LLM to Autonomously Fix Broken Data Pipelines", tag:"AI Agents", read:"15 min" },
-      { num:"03", title:"Pluto: How We Automated 30% of TikTok's US Deployments", tag:"Automation", read:"10 min" },
-      { num:"04", title:"Data Compliance at Scale — COPPA, CT SB3, and What I Learned", tag:"Governance", read:"8 min" },
-      { num:"05", title:"The Cognitive Cost of Building at Petabyte Scale", tag:"Leadership", read:"7 min" },
+      { num:"01", title:"How I Govern 1 Exabyte at TikTok — Architecture Breakdown",           tag:"Engineering",  read:"12 min" },
+      { num:"02", title:"Atlas: Teaching an LLM to Autonomously Fix Broken Data Pipelines",     tag:"AI Agents",    read:"15 min" },
+      { num:"03", title:"Pluto: How We Automated 30% of TikTok's US Deployments",              tag:"Automation",   read:"10 min" },
+      { num:"04", title:"Data Compliance at Scale — COPPA, CT SB3, and What I Learned",        tag:"Governance",   read:"8 min"  },
+      { num:"05", title:"The Cognitive Cost of Building at Petabyte Scale",                      tag:"Leadership",   read:"7 min"  },
     ];
 
-    /* ═══════════════ PIPELINE DIAGRAM ═══════════════ */
+    /* ═══════ PIPELINE DIAGRAM ═══════ */
     function PipelineDiagram() {
       const [active, setActive] = useState(null);
       const [tick, setTick] = useState(0);
-      useEffect(() => {
-        const id = setInterval(() => setTick(t => t + 1), 55);
-        return () => clearInterval(id);
-      }, []);
-      const nodeById = Object.fromEntries(PIPELINE_NODES.map(n => [n.id, n]));
-      const particles = PIPELINE_EDGES.map((edge, ei) => {
-        const a = nodeById[edge[0]], b = nodeById[edge[1]];
-        const t = ((tick * 0.45 + ei * 35) % 100) / 100;
-        return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t, id: ei };
+      useEffect(() => { const id = setInterval(() => setTick(t => t+1), 55); return () => clearInterval(id); }, []);
+      const nodeById = Object.fromEntries(PIPELINE_NODES.map(n=>[n.id,n]));
+      const particles = PIPELINE_EDGES.map((edge,ei) => {
+        const a=nodeById[edge[0]], b=nodeById[edge[1]];
+        const t=((tick*.45+ei*35)%100)/100;
+        return { x:a.x+(b.x-a.x)*t, y:a.y+(b.y-a.y)*t, id:ei };
       });
       return (
         <div style={{ width:"100%", aspectRatio:"3.2/1", position:"relative" }}>
           <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width:"100%", height:"100%", overflow:"visible" }}>
             {PIPELINE_EDGES.map(([a,b],i) => {
-              const na = nodeById[a], nb = nodeById[b];
-              const isActive = active===a || active===b;
+              const na=nodeById[a], nb=nodeById[b], isActive=active===a||active===b;
               return <line key={i} x1={na.x} y1={na.y} x2={nb.x} y2={nb.y}
-                stroke={isActive?"#0052cc":"#cbd5e1"}
-                strokeWidth={isActive?0.7:0.25}
-                strokeDasharray={isActive?"none":"1.2 0.6"}
-                style={{ transition:"all 0.3s" }} />;
+                stroke={isActive?"#0052cc":"#cbd5e1"} strokeWidth={isActive?.7:.25}
+                strokeDasharray={isActive?"none":"1.2 0.6"} style={{ transition:"all .3s" }} />;
             })}
-            {particles.map(p => <circle key={p.id} cx={p.x} cy={p.y} r={0.55} fill="#0066ff" opacity={0.65} />)}
+            {particles.map(p => <circle key={p.id} cx={p.x} cy={p.y} r={.55} fill="#0066ff" opacity={.65} />)}
             {PIPELINE_NODES.map(node => (
               <g key={node.id} style={{ cursor:"pointer" }}
-                onMouseEnter={() => setActive(node.id)}
-                onMouseLeave={() => setActive(null)}>
+                onMouseEnter={()=>setActive(node.id)} onMouseLeave={()=>setActive(null)}>
                 <circle cx={node.x} cy={node.y} r={5.8}
                   fill={active===node.id?node.color:"#f0f4ff"}
-                  stroke={node.color} strokeWidth={0.5}
-                  style={{ transition:"all 0.2s" }} />
-                <text x={node.x} y={node.y+0.9} textAnchor="middle" fontSize="4"
+                  stroke={node.color} strokeWidth={.5} style={{ transition:"all .2s" }} />
+                <text x={node.x} y={node.y+.9} textAnchor="middle" fontSize="4"
                   fill={active===node.id?"white":node.color}
                   style={{ fontFamily:"IBM Plex Mono,monospace", fontWeight:600, pointerEvents:"none" }}>
                   {node.icon}
@@ -298,44 +376,40 @@
       );
     }
 
-    /* ═══════════════ ANIMATED STAT ═══════════════ */
-    function AnimatedStat({ value, unit, label, sub, delay=0 }) {
+    /* ═══════ ANIMATED STAT ═══════ */
+    function AnimatedStat({ value, unit, label, sub, delay=0, last=false }) {
       const [visible, setVisible] = useState(false);
       const ref = useRef(null);
       useEffect(() => {
-        const obs = new IntersectionObserver(([e]) => { if(e.isIntersecting) setVisible(true); }, { threshold:0.3 });
+        const obs = new IntersectionObserver(([e])=>{ if(e.isIntersecting) setVisible(true); },{ threshold:.3 });
         if(ref.current) obs.observe(ref.current);
         return () => obs.disconnect();
-      }, []);
+      },[]);
       return (
-        <div ref={ref} style={{
-          padding:"2rem 1.5rem", borderRight:"1px solid #e2e8f0",
+        <div ref={ref} className="hero-stat-cell" style={{
+          borderRight: last ? "none" : "1px solid #e2e8f0",
           opacity: visible?1:0, transform: visible?"translateY(0)":"translateY(18px)",
-          transition: `opacity 0.65s ${delay}ms, transform 0.65s ${delay}ms`,
+          transition: `opacity .65s ${delay}ms, transform .65s ${delay}ms`,
         }}>
-          <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.22em", color:"#94a3b8", marginBottom:"0.4rem" }}>{label}</div>
-          <div style={{ fontFamily:"Bebas Neue,Arial Black", fontSize:"clamp(2rem,5vw,3.2rem)", lineHeight:1, color:"#0c0c0c", letterSpacing:"0.02em" }}>
+          <div style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".22em", color:"#94a3b8", marginBottom:".4rem" }}>{label}</div>
+          <div style={{ fontFamily:"Bebas Neue,Arial Black", fontSize:"clamp(1.8rem,4vw,3.2rem)", lineHeight:1, color:"#0c0c0c", letterSpacing:".02em" }}>
             {value}<span style={{ color:"#0052cc" }}>{unit}</span>
           </div>
-          <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", color:"#94a3b8", marginTop:"0.3rem" }}>{sub}</div>
+          <div style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", color:"#94a3b8", marginTop:".3rem" }}>{sub}</div>
         </div>
       );
     }
 
-    /* ═══════════════ TICKER ═══════════════ */
+    /* ═══════ TICKER ═══════ */
     function Ticker() {
       return (
         <div style={{ overflow:"hidden", background:"#0052cc", padding:"9px 0" }}>
           <div style={{ display:"flex" }}>
             {[0,1].map(pass => (
-              <div key={pass} style={{
-                display:"flex", gap:"2.5rem", whiteSpace:"nowrap",
-                animation:"marquee 32s linear infinite",
-                paddingRight:"2.5rem", flexShrink:0,
-              }}>
+              <div key={pass} style={{ display:"flex", gap:"2.5rem", whiteSpace:"nowrap", animation:"marquee 32s linear infinite", paddingRight:"2.5rem", flexShrink:0 }}>
                 {TICKER_ITEMS.map((item,i) => (
-                  <span key={i} style={{ fontFamily:"IBM Plex Mono,monospace", fontSize:"0.63rem", fontWeight:600, letterSpacing:"0.15em", color:"rgba(255,255,255,0.85)" }}>
-                    <span style={{ color:"rgba(255,255,255,0.35)", marginRight:"0.5rem" }}>◆</span>{item}
+                  <span key={i} style={{ fontFamily:"IBM Plex Mono,monospace", fontSize:".63rem", fontWeight:600, letterSpacing:".15em", color:"rgba(255,255,255,.85)" }}>
+                    <span style={{ color:"rgba(255,255,255,.35)", marginRight:".5rem" }}>◆</span>{item}
                   </span>
                 ))}
               </div>
@@ -345,30 +419,76 @@
       );
     }
 
-    /* ═══════════════ AI TOOL PANEL ═══════════════ */
-    function AIToolPanel({ tool }) {
+    /* ═══════ PHOTO CARD ═══════ */
+    function PhotoCard() {
+      const expertiseBadges = [
+        { label:"Data Engineering",   top:"-18px",  left:"-12px",  bg:"#0052cc",  color:"white",   delay:"0s"   },
+        { label:"AI Automation",      top:"-18px",  right:"-12px", bg:"#080c14",  color:"#60a5fa", delay:".5s"  },
+        { label:"Analytics Engineer", top:"18%",    right:"-20px", bg:"white",    color:"#0052cc", delay:"1s"   },
+        { label:"Visualization",      bottom:"22%", left:"-18px",  bg:"white",    color:"#0c0c0c", delay:"1.5s" },
+        { label:"Pipeline Architect", bottom:"-14px",left:"50%",   transform:"translateX(-50%)", bg:"#0052cc", color:"white", delay:".8s" },
+      ];
+
       return (
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1.1fr", gap:"4rem", alignItems:"start" }}>
-          <div>
-            <div style={{ display:"flex", gap:"0.75rem", alignItems:"center", marginBottom:"1.5rem" }}>
-              <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.2em", color:"rgba(255,255,255,0.35)", border:"1px solid rgba(255,255,255,0.12)", padding:"0.2rem 0.6rem" }}>{tool.code}</span>
-              <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.15em", color:tool.status==="PRODUCTION"?"#22c55e":"rgba(255,255,255,0.55)", border:`1px solid ${tool.status==="PRODUCTION"?"#22c55e50":"rgba(255,255,255,0.2)"}`, padding:"0.2rem 0.6rem" }}>{tool.status}</span>
+        <div className="photo-card fade-up-0">
+          {/* Floating expertise badges */}
+          {expertiseBadges.map((b,i) => (
+            <div key={i} className="expertise-badge" style={{
+              top:b.top, bottom:b.bottom, left:b.left, right:b.right,
+              transform:b.transform,
+              background:b.bg, color:b.color,
+              border:`1px solid ${b.bg==="white"?"#e2e8f0":"transparent"}`,
+              boxShadow:"0 4px 16px rgba(0,0,0,.12)",
+              animationDelay:b.delay, zIndex:10,
+            }}>
+              {b.label}
             </div>
-            <h3 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(3.5rem,7vw,5.5rem)", lineHeight:0.9, color:"white", letterSpacing:"0.04em", marginBottom:"0.5rem" }}>{tool.name}</h3>
-            <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.65rem", letterSpacing:"0.12em", color:"rgba(255,255,255,0.5)", marginBottom:"0.6rem" }}>{tool.subtitle}</div>
-            <div style={{ fontFamily:"Bebas Neue", fontSize:"1.1rem", letterSpacing:"0.08em", color:"#60a5fa", marginBottom:"1.5rem" }}>{tool.tagline}</div>
-            <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,0.72)", lineHeight:1.75, marginBottom:"2rem" }}>{tool.desc}</p>
-            <div style={{ display:"flex", gap:"0.5rem", flexWrap:"wrap" }}>
-              {tool.tags.map(tag => (
-                <span key={tag} style={{ fontFamily:"IBM Plex Mono", fontSize:"0.56rem", letterSpacing:"0.1em", color:"rgba(255,255,255,0.55)", border:"1px solid rgba(255,255,255,0.15)", padding:"0.2rem 0.65rem" }}>{tag}</span>
-              ))}
+          ))}
+
+          {/* Photo */}
+          <div className="photo-img-wrap">
+            {/* Replace suyash.jpg with your photo file in the same folder */}
+            <img
+              src="./suyash.jpg"
+              alt="Suyash Singh"
+              onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}
+            />
+            {/* Placeholder shown if image not found */}
+            <div className="photo-img-placeholder" style={{ display:"none" }}>
+              <div style={{ fontFamily:"Bebas Neue", fontSize:"5rem", color:"rgba(255,255,255,.15)", lineHeight:1 }}>SS</div>
+              <div style={{ fontFamily:"IBM Plex Mono", fontSize:".65rem", letterSpacing:".2em", color:"rgba(255,255,255,.4)", textAlign:"center" }}>
+                ADD PHOTO:<br/>suyash.jpg
+              </div>
+              <div style={{ display:"flex", gap:".5rem", flexWrap:"wrap", justifyContent:"center", padding:"0 1rem" }}>
+                {["Data Engineer","AI Builder","Analytics","Automation"].map(t=>(
+                  <span key={t} style={{ fontFamily:"IBM Plex Mono", fontSize:".5rem", letterSpacing:".1em", color:"rgba(255,255,255,.5)", border:"1px solid rgba(255,255,255,.15)", padding:".2rem .5rem" }}>{t}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Overlay */}
+            <div className="photo-overlay">
+              <div style={{ fontFamily:"Bebas Neue", fontSize:"1.8rem", color:"white", letterSpacing:".08em", lineHeight:1 }}>SUYASH SINGH</div>
+              <div style={{ fontFamily:"IBM Plex Mono", fontSize:".55rem", letterSpacing:".15em", color:"rgba(255,255,255,.55)", marginTop:".25rem" }}>DATA ENGINEER · TIKTOK USDS · SAN JOSE, CA</div>
+              {/* Expertise tags in overlay */}
+              <div style={{ display:"flex", gap:".4rem", flexWrap:"wrap", marginTop:".75rem" }}>
+                {["AI Builder","Analytics","Automation","Visualization"].map(t=>(
+                  <span key={t} style={{ fontFamily:"IBM Plex Mono", fontSize:".48rem", letterSpacing:".1em", color:"rgba(255,255,255,.7)", border:"1px solid rgba(255,255,255,.2)", padding:".15rem .45rem" }}>{t}</span>
+                ))}
+              </div>
             </div>
           </div>
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1px", background:"rgba(255,255,255,0.08)" }}>
-            {tool.metrics.map((m,i) => (
-              <div key={i} style={{ padding:"2rem 1.75rem", background:"rgba(0,0,0,0.25)", borderBottom:i<2?"1px solid rgba(255,255,255,0.06)":"none" }}>
-                <div style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2rem,4vw,3rem)", lineHeight:1, color:"white", letterSpacing:"0.04em", marginBottom:"0.4rem" }}>{m.val}</div>
-                <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.12em", color:"rgba(255,255,255,0.4)" }}>{m.label}</div>
+
+          {/* Stats strip below photo */}
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", marginTop:".75rem", background:"#0c0c0c", border:"1px solid rgba(255,255,255,.06)" }}>
+            {[
+              { val:"2", label:"Patents" },
+              { val:"1 EB+", label:"Data Governed" },
+              { val:"45K+", label:"X Followers" },
+            ].map((s,i) => (
+              <div key={i} style={{ padding:".75rem .5rem", borderRight:i<2?"1px solid rgba(255,255,255,.06)":"none", textAlign:"center" }}>
+                <div style={{ fontFamily:"Bebas Neue", fontSize:"1.4rem", color:"white", lineHeight:1 }}>{s.val}</div>
+                <div style={{ fontFamily:"IBM Plex Mono", fontSize:".48rem", letterSpacing:".1em", color:"rgba(255,255,255,.35)", marginTop:".2rem" }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -376,7 +496,38 @@
       );
     }
 
-    /* ═══════════════ MAIN APP ═══════════════ */
+    /* ═══════ AI TOOL PANEL ═══════ */
+    function AIToolPanel({ tool }) {
+      return (
+        <div className="ai-panel-grid">
+          <div>
+            <div style={{ display:"flex", gap:".75rem", alignItems:"center", marginBottom:"1.5rem" }}>
+              <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".2em", color:"rgba(255,255,255,.35)", border:"1px solid rgba(255,255,255,.12)", padding:".2rem .6rem" }}>{tool.code}</span>
+              <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".15em", color:tool.status==="PRODUCTION"?"#22c55e":"rgba(255,255,255,.55)", border:`1px solid ${tool.status==="PRODUCTION"?"#22c55e50":"rgba(255,255,255,.2)"}`, padding:".2rem .6rem" }}>{tool.status}</span>
+            </div>
+            <h3 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(3rem,6vw,5.5rem)", lineHeight:.9, color:"white", letterSpacing:".04em", marginBottom:".5rem" }}>{tool.name}</h3>
+            <div style={{ fontFamily:"IBM Plex Mono", fontSize:".65rem", letterSpacing:".12em", color:"rgba(255,255,255,.5)", marginBottom:".6rem" }}>{tool.subtitle}</div>
+            <div style={{ fontFamily:"Bebas Neue", fontSize:"1.1rem", letterSpacing:".08em", color:"#60a5fa", marginBottom:"1.5rem" }}>{tool.tagline}</div>
+            <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,.72)", lineHeight:1.75, marginBottom:"2rem" }}>{tool.desc}</p>
+            <div style={{ display:"flex", gap:".5rem", flexWrap:"wrap" }}>
+              {tool.tags.map(tag=>(
+                <span key={tag} style={{ fontFamily:"IBM Plex Mono", fontSize:".56rem", letterSpacing:".1em", color:"rgba(255,255,255,.55)", border:"1px solid rgba(255,255,255,.15)", padding:".2rem .65rem" }}>{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div className="ai-metrics-grid">
+            {tool.metrics.map((m,i)=>(
+              <div key={i} style={{ padding:"2rem 1.5rem", background:"rgba(0,0,0,.25)", borderBottom:i<2?"1px solid rgba(255,255,255,.06)":"none" }}>
+                <div style={{ fontFamily:"Bebas Neue", fontSize:"clamp(1.8rem,3.5vw,3rem)", lineHeight:1, color:"white", letterSpacing:".04em", marginBottom:".4rem" }}>{m.val}</div>
+                <div style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".12em", color:"rgba(255,255,255,.4)" }}>{m.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    /* ═══════ MAIN APP ═══════ */
     function App() {
       const [scrollY, setScrollY] = useState(0);
       const [activeToolIdx, setActiveToolIdx] = useState(0);
@@ -385,7 +536,7 @@
         const fn = () => setScrollY(window.scrollY);
         window.addEventListener("scroll", fn, { passive:true });
         return () => window.removeEventListener("scroll", fn);
-      }, []);
+      },[]);
 
       const navScrolled = scrollY > 40;
 
@@ -395,30 +546,29 @@
           {/* ── NAV ── */}
           <header style={{
             position:"fixed", top:0, left:0, right:0, zIndex:100,
-            background:navScrolled?"rgba(247,245,240,0.97)":"transparent",
+            background:navScrolled?"rgba(247,245,240,.97)":"transparent",
             backdropFilter:navScrolled?"blur(14px)":"none",
             borderBottom:navScrolled?"1px solid #e2e8f0":"1px solid transparent",
-            transition:"all 0.4s",
-            padding:navScrolled?"0.7rem 0":"1.3rem 0",
+            transition:"all .4s", padding:navScrolled?".7rem 0":"1.3rem 0",
           }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-              <div style={{ display:"flex", alignItems:"center", gap:"0.75rem" }}>
-                <div style={{ width:34, height:34, background:"#0052cc", display:"flex", alignItems:"center", justifyContent:"center" }}>
-                  <span style={{ fontFamily:"Bebas Neue", color:"white", fontSize:"1.05rem", letterSpacing:"0.05em" }}>SS</span>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+              <div style={{ display:"flex", alignItems:"center", gap:".75rem" }}>
+                <div style={{ width:34, height:34, background:"#0052cc", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <span style={{ fontFamily:"Bebas Neue", color:"white", fontSize:"1.05rem", letterSpacing:".05em" }}>SS</span>
                 </div>
                 <div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:"0.72rem", letterSpacing:"0.1em", color:"#0c0c0c" }}>SUYASH SINGH</div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.52rem", letterSpacing:"0.14em", color:"#94a3b8" }}>LEAD DATA ENGINEER · TIKTOK USDS</div>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:".72rem", letterSpacing:".1em", color:"#0c0c0c" }}>SUYASH SINGH</div>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".52rem", letterSpacing:".14em", color:"#94a3b8" }}>DATA ENGINEER · TIKTOK USDS</div>
                 </div>
               </div>
-              <nav style={{ display:"flex", gap:"2rem", alignItems:"center" }}>
-                {[["Stack","#stack"],["AI Tools","#ai-tools"],["Patents","#patents"],["Experience","#experience"],["Writing","#writing"]].map(([label,href]) => (
-                  <a key={label} href={href} className="nav-link" style={{ fontFamily:"IBM Plex Mono", fontSize:"0.62rem", fontWeight:500, letterSpacing:"0.15em", color:"#475569", textDecoration:"none" }}>
+              <nav className="nav-links">
+                {[["Stack","#stack"],["AI Tools","#ai-tools"],["Patents","#patents"],["Experience","#experience"],["Writing","#writing"]].map(([label,href])=>(
+                  <a key={label} href={href} className="nav-link" style={{ fontFamily:"IBM Plex Mono", fontSize:".62rem", fontWeight:500, letterSpacing:".15em", color:"#475569", textDecoration:"none" }}>
                     {label.toUpperCase()}
                   </a>
                 ))}
                 <a href="https://www.linkedin.com/in/isuyash14/" target="_blank" rel="noreferrer"
-                  style={{ fontFamily:"IBM Plex Mono", fontSize:"0.62rem", fontWeight:600, letterSpacing:"0.15em", color:"white", textDecoration:"none", background:"#0052cc", padding:"0.5rem 1.25rem", transition:"background 0.2s" }}
+                  style={{ fontFamily:"IBM Plex Mono", fontSize:".62rem", fontWeight:600, letterSpacing:".15em", color:"white", textDecoration:"none", background:"#0052cc", padding:".5rem 1.25rem", transition:"background .2s", whiteSpace:"nowrap" }}
                   onMouseEnter={e=>e.currentTarget.style.background="#003d99"}
                   onMouseLeave={e=>e.currentTarget.style.background="#0052cc"}>
                   CONNECT →
@@ -428,112 +578,126 @@
           </header>
 
           {/* ── HERO ── */}
-          <section style={{ paddingTop:"8rem", paddingBottom:"0", background:"#f7f5f0", position:"relative", overflow:"hidden" }}>
-            <div style={{ position:"absolute", inset:0, pointerEvents:"none", backgroundImage:"linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)", backgroundSize:"52px 52px", opacity:0.4 }} />
+          <section style={{ paddingTop:"7rem", paddingBottom:0, background:"#f7f5f0", position:"relative", overflow:"hidden" }}>
+            {/* Grid backdrop */}
+            <div style={{ position:"absolute", inset:0, pointerEvents:"none", backgroundImage:"linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)", backgroundSize:"52px 52px", opacity:.4 }} />
             <div style={{ position:"absolute", top:0, right:0, width:"32vw", height:"65%", background:"linear-gradient(135deg, #0052cc06, #0066ff14)", borderLeft:"1px solid #0052cc18" }} />
 
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem", position:"relative" }}>
-              {/* Badges */}
-              <div className="fade-up-0" style={{ display:"flex", gap:"1rem", flexWrap:"wrap", marginBottom:"2.5rem", alignItems:"center" }}>
-                <div style={{ display:"inline-flex", alignItems:"center", gap:"0.6rem", background:"white", border:"1px solid #e2e8f0", padding:"0.4rem 1rem", boxShadow:"0 2px 8px rgba(0,0,0,0.05)" }}>
-                  <div style={{ position:"relative", width:8, height:8 }}>
-                    <div style={{ position:"absolute", width:8, height:8, borderRadius:"50%", background:"#ff2200" }} />
-                    <div className="pulse-dot" style={{ position:"absolute", width:8, height:8, borderRadius:"50%", background:"#ff2200" }} />
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem", position:"relative" }}>
+              <div className="hero-inner">
+                {/* LEFT */}
+                <div>
+                  {/* Badges */}
+                  <div className="fade-up-0" style={{ display:"flex", gap:".75rem", flexWrap:"wrap", marginBottom:"2rem", alignItems:"center" }}>
+                    <div style={{ display:"inline-flex", alignItems:"center", gap:".6rem", background:"white", border:"1px solid #e2e8f0", padding:".4rem 1rem", boxShadow:"0 2px 8px rgba(0,0,0,.05)" }}>
+                      <div style={{ position:"relative", width:8, height:8 }}>
+                        <div style={{ position:"absolute", width:8, height:8, borderRadius:"50%", background:"#ff2200" }} />
+                        <div className="pulse-dot" style={{ position:"absolute", width:8, height:8, borderRadius:"50%", background:"#ff2200" }} />
+                      </div>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", fontWeight:600, letterSpacing:".2em", color:"#0052cc" }}>TIKTOK ROCKSTAR AWARD — 2024</span>
+                    </div>
+                    <div style={{ display:"inline-flex", alignItems:"center", gap:".6rem", background:"white", border:"1px solid #e2e8f0", padding:".4rem 1rem", boxShadow:"0 2px 8px rgba(0,0,0,.05)" }}>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", fontWeight:600, letterSpacing:".2em", color:"#475569" }}>2 × PATENTS · 45K+ ON X</span>
+                    </div>
                   </div>
-                  <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", fontWeight:600, letterSpacing:"0.2em", color:"#0052cc" }}>TIKTOK ROCKSTAR AWARD — 2023 &amp; 2024</span>
+
+                  {/* H1 */}
+                  <h1 className="fade-up-1" style={{ fontFamily:"Bebas Neue,Arial Black", fontSize:"clamp(3.2rem,10vw,9rem)", lineHeight:.87, letterSpacing:".02em", color:"#0c0c0c", marginBottom:"1.5rem" }}>
+                    EXABYTE<br />
+                    <span style={{ color:"#0052cc" }}>SCALE</span><br />
+                    <span style={{ WebkitTextStroke:"2px #0c0c0c", color:"transparent" }}>ARCHITECT</span>
+                    <span style={{ animation:"blink 1s step-end infinite", color:"#0052cc", fontFamily:"IBM Plex Mono", fontSize:".5em", verticalAlign:"top", marginLeft:".1em" }}>|</span>
+                  </h1>
+
+                  {/* Sub copy */}
+                  <p className="fade-up-2" style={{ fontFamily:"EB Garamond", fontSize:"clamp(1rem,1.8vw,1.25rem)", color:"#475569", maxWidth:540, lineHeight:1.75, marginBottom:"2rem" }}>
+                    Data Engineer at <strong style={{ color:"#0c0c0c" }}>TikTok USDS</strong> governing 1+ exabyte of data, building <strong style={{ color:"#0c0c0c" }}>three AI tools in production</strong>, and shipping systems that run the world's fastest-growing platforms.
+                  </p>
+
+                  {/* CTAs */}
+                  <div className="fade-up-3" style={{ display:"flex", gap:".75rem", alignItems:"center", flexWrap:"wrap", marginBottom:"2.5rem" }}>
+                    <a href="#ai-tools" style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:".68rem", letterSpacing:".15em", color:"white", textDecoration:"none", background:"#0052cc", padding:".85rem 1.75rem", display:"flex", alignItems:"center", gap:".5rem", transition:"background .2s" }}
+                      onMouseEnter={e=>e.currentTarget.style.background="#003d99"} onMouseLeave={e=>e.currentTarget.style.background="#0052cc"}>
+                      EXPLORE AI TOOLS <span>→</span>
+                    </a>
+                    <a href="https://suyashsingh.substack.com" target="_blank" rel="noreferrer"
+                      style={{ fontFamily:"IBM Plex Mono", fontSize:".65rem", fontWeight:500, letterSpacing:".1em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:".85rem 1.25rem", transition:"all .2s" }}
+                      onMouseEnter={e=>{e.currentTarget.style.borderColor="#0052cc";e.currentTarget.style.color="#0052cc";}}
+                      onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569";}}>
+                      SUBSTACK
+                    </a>
+                    <a href="https://x.com/isuyash14" target="_blank" rel="noreferrer"
+                      style={{ fontFamily:"IBM Plex Mono", fontSize:".65rem", fontWeight:500, letterSpacing:".1em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:".85rem 1.25rem", transition:"all .2s" }}
+                      onMouseEnter={e=>{e.currentTarget.style.borderColor="#0c0c0c";e.currentTarget.style.color="#0c0c0c";}}
+                      onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569";}}>
+                      𝕏 · 45K
+                    </a>
+                  </div>
                 </div>
-                <div style={{ display:"inline-flex", alignItems:"center", gap:"0.6rem", background:"white", border:"1px solid #e2e8f0", padding:"0.4rem 1rem", boxShadow:"0 2px 8px rgba(0,0,0,0.05)" }}>
-                  <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", fontWeight:600, letterSpacing:"0.2em", color:"#475569" }}>2 × PATENT PENDING · 45K+ FOLLOWERS ON X</span>
-                </div>
+
+                {/* RIGHT — Photo Card */}
+                <PhotoCard />
               </div>
 
-              <h1 className="fade-up-1" style={{ fontFamily:"Bebas Neue,Arial Black", fontSize:"clamp(3.8rem,12vw,10rem)", lineHeight:0.87, letterSpacing:"0.02em", color:"#0c0c0c", marginBottom:"2rem", maxWidth:950 }}>
-                EXABYTE<br />
-                <span style={{ color:"#0052cc" }}>SCALE</span><br />
-                <span style={{ WebkitTextStroke:"2px #0c0c0c", color:"transparent" }}>ARCHITECT</span>
-                <span style={{ animation:"blink 1s step-end infinite", color:"#0052cc", fontFamily:"IBM Plex Mono", fontSize:"0.5em", verticalAlign:"top", marginLeft:"0.1em" }}>|</span>
-              </h1>
-
-              <p className="fade-up-2" style={{ fontFamily:"EB Garamond", fontSize:"clamp(1rem,2vw,1.3rem)", color:"#475569", maxWidth:600, lineHeight:1.75, marginBottom:"2.5rem" }}>
-                Lead Data Engineer at <strong style={{ color:"#0c0c0c" }}>TikTok USDS</strong> governing 1+ exabyte of data infrastructure, building <strong style={{ color:"#0c0c0c" }}>three AI tools now in production</strong>, and shipping systems that run the world's fastest-growing platforms.
-              </p>
-
-              <div className="fade-up-3" style={{ display:"flex", gap:"1rem", alignItems:"center", flexWrap:"wrap", marginBottom:"4rem" }}>
-                <a href="#ai-tools" style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:"0.68rem", letterSpacing:"0.15em", color:"white", textDecoration:"none", background:"#0052cc", padding:"0.9rem 2rem", display:"flex", alignItems:"center", gap:"0.6rem", transition:"background 0.2s" }}
-                  onMouseEnter={e=>e.currentTarget.style.background="#003d99"} onMouseLeave={e=>e.currentTarget.style.background="#0052cc"}>
-                  EXPLORE AI TOOLS <span>→</span>
-                </a>
-                <a href="https://suyashsingh.substack.com" target="_blank" rel="noreferrer"
-                  style={{ fontFamily:"IBM Plex Mono", fontSize:"0.68rem", fontWeight:500, letterSpacing:"0.1em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:"0.9rem 1.5rem", transition:"all 0.2s" }}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor="#0052cc";e.currentTarget.style.color="#0052cc";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569";}}>
-                  READ ON SUBSTACK
-                </a>
-                <a href="https://x.com/isuyash14" target="_blank" rel="noreferrer"
-                  style={{ fontFamily:"IBM Plex Mono", fontSize:"0.68rem", fontWeight:500, letterSpacing:"0.1em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:"0.9rem 1.5rem", transition:"all 0.2s" }}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor="#0c0c0c";e.currentTarget.style.color="#0c0c0c";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569";}}>
-                  𝕏 · 45K FOLLOWERS
-                </a>
-              </div>
-
-              <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", background:"white", border:"1px solid #e2e8f0", boxShadow:"0 4px 28px rgba(0,0,0,0.07)" }}>
-                {HERO_STATS.map((s,i) => <AnimatedStat key={i} {...s} delay={i*110} />)}
+              {/* Stats row — full width */}
+              <div className="hero-stats" style={{ marginTop:"3rem" }}>
+                {HERO_STATS.map((s,i) => <AnimatedStat key={i} {...s} delay={i*110} last={i===3} />)}
               </div>
             </div>
+
             <div style={{ marginTop:"3rem" }}><Ticker /></div>
           </section>
 
           {/* ── AI TOOLS ── */}
           <section id="ai-tools" style={{ background:"#080c14", padding:"6rem 0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:"3.5rem", flexWrap:"wrap", gap:"1.5rem" }}>
                 <div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#0052cc", marginBottom:"0.75rem" }}>/ AI PRODUCTS</div>
-                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,5vw,4rem)", lineHeight:1, color:"white", letterSpacing:"0.02em" }}>
-                    THREE AI TOOLS<br /><span style={{ color:"#60a5fa" }}>BUILT 0→PRODUCTION</span>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#0052cc", marginBottom:".75rem" }}>/ AI PRODUCTS</div>
+                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,5vw,4rem)", lineHeight:1, color:"white", letterSpacing:".02em" }}>
+                    THREE AI TOOLS<br /><span style={{ color:"#60a5fa" }}>BUILT 0>F�PRODUCTION</span>
                   </h2>
                 </div>
-                <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,0.5)", maxWidth:380, lineHeight:1.7 }}>
+                <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,.5)", maxWidth:380, lineHeight:1.7 }}>
                   Not prototypes. Not demos. Production systems governing millions of data jobs, deployments, and alerts — daily.
                 </p>
               </div>
 
               {/* Tabs */}
-              <div style={{ display:"flex", gap:0, borderBottom:"1px solid rgba(255,255,255,0.08)" }}>
-                {AI_TOOLS.map((tool,i) => (
-                  <button key={i} className="tool-tab" onClick={()=>setActiveToolIdx(i)} style={{
-                    fontFamily:"IBM Plex Mono", fontSize:"0.65rem", fontWeight:600, letterSpacing:"0.15em",
-                    border:"none", cursor:"pointer", padding:"1rem 2rem",
-                    background:activeToolIdx===i?"rgba(0,82,204,0.25)":"transparent",
-                    color:activeToolIdx===i?"white":"rgba(255,255,255,0.35)",
+              <div style={{ display:"flex", gap:0, borderBottom:"1px solid rgba(255,255,255,.08)", flexWrap:"wrap" }}>
+                {AI_TOOLS.map((tool,i)=>(
+                  <button key={i} onClick={()=>setActiveToolIdx(i)} style={{
+                    fontFamily:"IBM Plex Mono", fontSize:".65rem", fontWeight:600, letterSpacing:".15em",
+                    border:"none", cursor:"pointer", padding:".9rem 1.75rem",
+                    background:activeToolIdx===i?"rgba(0,82,204,.25)":"transparent",
+                    color:activeToolIdx===i?"white":"rgba(255,255,255,.35)",
                     borderBottom:activeToolIdx===i?"2px solid #0052cc":"2px solid transparent",
-                    transition:"all 0.2s",
+                    transition:"all .2s",
                   }}>
                     {tool.name}
-                    <span style={{ marginLeft:"0.6rem", fontSize:"0.5rem", opacity:0.6 }}>{tool.status==="PATENT PENDING"?"PAT.PEND.":"PROD"}</span>
+                    <span style={{ marginLeft:".6rem", fontSize:".5rem", opacity:.6 }}>{tool.status==="PRODUCTION"?"PROD":"PAT."}</span>
                   </button>
                 ))}
               </div>
 
-              <div style={{ padding:"3.5rem 0", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
+              <div style={{ padding:"3.5rem 0", borderBottom:"1px solid rgba(255,255,255,.06)" }}>
                 <AIToolPanel tool={AI_TOOLS[activeToolIdx]} />
               </div>
 
               {/* Summary strip */}
-              <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"1px", background:"rgba(255,255,255,0.06)", marginTop:"3rem" }}>
-                {AI_TOOLS.map((tool,i) => (
+              <div className="tool-summary">
+                {AI_TOOLS.map((tool,i)=>(
                   <div key={i} onClick={()=>setActiveToolIdx(i)} style={{
                     padding:"1.5rem 1.75rem",
-                    background:activeToolIdx===i?"rgba(0,82,204,0.2)":"rgba(255,255,255,0.02)",
-                    cursor:"pointer", transition:"background 0.2s",
+                    background:activeToolIdx===i?"rgba(0,82,204,.2)":"rgba(255,255,255,.02)",
+                    cursor:"pointer", transition:"background .2s",
                     borderLeft:activeToolIdx===i?"3px solid #0052cc":"3px solid transparent",
                   }}
-                    onMouseEnter={e=>{if(activeToolIdx!==i) e.currentTarget.style.background="rgba(255,255,255,0.04)";}}
-                    onMouseLeave={e=>{if(activeToolIdx!==i) e.currentTarget.style.background="rgba(255,255,255,0.02)";}}>
-                    <div style={{ fontFamily:"Bebas Neue", fontSize:"1.6rem", color:"white", letterSpacing:"0.05em", marginBottom:"0.25rem" }}>{tool.name}</div>
-                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.1em", color:"rgba(255,255,255,0.35)", marginBottom:"0.75rem" }}>{tool.subtitle}</div>
-                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.62rem", color:"#60a5fa" }}>{tool.metrics[0].val} <span style={{ color:"rgba(255,255,255,0.3)" }}>{tool.metrics[0].label}</span></div>
+                    onMouseEnter={e=>{ if(activeToolIdx!==i) e.currentTarget.style.background="rgba(255,255,255,.04)"; }}
+                    onMouseLeave={e=>{ if(activeToolIdx!==i) e.currentTarget.style.background="rgba(255,255,255,.02)"; }}>
+                    <div style={{ fontFamily:"Bebas Neue", fontSize:"1.6rem", color:"white", letterSpacing:".05em", marginBottom:".25rem" }}>{tool.name}</div>
+                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".1em", color:"rgba(255,255,255,.35)", marginBottom:".75rem" }}>{tool.subtitle}</div>
+                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:".62rem", color:"#60a5fa" }}>{tool.metrics[0].val} <span style={{ color:"rgba(255,255,255,.3)" }}>{tool.metrics[0].label}</span></div>
                   </div>
                 ))}
               </div>
@@ -542,52 +706,54 @@
 
           {/* ── STACK / PIPELINE ── */}
           <section id="stack" style={{ background:"white", padding:"5.5rem 0", borderBottom:"1px solid #e2e8f0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 2.2fr", gap:"4.5rem", alignItems:"start" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
+              <div className="pipeline-layout">
                 <div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#0052cc", marginBottom:"0.75rem" }}>/ ARCHITECTURE</div>
-                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,5vw,4rem)", lineHeight:1, letterSpacing:"0.02em", color:"#0c0c0c", marginBottom:"1.25rem" }}>THE DATA<br />PIPELINE</h2>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#0052cc", marginBottom:".75rem" }}>/ ARCHITECTURE</div>
+                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,5vw,4rem)", lineHeight:1, letterSpacing:".02em", color:"#0c0c0c", marginBottom:"1.25rem" }}>THE DATA<br />PIPELINE</h2>
                   <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"#64748b", lineHeight:1.75, marginBottom:"2rem" }}>
-                    A battle-tested architecture powering seven data warehouses: streaming via Flink and BMQ/Kafka, batch via Spark across HDFS, all governed at exabyte scale with Atlas AI watching every node.
+                    A battle-tested architecture powering seven data warehouses: streaming via Flink and BMQ/Kafka, batch via Spark across HDFS — all governed at exabyte scale with Atlas AI watching every node.
                   </p>
-                  <div style={{ display:"flex", flexDirection:"column", gap:"0.6rem", marginTop:"1rem" }}>
+                  <div style={{ display:"flex", flexDirection:"column", gap:".6rem" }}>
                     {[
                       { label:"100+ BMQ / Kafka Topics & Flink Jobs", icon:"≋" },
                       { label:"100K+ Daily Batch Tasks (Spark/Dorado)", icon:"⚙" },
                       { label:"7 Production Data Warehouses", icon:"▦" },
                       { label:"140+ Business Units Served", icon:"◉" },
-                    ].map((b,i) => (
-                      <div key={i} style={{ display:"flex", alignItems:"center", gap:"0.6rem", padding:"0.6rem 0.75rem", background:"#f7f5f0", border:"1px solid #e2e8f0" }}>
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.75rem", color:"#0052cc" }}>{b.icon}</span>
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.08em", color:"#475569" }}>{b.label}</span>
+                    ].map((b,i)=>(
+                      <div key={i} style={{ display:"flex", alignItems:"center", gap:".6rem", padding:".6rem .75rem", background:"#f7f5f0", border:"1px solid #e2e8f0" }}>
+                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:".75rem", color:"#0052cc" }}>{b.icon}</span>
+                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".08em", color:"#475569" }}>{b.label}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div style={{ background:"#f7f5f0", padding:"2.5rem", border:"1px solid #e2e8f0" }}>
+                <div style={{ background:"#f7f5f0", padding:"2rem", border:"1px solid #e2e8f0" }}>
                   <PipelineDiagram />
                 </div>
               </div>
 
-              {/* 7 DW Grid */}
+              {/* 7 DWs */}
               <div style={{ marginTop:"4rem" }}>
                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"1.5rem", flexWrap:"wrap", gap:"1rem" }}>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#94a3b8" }}>— MISSION-CRITICAL DATA WAREHOUSES</div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", color:"#94a3b8" }}>7 DWs OWNED &amp; OPERATED · 1,000+ PB GOVERNED</div>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#94a3b8" }}>— MISSION-CRITICAL DATA WAREHOUSES</div>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", color:"#94a3b8" }}>7 DWs OWNED &amp; OPERATED · 1,000+ PB GOVERNED</div>
                 </div>
-                <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", border:"1px solid #e2e8f0" }}>
-                  {WAREHOUSES.map((w,i) => (
-                    <div key={i} className="wh-card" style={{ padding:"1.5rem 1rem", borderRight:i<6?"1px solid #e2e8f0":"none" }}>
-                      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:"0.75rem" }}>
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.55rem", letterSpacing:"0.08em", color:"#94a3b8" }} className="wh-id">{w.id}</span>
-                        <div className="wh-dot" style={{ width:5, height:5, borderRadius:"50%", background:"#22c55e" }} />
+                <div style={{ overflowX:"auto" }}>
+                  <div className="wh-grid" style={{ minWidth:700 }}>
+                    {WAREHOUSES.map((w,i)=>(
+                      <div key={i} className="wh-card" style={{ padding:"1.5rem 1rem", borderRight:i<6?"1px solid #e2e8f0":"none" }}>
+                        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:".75rem" }}>
+                          <span className="wh-id" style={{ fontFamily:"IBM Plex Mono", fontSize:".55rem", letterSpacing:".08em", color:"#94a3b8" }}>{w.id}</span>
+                          <div className="wh-dot" style={{ width:5, height:5, borderRadius:"50%", background:"#22c55e" }} />
+                        </div>
+                        <div className="wh-name" style={{ fontFamily:"Bebas Neue", fontSize:"1.1rem", letterSpacing:".04em", color:"#0c0c0c", marginBottom:".2rem", lineHeight:1.1 }}>{w.name}</div>
+                        <div className="wh-role" style={{ fontFamily:"EB Garamond", fontSize:".8rem", color:"#64748b", marginBottom:".5rem", lineHeight:1.4 }}>{w.role}</div>
+                        <div className="wh-scale" style={{ fontFamily:"IBM Plex Mono", fontSize:".5rem", letterSpacing:".08em", color:"#94a3b8", marginBottom:".4rem" }}>{w.scale}</div>
+                        <div className="wh-apps" style={{ fontFamily:"IBM Plex Mono", fontSize:".48rem", letterSpacing:".06em", color:"#94a3b8", border:"1px solid #e2e8f0", padding:".15rem .4rem", display:"inline-block" }}>{w.apps}</div>
                       </div>
-                      <div style={{ fontFamily:"Bebas Neue", fontSize:"1.1rem", letterSpacing:"0.04em", color:"#0c0c0c", marginBottom:"0.2rem", lineHeight:1.1 }} className="wh-name">{w.name}</div>
-                      <div style={{ fontFamily:"EB Garamond", fontSize:"0.8rem", color:"#64748b", marginBottom:"0.5rem", lineHeight:1.4 }} className="wh-role">{w.role}</div>
-                      <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.5rem", letterSpacing:"0.08em", color:"#94a3b8", marginBottom:"0.4rem" }} className="wh-scale">{w.scale}</div>
-                      <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.48rem", letterSpacing:"0.06em", color:"#94a3b8", border:"1px solid #e2e8f0", padding:"0.15rem 0.4rem", display:"inline-block" }} className="wh-apps">{w.apps}</div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -595,33 +761,33 @@
 
           {/* ── PATENTS ── */}
           <section id="patents" style={{ background:"#0052cc", padding:"5.5rem 0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:"3rem", flexWrap:"wrap", gap:"1.5rem" }}>
                 <div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"rgba(255,255,255,0.45)", marginBottom:"0.75rem" }}>/ INNOVATION</div>
-                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,5vw,4rem)", lineHeight:1, color:"white", letterSpacing:"0.02em" }}>THE PATENT<br />LAB</h2>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"rgba(255,255,255,.45)", marginBottom:".75rem" }}>/ INNOVATION</div>
+                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,5vw,4rem)", lineHeight:1, color:"white", letterSpacing:".02em" }}>THE PATENT<br />LAB</h2>
                 </div>
-                <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,0.6)", maxWidth:400, lineHeight:1.7 }}>
-                  Two US patent applications in progress — proprietary AI systems that solve problems no existing framework could handle at this scale.
+                <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,.6)", maxWidth:400, lineHeight:1.7 }}>
+                  Two US patents filed for proprietary AI systems that solve problems no existing framework could handle at this scale.
                 </p>
               </div>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"1.5rem" }}>
+              <div className="patents-grid">
                 {[
                   { code:"PAT-001", name:"ATLAS", type:"AI Pipeline Self-Healing System", desc:"An LLM-driven autonomous agent that detects, diagnoses, and remediates ETL failures across exabyte-scale infrastructure — completely without human intervention. Auto-resolved 200,000+ incidents since deployment.", tags:["LLM Agents","Auto-Remediation","Metadata Graph","ETL Intelligence"] },
                   { code:"PAT-002", name:"PLUTO", type:"AI Compliance Deployment Engine", desc:"One-click deployment platform using AI to validate, review, and execute infrastructure changes while maintaining continuous COPPA and CT SB3 compliance. 600K+ deployments across two years, 30% of all TikTok US.", tags:["Predictive Scaling","CI/CD AI","Compliance Automation","Resource Optimization"] },
-                ].map((p,i) => (
-                  <div key={i} style={{ background:"rgba(255,255,255,0.07)", border:"1px solid rgba(255,255,255,0.14)", padding:"2.75rem", backdropFilter:"blur(8px)", boxShadow:"0 12px 50px rgba(0,0,0,0.18)", transition:"transform 0.3s, box-shadow 0.3s" }}
-                    onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 24px 70px rgba(0,0,0,0.25)";}}
-                    onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="0 12px 50px rgba(0,0,0,0.18)";}}>
+                ].map((p,i)=>(
+                  <div key={i} style={{ background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.14)", padding:"2.75rem", backdropFilter:"blur(8px)", boxShadow:"0 12px 50px rgba(0,0,0,.18)", transition:"transform .3s, box-shadow .3s" }}
+                    onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)";e.currentTarget.style.boxShadow="0 24px 70px rgba(0,0,0,.25)";}}
+                    onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="0 12px 50px rgba(0,0,0,.18)";}}>
                     <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:"1.5rem" }}>
-                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.2em", color:"rgba(255,255,255,0.35)" }}>{p.code}</span>
-                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.55rem", letterSpacing:"0.15em", color:"rgba(255,255,255,0.5)", border:"1px solid rgba(255,255,255,0.2)", padding:"0.25rem 0.6rem" }}>PATENT PENDING</span>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".2em", color:"rgba(255,255,255,.35)" }}>{p.code}</span>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".55rem", letterSpacing:".15em", color:"rgba(255,255,255,.6)", border:"1px solid rgba(255,255,255,.3)", padding:".25rem .6rem" }}>PATENT</span>
                     </div>
-                    <h3 style={{ fontFamily:"Bebas Neue", fontSize:"4rem", lineHeight:1, color:"white", letterSpacing:"0.04em", marginBottom:"0.3rem" }}>{p.name}</h3>
-                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.62rem", letterSpacing:"0.1em", color:"rgba(255,255,255,0.5)", marginBottom:"1.25rem" }}>{p.type}</div>
-                    <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,0.78)", lineHeight:1.75, marginBottom:"1.75rem" }}>{p.desc}</p>
-                    <div style={{ display:"flex", gap:"0.5rem", flexWrap:"wrap" }}>
-                      {p.tags.map(tag => <span key={tag} style={{ fontFamily:"IBM Plex Mono", fontSize:"0.56rem", letterSpacing:"0.1em", color:"rgba(255,255,255,0.55)", border:"1px solid rgba(255,255,255,0.18)", padding:"0.2rem 0.6rem" }}>{tag}</span>)}
+                    <h3 style={{ fontFamily:"Bebas Neue", fontSize:"4rem", lineHeight:1, color:"white", letterSpacing:".04em", marginBottom:".3rem" }}>{p.name}</h3>
+                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:".62rem", letterSpacing:".1em", color:"rgba(255,255,255,.5)", marginBottom:"1.25rem" }}>{p.type}</div>
+                    <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"rgba(255,255,255,.78)", lineHeight:1.75, marginBottom:"1.75rem" }}>{p.desc}</p>
+                    <div style={{ display:"flex", gap:".5rem", flexWrap:"wrap" }}>
+                      {p.tags.map(tag=><span key={tag} style={{ fontFamily:"IBM Plex Mono", fontSize:".56rem", letterSpacing:".1em", color:"rgba(255,255,255,.55)", border:"1px solid rgba(255,255,255,.18)", padding:".2rem .6rem" }}>{tag}</span>)}
                     </div>
                   </div>
                 ))}
@@ -631,23 +797,23 @@
 
           {/* ── EXPERIENCE ── */}
           <section id="experience" style={{ background:"#f7f5f0", padding:"5.5rem 0", borderBottom:"1px solid #e2e8f0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
-              <div style={{ display:"grid", gridTemplateColumns:"280px 1fr", gap:"5rem" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
+              <div className="exp-layout">
                 <div style={{ position:"sticky", top:"6rem", alignSelf:"flex-start" }}>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#0052cc", marginBottom:"0.75rem" }}>/ CAREER</div>
-                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,4vw,3.5rem)", lineHeight:1, color:"#0c0c0c", letterSpacing:"0.02em", marginBottom:"2rem" }}>PROVEN<br />TRACK<br />RECORD</h2>
-                  <div style={{ display:"flex", flexDirection:"column", gap:"0.65rem" }}>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#0052cc", marginBottom:".75rem" }}>/ CAREER</div>
+                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,4vw,3.5rem)", lineHeight:1, color:"#0c0c0c", letterSpacing:".02em", marginBottom:"2rem" }}>PROVEN<br />TRACK<br />RECORD</h2>
+                  <div style={{ display:"flex", flexDirection:"column", gap:".65rem" }}>
                     {[
-                      { icon:"★", label:"Rockstar Award × 2", body:"2023 & 2024 — Exceptional cross-functional impact at TikTok" },
-                      { icon:"⚖", label:"Compliance Architect", body:"COPPA · CT SB3 · HIPAA · GDPR — $200M+ exposure shielded" },
-                      { icon:"◈", label:"Patent Inventor × 2", body:"Atlas & Pluto — 2 pending US patents in AI data infrastructure" },
-                      { icon:"◉", label:"Spot Bonus 2023", body:"Cross-functional automation & collaboration in 65-member team" },
-                    ].map((award,i) => (
-                      <div key={i} style={{ display:"flex", gap:"0.75rem", alignItems:"flex-start", background:"white", border:"1px solid #e2e8f0", padding:"0.85rem 1rem" }}>
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.85rem", color:"#0052cc", marginTop:"0.1rem", flexShrink:0 }}>{award.icon}</span>
+                      { icon:"★", label:"Rockstar Award 2024", body:"Exceptional cross-functional impact at TikTok USDS" },
+                      { icon:"◉", label:"Spot Bonus 2023",     body:"Cross-functional automation in 65-member team" },
+                      { icon:"⚖", label:"Compliance Architect", body:"COPPA · CT SB3 · HIPAA — $200M+ exposure shielded" },
+                      { icon:"◈", label:"Patent Inventor × 2", body:"Atlas & Pluto — 2 US patents in AI data infrastructure" },
+                    ].map((award,i)=>(
+                      <div key={i} style={{ display:"flex", gap:".75rem", alignItems:"flex-start", background:"white", border:"1px solid #e2e8f0", padding:".85rem 1rem" }}>
+                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:".85rem", color:"#0052cc", marginTop:".1rem", flexShrink:0 }}>{award.icon}</span>
                         <div>
-                          <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.62rem", fontWeight:600, color:"#0c0c0c", marginBottom:"0.2rem" }}>{award.label}</div>
-                          <div style={{ fontFamily:"EB Garamond", fontSize:"0.85rem", color:"#64748b", lineHeight:1.5 }}>{award.body}</div>
+                          <div style={{ fontFamily:"IBM Plex Mono", fontSize:".62rem", fontWeight:600, color:"#0c0c0c", marginBottom:".2rem" }}>{award.label}</div>
+                          <div style={{ fontFamily:"EB Garamond", fontSize:".85rem", color:"#64748b", lineHeight:1.5 }}>{award.body}</div>
                         </div>
                       </div>
                     ))}
@@ -655,25 +821,25 @@
                 </div>
 
                 <div style={{ display:"flex", flexDirection:"column", gap:"3.5rem" }}>
-                  {EXPERIENCE.map((exp,i) => (
+                  {EXPERIENCE.map((exp,i)=>(
                     <div key={i} className="exp-card" style={{ paddingLeft:"1.75rem" }}>
-                      <div style={{ position:"relative", marginLeft:"-1.82rem", marginBottom:"0.65rem", display:"flex", alignItems:"center", gap:"0.75rem", flexWrap:"wrap" }}>
+                      <div style={{ position:"relative", marginLeft:"-1.82rem", marginBottom:".65rem", display:"flex", alignItems:"center", gap:".75rem", flexWrap:"wrap" }}>
                         <div style={{ width:10, height:10, borderRadius:"50%", flexShrink:0, background:exp.active?"#0052cc":"#cbd5e1", border:"2px solid #f7f5f0", boxShadow:exp.active?"0 0 0 3px #0052cc40":"none" }} />
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.15em", color:exp.active?"#0052cc":"#94a3b8" }}>{exp.period}</span>
-                        {exp.highlight && <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.54rem", letterSpacing:"0.1em", color:"white", background:"#0052cc", padding:"0.15rem 0.55rem" }}>{exp.highlight}</span>}
+                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".15em", color:exp.active?"#0052cc":"#94a3b8" }}>{exp.period}</span>
+                        {exp.highlight && <span style={{ fontFamily:"IBM Plex Mono", fontSize:".54rem", letterSpacing:".1em", color:"white", background:"#0052cc", padding:".15rem .55rem" }}>{exp.highlight}</span>}
                       </div>
-                      <h3 style={{ fontFamily:"Bebas Neue", fontSize:"2rem", letterSpacing:"0.04em", color:"#0c0c0c", lineHeight:1, marginBottom:"0.15rem" }}>{exp.title}</h3>
+                      <h3 style={{ fontFamily:"Bebas Neue", fontSize:"2rem", letterSpacing:".04em", color:"#0c0c0c", lineHeight:1, marginBottom:".15rem" }}>{exp.title}</h3>
                       <div style={{ fontFamily:"EB Garamond", fontStyle:"italic", fontSize:"1rem", color:"#64748b", marginBottom:"1rem" }}>{exp.org}</div>
-                      <ul style={{ display:"flex", flexDirection:"column", gap:"0.5rem", marginBottom:"1.25rem" }}>
-                        {exp.points.map((pt,j) => (
-                          <li key={j} style={{ display:"flex", gap:"0.65rem", fontFamily:"EB Garamond", fontSize:"1rem", color:"#475569", lineHeight:1.65 }}>
-                            <span style={{ color:"#0052cc", flexShrink:0, marginTop:"0.1rem" }}>—</span>{pt}
+                      <ul style={{ display:"flex", flexDirection:"column", gap:".5rem", marginBottom:"1.25rem" }}>
+                        {exp.points.map((pt,j)=>(
+                          <li key={j} style={{ display:"flex", gap:".65rem", fontFamily:"EB Garamond", fontSize:"1rem", color:"#475569", lineHeight:1.65 }}>
+                            <span style={{ color:"#0052cc", flexShrink:0, marginTop:".1rem" }}>—</span>{pt}
                           </li>
                         ))}
                       </ul>
-                      {exp.tech.length > 0 && (
-                        <div style={{ display:"flex", gap:"0.4rem", flexWrap:"wrap" }}>
-                          {exp.tech.map(t => <span key={t} style={{ fontFamily:"IBM Plex Mono", fontSize:"0.56rem", letterSpacing:"0.08em", color:"#0052cc", border:"1px solid #0052cc28", background:"#0052cc08", padding:"0.2rem 0.55rem" }}>{t}</span>)}
+                      {exp.tech.length>0 && (
+                        <div style={{ display:"flex", gap:".4rem", flexWrap:"wrap" }}>
+                          {exp.tech.map(t=><span key={t} style={{ fontFamily:"IBM Plex Mono", fontSize:".56rem", letterSpacing:".08em", color:"#0052cc", border:"1px solid #0052cc28", background:"#0052cc08", padding:".2rem .55rem" }}>{t}</span>)}
                         </div>
                       )}
                     </div>
@@ -685,38 +851,42 @@
 
           {/* ── SKILLS ── */}
           <section style={{ background:"white", padding:"5.5rem 0", borderBottom:"1px solid #e2e8f0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
-              <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#0052cc", marginBottom:"0.75rem" }}>/ STACK PROFILE</div>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
+              <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#0052cc", marginBottom:".75rem" }}>/ STACK PROFILE</div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:"2.5rem", flexWrap:"wrap", gap:"1rem" }}>
-                <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,5vw,4rem)", lineHeight:1, letterSpacing:"0.02em", color:"#0c0c0c" }}>TECHNICAL<br />ARSENAL</h2>
+                <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,5vw,4rem)", lineHeight:1, letterSpacing:".02em", color:"#0c0c0c" }}>TECHNICAL<br />ARSENAL</h2>
                 <p style={{ fontFamily:"EB Garamond", fontSize:"1.05rem", color:"#64748b", maxWidth:380 }}>End-to-end coverage — from raw ingestion to AI-powered governance, streaming to batch, cloud to on-prem.</p>
               </div>
-              <div style={{ display:"grid", gridTemplateColumns:"repeat(6,1fr)", border:"1px solid #e2e8f0" }}>
-                {SKILLS_COLS.map((col,i) => (
+              <div className="skills-grid">
+                {SKILLS_COLS.map((col,i)=>(
                   <div key={i} className="skill-col" style={{ padding:"2rem 1.25rem", borderRight:i<5?"1px solid #e2e8f0":"none" }}>
-                    <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginBottom:"1.25rem" }}>
-                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.9rem", color:"#0052cc" }}>{col.icon}</span>
-                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.55rem", fontWeight:600, letterSpacing:"0.18em", color:"#0c0c0c" }}>{col.label}</span>
+                    <div style={{ display:"flex", alignItems:"center", gap:".5rem", marginBottom:"1.25rem" }}>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".9rem", color:"#0052cc" }}>{col.icon}</span>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".55rem", fontWeight:600, letterSpacing:".18em", color:"#0c0c0c" }}>{col.label}</span>
                     </div>
-                    <ul style={{ listStyle:"none", display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-                      {col.items.map(item => (
-                        <li key={item} style={{ fontFamily:"EB Garamond", fontSize:"0.92rem", color:"#475569", display:"flex", alignItems:"center", gap:"0.45rem" }}>
-                          <span style={{ width:14, height:1, background:"#0052cc40", flexShrink:0, display:"inline-block" }} />{item}
+                    <ul style={{ listStyle:"none", display:"flex", flexDirection:"column", gap:".55rem" }}>
+                      {col.items.map(item=>(
+                        <li key={item} style={{ fontFamily:"EB Garamond", fontSize:".92rem", color:"#475569", display:"flex", alignItems:"center", gap:".5rem" }}>
+                          {/* Solid blue dot — replaces the faint white lines */}
+                          <span className="skill-bullet" />
+                          {item}
                         </li>
                       ))}
                     </ul>
                   </div>
                 ))}
               </div>
+
+              {/* Certifications */}
               <div style={{ marginTop:"2.5rem" }}>
-                <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.25em", color:"#94a3b8", marginBottom:"1.25rem" }}>— CERTIFICATIONS</div>
-                <div style={{ display:"flex", gap:"0.75rem", flexWrap:"wrap" }}>
-                  {CERTIFICATIONS.map((cert,i) => (
-                    <div key={i} className="cert-chip" style={{ display:"flex", alignItems:"center", gap:"0.6rem", padding:"0.6rem 1rem", background:"#f7f5f0", border:"1px solid #e2e8f0", cursor:"default" }}>
-                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.75rem", color:"#0052cc" }}>{cert.icon}</span>
+                <div style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".25em", color:"#94a3b8", marginBottom:"1.25rem" }}>— CERTIFICATIONS</div>
+                <div style={{ display:"flex", gap:".75rem", flexWrap:"wrap" }}>
+                  {CERTIFICATIONS.map((cert,i)=>(
+                    <div key={i} className="cert-chip" style={{ display:"flex", alignItems:"center", gap:".6rem", padding:".6rem 1rem", background:"#f7f5f0", border:"1px solid #e2e8f0", cursor:"default" }}>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".75rem", color:"#0052cc" }}>{cert.icon}</span>
                       <div>
-                        <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", fontWeight:600, color:"#0c0c0c", letterSpacing:"0.08em" }} className="cert-name">{cert.name}</div>
-                        <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.5rem", color:"#94a3b8", letterSpacing:"0.06em" }} className="cert-issuer">{cert.issuer}</div>
+                        <div className="cert-name" style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", fontWeight:600, color:"#0c0c0c", letterSpacing:".08em" }}>{cert.name}</div>
+                        <div className="cert-issuer" style={{ fontFamily:"IBM Plex Mono", fontSize:".5rem", color:"#94a3b8", letterSpacing:".06em" }}>{cert.issuer}</div>
                       </div>
                     </div>
                   ))}
@@ -726,19 +896,19 @@
           </section>
 
           {/* ── IMPACT STRIP ── */}
-          <section style={{ background:"#0c0c0c", padding:"4rem 0", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
-              <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:0, borderLeft:"1px solid rgba(255,255,255,0.06)" }}>
+          <section style={{ background:"#0c0c0c", padding:"4rem 0", borderBottom:"1px solid rgba(255,255,255,.06)" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
+              <div className="impact-grid">
                 {[
                   { val:"1.0 EB+",  sub:"Data Governed" },
                   { val:"7 DWs",    sub:"Owned & Operated" },
                   { val:"$200M+",   sub:"Regulatory Risk Avoided" },
                   { val:"120→<15",  sub:"SLA Breach Reduction / Qtr" },
                   { val:"15→80+",   sub:"NPS Score Improvement" },
-                ].map((item,i) => (
-                  <div key={i} style={{ padding:"2rem 1.5rem", borderRight:"1px solid rgba(255,255,255,0.06)" }}>
-                    <div style={{ fontFamily:"Bebas Neue", fontSize:"clamp(1.6rem,3vw,2.5rem)", color:"white", lineHeight:1, marginBottom:"0.4rem", letterSpacing:"0.02em" }}>{item.val}</div>
-                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.56rem", letterSpacing:"0.12em", color:"rgba(255,255,255,0.35)" }}>{item.sub}</div>
+                ].map((item,i)=>(
+                  <div key={i} style={{ padding:"2rem 1.5rem", borderRight:"1px solid rgba(255,255,255,.06)" }}>
+                    <div style={{ fontFamily:"Bebas Neue", fontSize:"clamp(1.4rem,3vw,2.5rem)", color:"white", lineHeight:1, marginBottom:".4rem", letterSpacing:".02em" }}>{item.val}</div>
+                    <div style={{ fontFamily:"IBM Plex Mono", fontSize:".56rem", letterSpacing:".12em", color:"rgba(255,255,255,.35)" }}>{item.sub}</div>
                   </div>
                 ))}
               </div>
@@ -747,53 +917,55 @@
 
           {/* ── WRITING ── */}
           <section id="writing" style={{ background:"#0c0c0c", padding:"5.5rem 0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem" }}>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1.3fr", gap:"5rem", alignItems:"start" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem" }}>
+              <div className="writing-grid">
                 <div>
-                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#0052cc", marginBottom:"0.75rem" }}>/ THOUGHT LEADERSHIP</div>
-                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,5vw,4.5rem)", lineHeight:0.92, letterSpacing:"0.02em", color:"white", marginBottom:"1.5rem" }}>SYSTEMS<br />&amp; SOUL</h2>
-                  <p style={{ fontFamily:"EB Garamond", fontSize:"1.1rem", fontStyle:"italic", color:"rgba(255,255,255,0.55)", lineHeight:1.75, marginBottom:"2rem" }}>
+                  <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#0052cc", marginBottom:".75rem" }}>/ THOUGHT LEADERSHIP</div>
+                  <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,5vw,4.5rem)", lineHeight:.92, letterSpacing:".02em", color:"white", marginBottom:"1.5rem" }}>SYSTEMS<br />&amp; SOUL</h2>
+                  <p style={{ fontFamily:"EB Garamond", fontSize:"1.1rem", fontStyle:"italic", color:"rgba(255,255,255,.55)", lineHeight:1.75, marginBottom:"2rem" }}>
                     Deep-dives on high-scale data engineering, AI agent design, and the discipline of building at petabyte scale.
                   </p>
-                  <div style={{ display:"flex", gap:"1rem", marginBottom:"2.5rem", flexWrap:"wrap" }}>
+                  <div style={{ display:"flex", gap:".75rem", marginBottom:"2rem", flexWrap:"wrap" }}>
                     {[
-                      { platform:"X / Twitter", stat:"45K+ Followers", link:"https://x.com/isuyash14" },
-                      { platform:"Substack",    stat:"Growing Newsletter", link:"https://suyashsingh.substack.com" },
-                      { platform:"LinkedIn",    stat:"isuyash14", link:"https://www.linkedin.com/in/isuyash14/" },
-                    ].map((s,i) => (
-                      <a key={i} href={s.link} target="_blank" rel="noreferrer" style={{ textDecoration:"none", padding:"0.75rem 1rem", border:"1px solid rgba(255,255,255,0.1)", background:"rgba(255,255,255,0.03)", transition:"all 0.2s" }}
-                        onMouseEnter={e=>{e.currentTarget.style.borderColor="#0052cc";e.currentTarget.style.background="rgba(0,82,204,0.1)";}}
-                        onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.1)";e.currentTarget.style.background="rgba(255,255,255,0.03)";}}>
-                        <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.5rem", letterSpacing:"0.12em", color:"rgba(255,255,255,0.35)", marginBottom:"0.25rem" }}>{s.platform}</div>
-                        <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.62rem", fontWeight:600, color:"white" }}>{s.stat}</div>
+                      { platform:"X / Twitter", stat:"45K+ Followers",       link:"https://x.com/isuyash14" },
+                      { platform:"Substack",    stat:"Growing Newsletter",   link:"https://suyashsingh.substack.com" },
+                      { platform:"LinkedIn",    stat:"linkedin/isuyash14",   link:"https://www.linkedin.com/in/isuyash14/" },
+                    ].map((s,i)=>(
+                      <a key={i} href={s.link} target="_blank" rel="noreferrer" style={{ textDecoration:"none", padding:".75rem 1rem", border:"1px solid rgba(255,255,255,.1)", background:"rgba(255,255,255,.03)", transition:"all .2s" }}
+                        onMouseEnter={e=>{e.currentTarget.style.borderColor="#0052cc";e.currentTarget.style.background="rgba(0,82,204,.1)";}}
+                        onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,.1)";e.currentTarget.style.background="rgba(255,255,255,.03)";}}>
+                        <div style={{ fontFamily:"IBM Plex Mono", fontSize:".5rem", letterSpacing:".12em", color:"rgba(255,255,255,.35)", marginBottom:".25rem" }}>{s.platform}</div>
+                        <div style={{ fontFamily:"IBM Plex Mono", fontSize:".62rem", fontWeight:600, color:"white" }}>{s.stat}</div>
                       </a>
                     ))}
                   </div>
-                  <div style={{ display:"flex", gap:"0.75rem" }}>
-                    <input type="email" placeholder="your@email.com" style={{ flex:1, background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)", color:"white", fontFamily:"IBM Plex Mono", fontSize:"0.68rem", padding:"0.85rem 1.25rem", outline:"none" }}
-                      onFocus={e=>e.target.style.borderColor="#0052cc"} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"} />
-                    <button style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:"0.68rem", letterSpacing:"0.15em", color:"black", background:"white", border:"none", padding:"0.85rem 1.5rem", cursor:"pointer", transition:"background 0.2s" }}
+                  <div style={{ display:"flex", gap:".75rem" }}>
+                    <input type="email" placeholder="your@email.com" style={{ flex:1, background:"rgba(255,255,255,.05)", border:"1px solid rgba(255,255,255,.1)", color:"white", fontFamily:"IBM Plex Mono", fontSize:".68rem", padding:".85rem 1.25rem", outline:"none" }}
+                      onFocus={e=>e.target.style.borderColor="#0052cc"} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,.1)"} />
+                    <button style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:".68rem", letterSpacing:".15em", color:"black", background:"white", border:"none", padding:".85rem 1.5rem", cursor:"pointer", transition:"background .2s" }}
                       onMouseEnter={e=>e.target.style.background="#e2e8f0"} onMouseLeave={e=>e.target.style.background="white"}>
                       SUBSCRIBE
                     </button>
                   </div>
                 </div>
                 <div style={{ display:"flex", flexDirection:"column", gap:"1px" }}>
-                  {WRITING_POSTS.map((post,i) => (
-                    <a key={i} href="https://suyashsingh.substack.com" target="_blank" rel="noreferrer" className="post-row" style={{ display:"flex", gap:"1.25rem", alignItems:"center", padding:"1.1rem 1.25rem", background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.05)", textDecoration:"none", transition:"background 0.2s" }}
-                      onMouseEnter={e=>e.currentTarget.style.background="rgba(0,82,204,0.12)"}
-                      onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.02)"}>
-                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", color:"rgba(255,255,255,0.2)", flexShrink:0 }}>{post.num}</span>
-                      <span style={{ fontFamily:"EB Garamond", fontSize:"1rem", color:"rgba(255,255,255,0.78)", flex:1, lineHeight:1.4 }}>{post.title}</span>
-                      <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"0.25rem", flexShrink:0 }}>
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.5rem", letterSpacing:"0.1em", color:"#0052cc", border:"1px solid #0052cc40", padding:"0.12rem 0.45rem" }}>{post.tag}</span>
-                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:"0.48rem", color:"rgba(255,255,255,0.2)" }}>{post.read}</span>
+                  {WRITING_POSTS.map((post,i)=>(
+                    <a key={i} href="https://suyashsingh.substack.com" target="_blank" rel="noreferrer" className="post-row" style={{ display:"flex", gap:"1.25rem", alignItems:"center", padding:"1.1rem 1.25rem", background:"rgba(255,255,255,.02)", border:"1px solid rgba(255,255,255,.05)", textDecoration:"none" }}
+                      onMouseEnter={e=>e.currentTarget.style.background="rgba(0,82,204,.12)"}
+                      onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,.02)"}>
+                      <span style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", color:"rgba(255,255,255,.2)", flexShrink:0 }}>{post.num}</span>
+                      <span style={{ fontFamily:"EB Garamond", fontSize:"1rem", color:"rgba(255,255,255,.78)", flex:1, lineHeight:1.4 }}>{post.title}</span>
+                      <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:".25rem", flexShrink:0 }}>
+                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:".5rem", letterSpacing:".1em", color:"#0052cc", border:"1px solid #0052cc40", padding:".12rem .45rem" }}>{post.tag}</span>
+                        <span style={{ fontFamily:"IBM Plex Mono", fontSize:".48rem", color:"rgba(255,255,255,.2)" }}>{post.read}</span>
                       </div>
                     </a>
                   ))}
-                  <div style={{ padding:"1rem 1.25rem", border:"1px solid rgba(255,255,255,0.05)", marginTop:"1px" }}>
-                    <a href="https://suyashsingh.substack.com" target="_blank" rel="noreferrer" style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.15em", color:"#0052cc", textDecoration:"none", display:"flex", alignItems:"center", gap:"0.5rem" }}
-                      onMouseEnter={e=>e.currentTarget.style.color="#60a5fa"} onMouseLeave={e=>e.currentTarget.style.color="#0052cc"}>
+                  <div style={{ padding:"1rem 1.25rem", border:"1px solid rgba(255,255,255,.05)", marginTop:"1px" }}>
+                    <a href="https://suyashsingh.substack.com" target="_blank" rel="noreferrer"
+                      style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".15em", color:"#0052cc", textDecoration:"none" }}
+                      onMouseEnter={e=>e.currentTarget.style.color="#60a5fa"}
+                      onMouseLeave={e=>e.currentTarget.style.color="#0052cc"}>
                       READ ALL ARTICLES ON SUBSTACK →
                     </a>
                   </div>
@@ -804,27 +976,29 @@
 
           {/* ── CONTACT CTA ── */}
           <section style={{ background:"#f7f5f0", padding:"6rem 0", borderTop:"1px solid #e2e8f0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem", textAlign:"center" }}>
-              <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.6rem", letterSpacing:"0.3em", color:"#0052cc", marginBottom:"1.25rem" }}>/ OPEN TO OPPORTUNITIES</div>
-              <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.5rem,8vw,6rem)", lineHeight:0.92, letterSpacing:"0.02em", color:"#0c0c0c", marginBottom:"1.5rem" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem", textAlign:"center" }}>
+              <div style={{ fontFamily:"IBM Plex Mono", fontSize:".6rem", letterSpacing:".3em", color:"#0052cc", marginBottom:"1.25rem" }}>/ OPEN TO OPPORTUNITIES</div>
+              <h2 style={{ fontFamily:"Bebas Neue", fontSize:"clamp(2.2rem,8vw,6rem)", lineHeight:.92, letterSpacing:".02em", color:"#0c0c0c", marginBottom:"1.5rem" }}>
                 LET'S BUILD<br /><span style={{ color:"#0052cc" }}>SOMETHING</span><br /><span style={{ WebkitTextStroke:"2px #0c0c0c", color:"transparent" }}>REMARKABLE</span>
               </h2>
-              <p style={{ fontFamily:"EB Garamond", fontSize:"1.15rem", color:"#64748b", lineHeight:1.75, maxWidth:560, margin:"0 auto 3rem" }}>
-                Targeting Staff / Principal Data Engineer roles at top-tier companies. Open to discussing high-impact infrastructure challenges, AI-native data platforms, and exabyte-scale systems.
+              <p style={{ fontFamily:"EB Garamond", fontSize:"1.15rem", color:"#64748b", lineHeight:1.75, maxWidth:540, margin:"0 auto 3rem" }}>
+                Targeting Staff / Principal Data Engineer roles at top-tier companies. Open to high-impact infrastructure challenges, AI-native data platforms, and exabyte-scale systems.
               </p>
               <div style={{ display:"flex", gap:"1rem", justifyContent:"center", flexWrap:"wrap" }}>
-                <a href="mailto:suyashsingh1494@gmail.com" style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:"0.7rem", letterSpacing:"0.15em", color:"white", textDecoration:"none", background:"#0052cc", padding:"1rem 2.5rem", transition:"background 0.2s" }}
+                <a href="mailto:suyashsingh1494@gmail.com" style={{ fontFamily:"IBM Plex Mono", fontWeight:600, fontSize:".7rem", letterSpacing:".15em", color:"white", textDecoration:"none", background:"#0052cc", padding:"1rem 2.5rem", transition:"background .2s" }}
                   onMouseEnter={e=>e.currentTarget.style.background="#003d99"} onMouseLeave={e=>e.currentTarget.style.background="#0052cc"}>
                   GET IN TOUCH →
                 </a>
-                <a href="https://www.linkedin.com/in/isuyash14/" target="_blank" rel="noreferrer" style={{ fontFamily:"IBM Plex Mono", fontWeight:500, fontSize:"0.7rem", letterSpacing:"0.15em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:"1rem 2rem", transition:"all 0.2s" }}
+                <a href="https://www.linkedin.com/in/isuyash14/" target="_blank" rel="noreferrer"
+                  style={{ fontFamily:"IBM Plex Mono", fontWeight:500, fontSize:".7rem", letterSpacing:".15em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:"1rem 2rem", transition:"all .2s" }}
                   onMouseEnter={e=>{e.currentTarget.style.borderColor="#0052cc";e.currentTarget.style.color="#0052cc";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569"}}>
-                  VIEW LINKEDIN
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569";}}>
+                  LINKEDIN
                 </a>
-                <a href="https://x.com/isuyash14" target="_blank" rel="noreferrer" style={{ fontFamily:"IBM Plex Mono", fontWeight:500, fontSize:"0.7rem", letterSpacing:"0.15em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:"1rem 2rem", transition:"all 0.2s" }}
+                <a href="https://x.com/isuyash14" target="_blank" rel="noreferrer"
+                  style={{ fontFamily:"IBM Plex Mono", fontWeight:500, fontSize:".7rem", letterSpacing:".15em", color:"#475569", textDecoration:"none", border:"1px solid #cbd5e1", padding:"1rem 2rem", transition:"all .2s" }}
                   onMouseEnter={e=>{e.currentTarget.style.borderColor="#0c0c0c";e.currentTarget.style.color="#0c0c0c";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569"}}>
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor="#cbd5e1";e.currentTarget.style.color="#475569";}}>
                   FOLLOW ON 𝕏
                 </a>
               </div>
@@ -832,21 +1006,22 @@
           </section>
 
           {/* ── FOOTER ── */}
-          <footer style={{ background:"#0c0c0c", borderTop:"1px solid rgba(255,255,255,0.05)", padding:"2.5rem 0" }}>
-            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 2rem", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"1.25rem" }}>
-              <div style={{ fontFamily:"Bebas Neue", fontSize:"1.3rem", letterSpacing:"0.1em", color:"white" }}>
+          <footer style={{ background:"#0c0c0c", borderTop:"1px solid rgba(255,255,255,.05)", padding:"2.5rem 0" }}>
+            <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 1.5rem", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"1.25rem" }}>
+              <div style={{ fontFamily:"Bebas Neue", fontSize:"1.3rem", letterSpacing:".1em", color:"white" }}>
                 SUYASH<span style={{ color:"#0052cc" }}>.</span>SINGH
               </div>
-              <div style={{ display:"flex", gap:"2rem" }}>
-                {[["LinkedIn","https://www.linkedin.com/in/isuyash14/"],["Substack","https://suyashsingh.substack.com"],["X / Twitter","https://x.com/isuyash14"],["Email","mailto:suyashsingh1494@gmail.com"]].map(([l,href]) => (
-                  <a key={l} href={href} target={href.startsWith("http")?"_blank":undefined} rel="noreferrer" style={{ fontFamily:"IBM Plex Mono", fontSize:"0.58rem", letterSpacing:"0.15em", color:"rgba(255,255,255,0.3)", textDecoration:"none", transition:"color 0.2s" }}
-                    onMouseEnter={e=>e.target.style.color="white"} onMouseLeave={e=>e.target.style.color="rgba(255,255,255,0.3)"}>
+              <div style={{ display:"flex", gap:"1.5rem", flexWrap:"wrap" }}>
+                {[["LinkedIn","https://www.linkedin.com/in/isuyash14/"],["Substack","https://suyashsingh.substack.com"],["X / Twitter","https://x.com/isuyash14"],["Email","mailto:suyashsingh1494@gmail.com"]].map(([l,href])=>(
+                  <a key={l} href={href} target={href.startsWith("http")?"_blank":undefined} rel="noreferrer"
+                    style={{ fontFamily:"IBM Plex Mono", fontSize:".58rem", letterSpacing:".15em", color:"rgba(255,255,255,.3)", textDecoration:"none", transition:"color .2s" }}
+                    onMouseEnter={e=>e.target.style.color="white"} onMouseLeave={e=>e.target.style.color="rgba(255,255,255,.3)"}>
                     {l.toUpperCase()}
                   </a>
                 ))}
               </div>
-              <div style={{ fontFamily:"IBM Plex Mono", fontSize:"0.55rem", letterSpacing:"0.1em", color:"rgba(255,255,255,0.18)" }}>
-                © 2025 · LEAD DATA ENGINEER · TIKTOK USDS · SAN JOSE, CA
+              <div style={{ fontFamily:"IBM Plex Mono", fontSize:".55rem", letterSpacing:".1em", color:"rgba(255,255,255,.18)" }}>
+                © 2025 · DATA ENGINEER · TIKTOK USDS · SAN JOSE, CA
               </div>
             </div>
           </footer>
@@ -854,8 +1029,7 @@
       );
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 </body>
 </html>
