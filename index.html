@@ -12,6 +12,7 @@
   <script crossorigin
     src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,7 +162,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center bottom;
       display: block;
     }
 
@@ -247,6 +248,12 @@
       display: grid;
       grid-template-columns: 280px 1fr;
       gap: 5rem;
+    }
+
+    .exp-sidebar {
+      position: sticky;
+      top: 6rem;
+      align-self: flex-start;
     }
 
     /* ─── SKILLS ─── */
@@ -408,12 +415,12 @@
       }
 
       .photo-card {
-        max-width: 420px;
+        max-width: calc(100vw - 80px);
         margin: 0 auto;
       }
 
       .photo-img-wrap {
-        aspect-ratio: 4/3;
+        aspect-ratio: 3/4;
       }
 
       .pipeline-layout {
@@ -422,6 +429,10 @@
 
       .exp-layout {
         grid-template-columns: 1fr;
+      }
+
+      .exp-sidebar {
+        position: static;
       }
 
       .writing-grid {
@@ -504,6 +515,224 @@
 
       .impact-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ─── TOPOLOGY DIAGRAM (DARK) ─── */
+    .topo-container {
+      width: 100%;
+      max-width: 80rem;
+      margin: 0 auto;
+      background: transparent;
+      padding: 2.5rem 0;
+      border-radius: 0;
+      border: none;
+    }
+
+    .topo-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .topo-radio-icon {
+      color: #0052cc;
+      width: 1.25rem;
+      height: 1.25rem;
+      animation: topo-pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .topo-title {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin: 0;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .topo-grid {
+      display: grid;
+      gap: 1.25rem;
+      position: relative;
+    }
+
+    .topo-col-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 900;
+      color: #0052cc;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .topo-node {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      padding: 0.85rem 1rem;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 3px solid #0052cc;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      z-index: 1;
+    }
+
+    .topo-node:hover {
+      transform: translateY(-2px);
+      border-color: #0052cc;
+      background: #f0f4ff;
+      box-shadow: 0 4px 16px rgba(0, 82, 204, .12);
+      z-index: 30;
+    }
+
+    .topo-node-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+      color: #94a3b8;
+      transition: color 0.2s;
+    }
+
+    .topo-node:hover .topo-node-icon {
+      color: #0052cc;
+    }
+
+    .topo-node-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #0c0c0c;
+      margin: 0;
+      letter-spacing: .05em;
+    }
+
+    .topo-node-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: #94a3b8;
+      font-weight: 500;
+      margin: 0;
+      margin-left: 1.5rem;
+      letter-spacing: .06em;
+    }
+
+    .topo-node:hover .topo-node-sub {
+      color: #64748b;
+    }
+
+    .topo-arrow {
+      display: flex;
+      justify-content: center;
+      padding-top: 0.75rem;
+    }
+
+    .topo-footer {
+      font-family: 'IBM Plex Mono', monospace;
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 10px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .topo-tooltip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 8px);
+      z-index: 20;
+      background: #080c14;
+      border: 1px solid rgba(0, 82, 204, .25);
+      border-radius: 0.5rem;
+      padding: 0.85rem 1rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .topo-node:hover .topo-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .topo-tooltip-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, .75);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .topo-tooltip-stat {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: #60a5fa;
+      letter-spacing: .1em;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    @keyframes topo-pulse-slow {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .topo-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .topo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topo-container {
+        padding: 1.25rem;
+      }
+
+      .topo-arrow {
+        display: none;
+      }
+
+      .topo-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topo-tooltip {
+        position: relative;
+        top: auto;
+        opacity: 1;
+        transform: none;
+        margin-top: 0.5rem;
       }
     }
   </style>
@@ -626,20 +855,41 @@
       { id: "11", name: "Live Services", role: "TikTok Live / Streaming", scale: "Real-time events", apps: "Live creators", status: "LIVE" },
     ];
 
-    const PIPELINE_NODES = [
-      { id: "src", label: "Sources", x: 5, y: 50, color: "#0052cc", icon: "⬡" },
-      { id: "bmq", label: "BMQ/Kafka", x: 22, y: 25, color: "#0066ff", icon: "≋" },
-      { id: "ing", label: "Ingestion", x: 22, y: 75, color: "#0066ff", icon: "↓" },
-      { id: "flink", label: "Flink", x: 42, y: 25, color: "#003d99", icon: "⚡" },
-      { id: "spark", label: "Spark", x: 42, y: 75, color: "#003d99", icon: "⚙" },
-      { id: "dw", label: "11 DWs", x: 65, y: 50, color: "#0052cc", icon: "▦" },
-      { id: "atlas", label: "Atlas AI", x: 82, y: 25, color: "#0052cc", icon: "◈" },
-      { id: "out", label: "Consumers", x: 95, y: 50, color: "#001f66", icon: "◉" },
-    ];
-
-    const PIPELINE_EDGES = [
-      ["src", "bmq"], ["src", "ing"], ["bmq", "flink"], ["ing", "spark"],
-      ["flink", "dw"], ["spark", "dw"], ["dw", "atlas"], ["dw", "out"], ["atlas", "out"],
+    const TOPO_DATA = [
+      {
+        title: "Deploy & Orchestrate", nodes: [
+          { icon: "box", t: "Pluto", s: "AI Deployment Engine", desc: "AI-powered code-review and deployment automation — 550K+ total deployments. Reduced release cycle from 8 days to <1 hour (99% reduction).", stat: "550K+ DEPLOYMENTS · 290% YoY GROWTH" },
+          { icon: "clock", t: "Dorado / Airflow", s: "Task Orchestration", desc: "Manages 100K+ daily batch tasks across 8 major production data warehouses with end-to-end scheduling and dependency tracking.", stat: "100K+ DAILY TASKS" }
+        ]
+      },
+      {
+        title: "Ingestion & Streaming", nodes: [
+          { icon: "share-2", t: "BMQ / Kafka", s: "Message Bus", desc: "Operates 100+ streaming topics powering real-time data ingestion for event-level data across all business units.", stat: "100+ STREAMING TOPICS" },
+          { icon: "activity", t: "Apache Flink", s: "Real-time Processing", desc: "Manages 100+ Flink jobs at scale for real-time event processing, streaming analytics, and low-latency data transformation.", stat: "100+ FLINK JOBS AT SCALE" },
+          { icon: "refresh-cw", t: "Spark Batch", s: "Micro-batch ETL", desc: "Core batch processing engine across YARN multi-queue clusters. Delivered $4M+ in annual Spark/YARN compute optimization savings.", stat: "$4M+ ANNUAL COMPUTE SAVINGS" }
+        ]
+      },
+      {
+        title: "Processing & Storage", nodes: [
+          { icon: "hard-drive", t: "YARN Clusters", s: "Compute Layer", desc: "Built YARN↔YODEL automated resource management integration optimizing compute allocation across multi-queue clusters.", stat: "AUTOMATED RESOURCE MGMT" },
+          { icon: "layers", t: "Hive / Presto", s: "Query & Warehouse", desc: "Serves as the primary query engine across 8 production data warehouses supporting 20+ business units with sub-second analytics.", stat: "8 PRODUCTION DWs" },
+          { icon: "database", t: "HDFS", s: "Distributed Storage", desc: "Identified and executed storage optimization saving ~40PB yearly. Delivered $6M+ in annual HDFS storage cost reduction.", stat: "~40PB SAVED · $6M+/YR" }
+        ]
+      },
+      {
+        title: "Governance & Ops", nodes: [
+          { icon: "eye", t: "The Watcher", s: "Proactive Monitoring", desc: "Proactively monitors 100K+ upstream tasks to D1/D2 SLAs. Identifies stuck tasks, slow pipelines, predicts ETA. Eradicated 40% of all SLA misses.", stat: "40% SLA MISSES ERADICATED" },
+          { icon: "shield-check", t: "SLAM", s: "SLA Monitoring Suite", desc: "AI/ML-powered SLA monitoring with predictive forecasting and auto-generated ETAs. 100% eliminated manual on-call SLA reporting across 3 major versions.", stat: "100% MANUAL REPORTING ELIMINATED" },
+          { icon: "cloud-lightning", t: "ECC Bot", s: "Infrastructure Alerts", desc: "Company-wide production monitoring bot. Auto-notifies stakeholders with business impact analysis and AI-generated ETAs using pattern recognition.", stat: "COMPANY-WIDE DEPLOYMENT" }
+        ]
+      },
+      {
+        title: "Intelligence & Compliance", nodes: [
+          { icon: "brain", t: "Atlas", s: "Self-Healing AI", desc: "Autonomous root-cause diagnosis and auto-remediation. Drove failed task rate from 10% to <0.0015% (99.985% reduction). Resolved 200K+ failures without human intervention.", stat: "200K+ AUTO-RESOLVED · PATENT PENDING" },
+          { icon: "scan-search", t: "KYD + LabelX", s: "Data Intelligence", desc: "KYD: LLM-powered tool analyzing SQL tables and metadata to auto-generate business context across 400PB+. LabelX: auto-classifies 1M+ tables against COPPA/CT SB3.", stat: "400PB+ CATALOGED · 1M+ DDLs" },
+          { icon: "bar-chart-3", t: "Dashboards", s: "Observability & BI", desc: "Built Grafana/Prometheus and Aeolus (Superset) dashboards across the org. Elevated NPS from 15 to 80+ with live deployment and monitoring views.", stat: "NPS 15 → 80+" }
+        ]
+      }
     ];
 
     const EXPERIENCE = [
@@ -668,7 +918,7 @@
         tech: ["Apache Airflow", "Apache Spark", "Snowflake", "MySQL", "Oracle", "SQL Server", "AWS S3/EMR", "Aurora", "Databricks", "Terraform"],
       },
       {
-        period: "MAY 2018 — MAY 2019", title: "Data Analyst",
+        period: "MAY 2018 — MAY 2019", title: "Data Engineer",
         org: "Graybar · Champaign, IL", highlight: null, active: false,
         points: [
           "Built ML + NLP pipeline to automate sales order processing, eliminating dependency on third-party applications.",
@@ -726,45 +976,34 @@
       }
     ]
 
-    /* ═══════ PIPELINE DIAGRAM ═══════ */
-    function PipelineDiagram() {
-      const [active, setActive] = useState(null);
-      const [tick, setTick] = useState(0);
-      useEffect(() => { const id = setInterval(() => setTick(t => t + 1), 55); return () => clearInterval(id); }, []);
-      const nodeById = Object.fromEntries(PIPELINE_NODES.map(n => [n.id, n]));
-      const particles = PIPELINE_EDGES.map((edge, ei) => {
-        const a = nodeById[edge[0]], b = nodeById[edge[1]];
-        const t = ((tick * .45 + ei * 35) % 100) / 100;
-        return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t, id: ei };
-      });
+    /* ═══════ TOPOLOGY DIAGRAM ═══════ */
+    function TopologyDiagram() {
+      React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
       return (
-        <div style={{ width: "100%", aspectRatio: "3.2/1", position: "relative" }}>
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: "100%", height: "100%", overflow: "visible" }}>
-            {PIPELINE_EDGES.map(([a, b], i) => {
-              const na = nodeById[a], nb = nodeById[b], isActive = active === a || active === b;
-              return <line key={i} x1={na.x} y1={na.y} x2={nb.x} y2={nb.y}
-                stroke={isActive ? "#0052cc" : "#cbd5e1"} strokeWidth={isActive ? .7 : .25}
-                strokeDasharray={isActive ? "none" : "1.2 0.6"} style={{ transition: "all .3s" }} />;
-            })}
-            {particles.map(p => <circle key={p.id} cx={p.x} cy={p.y} r={.55} fill="#0066ff" opacity={.65} />)}
-            {PIPELINE_NODES.map(node => (
-              <g key={node.id} style={{ cursor: "pointer" }}
-                onMouseEnter={() => setActive(node.id)} onMouseLeave={() => setActive(null)}>
-                <circle cx={node.x} cy={node.y} r={5.8}
-                  fill={active === node.id ? node.color : "#f0f4ff"}
-                  stroke={node.color} strokeWidth={.5} style={{ transition: "all .2s" }} />
-                <text x={node.x} y={node.y + .9} textAnchor="middle" fontSize="4"
-                  fill={active === node.id ? "white" : node.color}
-                  style={{ fontFamily: "IBM Plex Mono,monospace", fontWeight: 600, pointerEvents: "none" }}>
-                  {node.icon}
-                </text>
-                <text x={node.x} y={node.y + 9.5} textAnchor="middle" fontSize="2.5" fill="#475569"
-                  style={{ fontFamily: "IBM Plex Mono,monospace", pointerEvents: "none" }}>
-                  {node.label}
-                </text>
-              </g>
+        <div className="topo-container">
+          <div className="topo-grid">
+            {TOPO_DATA.map((col, i) => (
+              <div key={i} style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                <div className="topo-col-title">{col.title}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {col.nodes.map((n, j) => (
+                    <div key={j} className="topo-node">
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                        <i data-lucide={n.icon} className="topo-node-icon"></i>
+                        <p className="topo-node-title">{n.t}</p>
+                      </div>
+                      <p className="topo-node-sub">{n.s}</p>
+                      {n.desc && <div className="topo-tooltip">
+                        <p className="topo-tooltip-text">{n.desc}</p>
+                        {n.stat && <div className="topo-tooltip-stat">{n.stat}</div>}
+                      </div>}
+                    </div>
+                  ))}
+                </div>
+                {i < TOPO_DATA.length - 1 && <div className="topo-arrow"><i data-lucide="arrow-right" style={{ color: "#cbd5e1", width: "1rem", height: "1rem" }}></i></div>}
+              </div>
             ))}
-          </svg>
+          </div>
         </div>
       );
     }
@@ -1107,30 +1346,31 @@
           {/* ── STACK / PIPELINE ── */}
           <section id="stack" style={{ background: "white", padding: "5.5rem 0", borderBottom: "1px solid #e2e8f0" }}>
             <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem" }}>
-              <div className="pipeline-layout">
-                <div>
-                  <div style={{ fontFamily: "IBM Plex Mono", fontSize: ".6rem", letterSpacing: ".3em", color: "#0052cc", marginBottom: ".75rem" }}>/ ARCHITECTURE</div>
-                  <h2 style={{ fontFamily: "Bebas Neue", fontSize: "clamp(2.2rem,5vw,4rem)", lineHeight: 1, letterSpacing: ".02em", color: "#0c0c0c", marginBottom: "1.25rem" }}>THE DATA<br />PIPELINE</h2>
-                  <p style={{ fontFamily: "EB Garamond", fontSize: "1.05rem", color: "#64748b", lineHeight: 1.75, marginBottom: "2rem" }}>
-                    A battle-tested architecture powering eleven data warehouses: streaming via Flink and BMQ/Kafka, batch via Spark across HDFS — all governed at exabyte scale with Atlas AI watching every node.
-                  </p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: ".6rem" }}>
-                    {[
-                      { label: "100+ BMQ / Kafka Topics & Flink Jobs", icon: "≋" },
-                      { label: "100K+ Daily Batch Tasks (Spark/Dorado)", icon: "⚙" },
-                      { label: "11 Production Data Warehouses", icon: "▦" },
-                      { label: "20+ Business Units Served", icon: "◉" },
-                    ].map((b, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "center", gap: ".6rem", padding: ".6rem .75rem", background: "#f7f5f0", border: "1px solid #e2e8f0" }}>
-                        <span style={{ fontFamily: "IBM Plex Mono", fontSize: ".75rem", color: "#0052cc" }}>{b.icon}</span>
-                        <span style={{ fontFamily: "IBM Plex Mono", fontSize: ".58rem", letterSpacing: ".08em", color: "#475569" }}>{b.label}</span>
-                      </div>
-                    ))}
+              {/* Header */}
+              <div style={{ marginBottom: "2.5rem" }}>
+                <div style={{ fontFamily: "IBM Plex Mono", fontSize: ".6rem", letterSpacing: ".3em", color: "#0052cc", marginBottom: ".75rem" }}>/ ARCHITECTURE</div>
+                <h2 style={{ fontFamily: "Bebas Neue", fontSize: "clamp(2.2rem,5vw,4rem)", lineHeight: 1, letterSpacing: ".02em", color: "#0c0c0c", marginBottom: "1.25rem" }}>THE DATA PIPELINE</h2>
+                <p style={{ fontFamily: "EB Garamond", fontSize: "1.05rem", color: "#64748b", lineHeight: 1.75, maxWidth: 720 }}>
+                  A battle-tested architecture powering eleven data warehouses: streaming via Flink and BMQ/Kafka, batch via Spark across HDFS — all governed at exabyte scale with Atlas AI watching every node.
+                </p>
+              </div>
+
+              {/* Topology — full width, no panel */}
+              <TopologyDiagram />
+
+              {/* Stats row */}
+              <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", marginTop: "2rem", justifyContent: "center" }}>
+                {[
+                  { label: "100+ BMQ / Kafka Topics & Flink Jobs", icon: "≋" },
+                  { label: "100K+ Daily Batch Tasks (Spark/Dorado)", icon: "⚙" },
+                  { label: "11 Production Data Warehouses", icon: "▦" },
+                  { label: "20+ Business Units Served", icon: "◉" },
+                ].map((b, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: ".6rem", padding: ".6rem .75rem", background: "#f7f5f0", border: "1px solid #e2e8f0" }}>
+                    <span style={{ fontFamily: "IBM Plex Mono", fontSize: ".75rem", color: "#0052cc" }}>{b.icon}</span>
+                    <span style={{ fontFamily: "IBM Plex Mono", fontSize: ".58rem", letterSpacing: ".08em", color: "#475569" }}>{b.label}</span>
                   </div>
-                </div>
-                <div style={{ background: "#f7f5f0", padding: "2rem", border: "1px solid #e2e8f0" }}>
-                  <PipelineDiagram />
-                </div>
+                ))}
               </div>
 
               {/* 11 DWs */}
@@ -1199,7 +1439,7 @@
           <section id="experience" style={{ background: "#f7f5f0", padding: "5.5rem 0", borderBottom: "1px solid #e2e8f0" }}>
             <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem" }}>
               <div className="exp-layout">
-                <div style={{ position: "sticky", top: "6rem", alignSelf: "flex-start" }}>
+                <div className="exp-sidebar">
                   <div style={{ fontFamily: "IBM Plex Mono", fontSize: ".6rem", letterSpacing: ".3em", color: "#0052cc", marginBottom: ".75rem" }}>/ CAREER</div>
                   <h2 style={{ fontFamily: "Bebas Neue", fontSize: "clamp(2.2rem,4vw,3.5rem)", lineHeight: 1, color: "#0c0c0c", letterSpacing: ".02em", marginBottom: "2rem" }}>PROVEN<br />TRACK<br />RECORD</h2>
                   <div style={{ display: "flex", flexDirection: "column", gap: ".65rem" }}>
