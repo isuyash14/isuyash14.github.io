@@ -853,6 +853,9 @@
       { id: "09", name: "CapCut DW", role: "Creative Platform", scale: "0 → Production", apps: "CapCut users", status: "LIVE" },
       { id: "10", name: "Lemon8 DW", role: "Lifestyle Platform", scale: "0 → Production", apps: "Lemon8 users", status: "LIVE" },
       { id: "11", name: "Live Services", role: "TikTok Live / Streaming", scale: "Real-time events", apps: "Live creators", status: "LIVE" },
+      { id: "12", name: "SLAM DW", role: "SLA Monitoring & Reporting", scale: "Predictive analytics", apps: "On-call & leadership", status: "LIVE" },
+      { id: "13", name: "Atlas DW", role: "Self-Healing Intelligence", scale: "200K+ incidents tracked", apps: "Pipeline reliability", status: "LIVE" },
+      { id: "14", name: "Pluto DW", role: "Deployment Analytics", scale: "550K+ deployments logged", apps: "CI/CD insights", status: "LIVE" },
     ];
 
     const TOPO_DATA = [
@@ -1363,7 +1366,7 @@
                 {[
                   { label: "100+ BMQ / Kafka Topics & Flink Jobs", icon: "≋" },
                   { label: "100K+ Daily Batch Tasks (Spark/Dorado)", icon: "⚙" },
-                  { label: "11 Production Data Warehouses", icon: "▦" },
+                  { label: "14 Production Data Warehouses", icon: "▦" },
                   { label: "20+ Business Units Served", icon: "◉" },
                 ].map((b, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: ".6rem", padding: ".6rem .75rem", background: "#f7f5f0", border: "1px solid #e2e8f0" }}>
@@ -1377,12 +1380,12 @@
               <div style={{ marginTop: "4rem" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
                   <div style={{ fontFamily: "IBM Plex Mono", fontSize: ".6rem", letterSpacing: ".3em", color: "#94a3b8" }}>— MISSION-CRITICAL DATA WAREHOUSES</div>
-                  <div style={{ fontFamily: "IBM Plex Mono", fontSize: ".58rem", color: "#94a3b8" }}>11 DWs OWNED &amp; OPERATED · 1,200+ PB GOVERNED</div>
+                  <div style={{ fontFamily: "IBM Plex Mono", fontSize: ".58rem", color: "#94a3b8" }}>14 DWs OWNED &amp; OPERATED · 1,200+ PB GOVERNED</div>
                 </div>
                 <div style={{ overflowX: "auto" }}>
                   <div className="wh-grid" style={{ minWidth: 700 }}>
                     {WAREHOUSES.map((w, i) => (
-                      <div key={i} className="wh-card" style={{ padding: "1.5rem 1rem", borderRight: i < 10 ? "1px solid #e2e8f0" : "none" }}>
+                      <div key={i} className="wh-card" style={{ padding: "1.5rem 1rem", borderRight: i < 13 ? "1px solid #e2e8f0" : "none" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: ".75rem" }}>
                           <span className="wh-id" style={{ fontFamily: "IBM Plex Mono", fontSize: ".55rem", letterSpacing: ".08em", color: "#94a3b8" }}>{w.id}</span>
                           <div className="wh-dot" style={{ width: 5, height: 5, borderRadius: "50%", background: "#22c55e" }} />
@@ -1621,7 +1624,7 @@
                 LET'S BUILD<br /><span style={{ color: "#0052cc" }}>SOMETHING</span><br /><span style={{ WebkitTextStroke: "2px #0c0c0c", color: "transparent" }}>REMARKABLE</span>
               </h2>
               <p style={{ fontFamily: "EB Garamond", fontSize: "1.15rem", color: "#64748b", lineHeight: 1.75, maxWidth: 540, margin: "0 auto 3rem" }}>
-                Targeting Staff / Principal Data Engineer roles at top-tier companies. Open to high-impact infrastructure challenges, AI-native data platforms, and exabyte-scale systems.
+                Passionate about high-impact infrastructure challenges, AI-native data platforms, and building systems that operate at exabyte scale.
               </p>
               <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
                 <a href="mailto:suyashsingh1494@gmail.com" style={{ fontFamily: "IBM Plex Mono", fontWeight: 600, fontSize: ".7rem", letterSpacing: ".15em", color: "white", textDecoration: "none", background: "#0052cc", padding: "1rem 2.5rem", transition: "background .2s" }}
