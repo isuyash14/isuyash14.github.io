@@ -1091,6 +1091,9 @@ input.t-input[type="date"] { width: 130px; }
     <a class="nav-item" onclick="showSection('week3')">
       <span class="icon">🧪</span> Week 3: Genetics & Mol. Bio
     </a>
+    <a class="nav-item" onclick="showSection('week4')">
+      <span class="icon">🔬</span> Week 4: Cell Biology & Pathology
+    </a>
   </div>
 
   <div class="sidebar-footer">
@@ -2739,61 +2742,598 @@ input.t-input[type="date"] { width: 130px; }
       </div>
     </div>
 
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px;text-align:center">
+    <!-- Day tabs -->
+    <div class="filter-tabs" id="week3-tabs">
+      <button class="filter-tab active" onclick="showDay3('mon',this)">Monday</button>
+      <button class="filter-tab" onclick="showDay3('tue',this)">Tuesday</button>
+      <button class="filter-tab" onclick="showDay3('wed',this)">Wednesday</button>
+      <button class="filter-tab" onclick="showDay3('thu',this)">Thursday</button>
+      <button class="filter-tab" onclick="showDay3('fri',this)">Friday</button>
+      <button class="filter-tab" onclick="showDay3('sat',this)">Saturday</button>
+    </div>
 
-      <div style="font-size:64px;margin-bottom:24px">🧪</div>
-
-      <div style="font-family:'Playfair Display',serif;font-size:36px;color:var(--navy);font-weight:700;margin-bottom:12px">
-        Coming Soon
-      </div>
-
-      <div style="font-size:16px;color:var(--text-soft);max-width:480px;line-height:1.7;margin-bottom:40px">
-        The Week 3 detailed day-by-day breakdown for <strong>Genetics &amp; Molecular Biology</strong> is being prepared. Check back after completing Week 2.
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:700px;width:100%">
-        <div class="card" style="border-top:3px solid var(--phase1);text-align:left">
-          <div class="card-eyebrow" style="color:var(--phase1)">Monday</div>
-          <div class="card-title" style="font-size:14px">Mendelian Genetics &amp; Hardy-Weinberg</div>
-          <div class="card-body" style="font-size:12px;color:var(--text-soft)">FA pp. 56–60 · Autosomal dominant/recessive, X-linked, population genetics</div>
-        </div>
-        <div class="card" style="border-top:3px solid var(--phase1);text-align:left">
-          <div class="card-eyebrow" style="color:var(--phase1)">Tuesday</div>
-          <div class="card-title" style="font-size:14px">DNA Replication &amp; Repair Mechanisms</div>
-          <div class="card-body" style="font-size:12px;color:var(--text-soft)">FA pp. 33–38 · Polymerases, mismatch repair, NER, BER, HNPCC, XP</div>
-        </div>
-        <div class="card" style="border-top:3px solid var(--phase1);text-align:left">
-          <div class="card-eyebrow" style="color:var(--phase1)">Wednesday</div>
-          <div class="card-title" style="font-size:14px">Transcription &amp; Translation</div>
-          <div class="card-body" style="font-size:12px;color:var(--text-soft)">FA pp. 39–45 · RNA polymerases, ribosomes, post-translational modification</div>
-        </div>
-        <div class="card" style="border-top:3px solid var(--phase1);text-align:left">
-          <div class="card-eyebrow" style="color:var(--phase1)">Thursday</div>
-          <div class="card-title" style="font-size:14px">Mutations &amp; Chromosomal Disorders</div>
-          <div class="card-body" style="font-size:12px;color:var(--text-soft)">FA pp. 61–68 · Trisomies, deletions, imprinting, trinucleotide repeats</div>
-        </div>
-        <div class="card" style="border-top:3px solid var(--phase1);text-align:left">
-          <div class="card-eyebrow" style="color:var(--phase1)">Friday</div>
-          <div class="card-title" style="font-size:14px">Question Block — FA Q&amp;A Ch. 1 &amp; 2</div>
-          <div class="card-body" style="font-size:12px;color:var(--text-soft)">20+ questions from your book covering genetics, molecular biology &amp; lab techniques</div>
-        </div>
-        <div class="card" style="border-top:3px solid var(--phase3);text-align:left">
-          <div class="card-eyebrow" style="color:var(--phase3)">Saturday</div>
-          <div class="card-title" style="font-size:14px">Full Review + Anki</div>
-          <div class="card-body" style="font-size:12px;color:var(--text-soft)">Redo wrong questions, FA flag review, Anki deck update for Weeks 1–3</div>
-        </div>
-      </div>
-
-      <div class="alert-banner" style="max-width:600px;width:100%;margin-top:40px">
-        <div class="alert-icon">📖</div>
+    <!-- ── MONDAY ── -->
+    <div class="day-panel active" id="day3-mon">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
         <div>
-          <div class="alert-title">First Aid Pages for Week 3</div>
-          <div class="alert-body">Genetics &amp; Molecular Biology: FA pp. 33–80. Focus especially on the molecular biology techniques table (PCR, Southern/Northern/Western blot, FISH) — these appear as vignettes in almost every Step 1 exam.</div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Monday · Week 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Mendelian Genetics & Hardy-Weinberg</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 56–60</div>
         </div>
       </div>
 
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">First Aid Pages to Read</div>
+          <div class="card-title">Genetics Foundations</div>
+          <div class="card-body">
+            <strong>FA pp. 56–60</strong> — Review inheritance patterns and population genetics.<br><br>
+            Focus specifically on:<br>
+            • AD vs AR vs XR vs XD (Memorize the examples list)<br>
+            • Hardy-Weinberg equilibrium (p² + 2pq + q² = 1)<br>
+            • Uniparental disomy & Imprinting (Prader-Willi vs. Angelman)<br>
+            • Mosaicism & Pleiotropy
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Hour-by-Hour Plan</div>
+          <div class="card-title">Hardy-Weinberg Day</div>
+          <div class="card-body">
+            <strong>Hour 1:</strong> Read/Annotate FA pp. 56–60. Memorize the 5 HW assumptions.<br><br>
+            <strong>Hour 2:</strong> Watch Dirty Medicine "Inheritance Patterns" or "Hardy Weinberg".<br><br>
+            <strong>Hour 3:</strong> Solve 10–15 HW math problems. These are free points on the exam!<br><br>
+            <strong>Hour 4:</strong> Anki — focus on Prader-Willi vs Angelman (Chromosome 15 imprinting).
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;border-left:4px solid var(--gold)">
+        <div class="card-eyebrow" style="color:var(--gold)">Key Contrast Mastered</div>
+        <div class="card-title">Prader-Willi vs. Angelman — Chromosome 15 Imprinting</div>
+        <div class="card-body" style="font-size:13px;line-height:1.9">
+          <strong>Prader-Willi Syndrome</strong>: Maternal imprinting (moms gene is silent), Paternal gene is deleted/mutated. 25% of cases due to maternal uniparental disomy. Presentation: Neonatal hypotonia, hyperphagia/obesity, small hands/feet.<br><br>
+          <strong>Angelman Syndrome</strong>: Paternal imprinting (dads gene is silent), Maternal gene is deleted/mutated. 5% due to paternal uniparental disomy. Presentation: Inappropriate laughter ("Happy Puppet"), seizures, ataxia, severe ID.
+        </div>
+      </div>
+
+      <div class="card" style="background:var(--navy);border:none;margin-bottom:20px">
+        <div class="card-eyebrow" style="color:var(--gold)">Hardy-Weinberg Tips</div>
+        <div class="card-body" style="color:rgba(255,255,255,.7)">
+          • q² = Frequency of the disease (AR condition prevalence)<br>
+          • q = Allele frequency<br>
+          • 2pq = Carrier frequency (often what is asked)<br>
+          • Assumptions (Mnemonic: <strong>"No"</strong>): No mutation, No selection, No migration, Large population, Random mating.
+        </div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
+        <div class="card-eyebrow" style="color:var(--phase1)">Mnemonic Mastery</div>
+        <div class="card-title">Inheritance Patterns</div>
+        <div class="card-body">
+          • <strong>Autosomal Dominant</strong>: Marfan syndrome, Neurofibromatosis 1 & 2, von Hippel-Lindau disease, FAP.<br>
+          • <strong>Autosomal Recessive</strong>: Cystic Fibrosis, Glycogen storage diseases, Lysosomal storage diseases (except Fabry & Hunter).<br>
+          • <strong>X-Linked Recessive</strong>: <em>"Oblivious Female Will Often Give Her Boys Her x-Linked Disorders"</em> (Ornithine transcarbamylase def., Fabry, Wiskott-Aldrich, Ocular albinism, G6PD def., Hunter, Bruton agammaglobulinemia, Hemophilia A/B, Lesch-Nyhan, Duchenne).
+        </div>
+      </div>
+
+      <!-- Q&A Check - Week 3 Monday -->
+      <div class="qa-block">
+        <div class="qa-header">
+          <span class="qa-num">Question 1</span>
+          <span class="qa-source">Genetics · Population Genetics</span>
+          <span class="qa-difficulty qa-diff-easy">Easy</span>
+        </div>
+        <div class="qa-vignette">
+          A specific autosomal recessive disorder has a prevalence of 1 in 10,000 in a population in Hardy-Weinberg equilibrium.
+        </div>
+        <div class="qa-stem">What is the approximate frequency of carriers (heterozygotes) for this condition?</div>
+        <div class="qa-options" id="w3mon1-opts">
+          <div class="qa-option" onclick="selectOption('w3mon1','A',false)"><span class="qa-letter">A</span> 1/100</div>
+          <div class="qa-option" onclick="selectOption('w3mon1','B',true)"><span class="qa-letter">B</span> 1/50</div>
+          <div class="qa-option" onclick="selectOption('w3mon1','C',false)"><span class="qa-letter">C</span> 1/25</div>
+          <div class="qa-option" onclick="selectOption('w3mon1','D',false)"><span class="qa-letter">D</span> 1/10,000</div>
+        </div>
+        <button class="qa-reveal-btn" onclick="revealAnswer('w3mon1')">Show Answer</button>
+        <div class="qa-explanation" id="w3mon1-exp">
+          <div class="qa-exp-label">✓ Correct Answer: B — 1/50</div>
+          <div class="qa-exp-text">
+            Prevalence of AR disease = q² = 1/10,000. Therefore, q = 1/100. Since p + q = 1, p is approximately 1. Heterozygote frequency = 2pq ≈ 2(1)(1/100) = 2/100 = 1/50.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TUESDAY ── -->
+    <div class="day-panel hidden" id="day3-tue">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Tuesday · Week 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">DNA Replication & Repair</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 33–38</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">First Aid Pages to Read</div>
+          <div class="card-title">Molecular Repair Systems</div>
+          <div class="card-body">
+            <strong>FA pp. 33–38</strong> — High yield enzymes and mechanical repair.<br><br>
+            • DNA Polymerase I vs III (Prokaryotes)<br>
+            • Nucleotide Excision Repair (NER) vs Base Excision Repair (BER)<br>
+            • Mismatch Repair (MMR)<br>
+            • Homologous vs Non-homologous End Joining
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Clinical High Yield</div>
+          <div class="card-title">Repair Deficiency Diseases</div>
+          <div class="card-body">
+            • <strong>Xeroderma Pigmentosum</strong>: NER defect (UV pyrimidine dimers)<br>
+            • <strong>HNPCC (Lynch Syndrome)</strong>: Mismatch repair defect<br>
+            • <strong>Ataxia-telangiectasia</strong>: Non-homologous end joining defect<br>
+            • <strong>BRCA1/2</strong>: Homologous recombination defect
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
+        <div class="card-eyebrow" style="color:var(--phase1)">Core Mechanics</div>
+        <div class="card-title">DNA Replication Enzymes</div>
+        <div class="card-body" style="column-count:2;column-gap:20px">
+          • <strong>Helicase</strong>: Unwinds DNA template at replication fork.<br>
+          • <strong>Topoisomerase</strong>: Creates breaks to add/remove supercoils (Target of fluoroquinolones, etoposide).<br>
+          • <strong>Primase</strong>: Makes RNA primer on which DNA Pol III can initiate replication.<br>
+          • <strong>DNA Pol III</strong>: Prokaryotic. 5′→3′ synthesis, 3′→5′ exonuclease (proofreading).<br>
+          • <strong>DNA Pol I</strong>: Prokaryotic. Excises RNA primer with 5′→3′ exonuclease.<br>
+          • <strong>Ligase</strong>: Joins Okazaki fragments (catalyzes phosphodiester bond).<br>
+          • <strong>Telomerase</strong>: Adds DNA to 3′ ends to avoid loss of genetic material.
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-header">
+          <span class="qa-num">Question 2</span>
+          <span class="qa-source">Molecular · DNA Repair</span>
+          <span class="qa-difficulty qa-diff-med">Medium</span>
+        </div>
+        <div class="qa-vignette">
+          A patient with numerous skin cancers at a young age is found to have an inability to repair pyrimidine dimers caused by UV light.
+        </div>
+        <div class="qa-stem">Which of the following enzymes is most likely deficient or non-functional in this patient?</div>
+        <div class="qa-options" id="w3tue1-opts">
+          <div class="qa-option" onclick="selectOption('w3tue1','A',false)"><span class="qa-letter">A</span> DNA Ligase</div>
+          <div class="qa-option" onclick="selectOption('w3tue1','B',false)"><span class="qa-letter">B</span> DNA Glycosylase</div>
+          <div class="qa-option" onclick="selectOption('w3tue1','C',true)"><span class="qa-letter">C</span> UV-specific Endonuclease</div>
+          <div class="qa-option" onclick="selectOption('w3tue1','D',false)"><span class="qa-letter">D</span> Photolyase</div>
+        </div>
+        <button class="qa-reveal-btn" onclick="revealAnswer('w3tue1')">Show Answer</button>
+        <div class="qa-explanation" id="w3tue1-exp">
+          <div class="qa-exp-label">✓ Correct Answer: C — UV-specific Endonuclease</div>
+          <div class="qa-exp-text">
+            Xeroderma pigmentosum is caused by a defect in Nucleotide Excision Repair (NER), which uses a UV-specific endonuclease to identify and excise bulky UV-induced pyrimidine dimers.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEDNESDAY ── -->
+    <div class="day-panel hidden" id="day3-wed">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Wednesday · Week 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Transcription & Translation</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 40–45</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
+        <div class="card-eyebrow" style="color:var(--phase1)">The Central Dogma</div>
+        <div class="card-title">RNA Processing & Protein Synthesis</div>
+        <div class="card-body">
+          • <strong>RNA Pol I</strong>: Nucleolus (rRNA)<br>
+          • <strong>RNA Pol II</strong>: Nucleoplasm (mRNA) — inhibited by α-amanitin (Death Cap mushrooms)<br>
+          • <strong>RNA Pol III</strong>: Nucleoplasm (tRNA)<br>
+          • <strong>Introns vs Exons</strong>: Introns are cut OUT (Splicing), Exons stay IN.<br>
+          • <strong>tRNA charging</strong>: Aminoacyl-tRNA synthetase (uses ATP).
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Structure Spotlight</div>
+          <div class="card-title">tRNA Mechanics</div>
+          <div class="card-body">
+            • <strong>3′ CCA Tail</strong>: Can Carry Amino acids.<br>
+            • <strong>T-arm</strong>: Contains TΨC sequence, Tethers tRNA molecule to ribosome.<br>
+            • <strong>D-arm</strong>: Contains Dihydrouridine residues, helps Detect the tRNA by aminoacyl-tRNA synthetase.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Gene Silencing</div>
+          <div class="card-title">RNA Interference (RNAi)</div>
+          <div class="card-body">
+            • <strong>miRNA</strong>: Noncoding RNA molecules that post-transcriptionally regulate gene expression by targeting the 3′ UTR of specific mRNAs.<br>
+            • <strong>siRNA</strong>: Short interfering RNA. Can be introduced therapeutically to silence specific genes.
+          </div>
+        </div>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-header">
+          <span class="qa-num">Question 3</span>
+          <span class="qa-source">Molecular · Splicing</span>
+          <span class="qa-difficulty qa-diff-hard">Hard</span>
+        </div>
+        <div class="qa-vignette">
+          Antibodies against snRNPs (Small nuclear ribonucleoproteins) are found in a patient.
+        </div>
+        <div class="qa-stem">These antibodies (Anti-Smith) are highly specific for which autoimmune condition?</div>
+        <div class="qa-options" id="w3wed1-opts">
+          <div class="qa-option" onclick="selectOption('w3wed1','A',false)"><span class="qa-letter">A</span> Rheumatoid Arthritis</div>
+          <div class="qa-option" onclick="selectOption('w3wed1','B',true)"><span class="qa-letter">B</span> Systemic Lupus Erythematosus (SLE)</div>
+          <div class="qa-option" onclick="selectOption('w3wed1','C',false)"><span class="qa-letter">C</span> Sjögren Syndrome</div>
+          <div class="qa-option" onclick="selectOption('w3wed1','D',false)"><span class="qa-letter">D</span> Scleroderma</div>
+        </div>
+        <button class="qa-reveal-btn" onclick="revealAnswer('w3wed1')">Show Answer</button>
+        <div class="qa-explanation" id="w3wed1-exp">
+          <div class="qa-exp-label">✓ Correct Answer: B — SLE</div>
+          <div class="qa-exp-text">
+            Anti-Smith antibodies are specific for SLE and target snRNPs, which are essential components of the spliceosome (responsible for intron removal from pre-mRNA).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── THURSDAY ── -->
+    <div class="day-panel hidden" id="day3-thu">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Thursday · Week 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Mutations & Chromosomal Disorders</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 61–68</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Numerical Disorders</div>
+          <div class="card-title">Autosomal Trisomies</div>
+          <div class="card-body">
+            • <strong>Down (21)</strong>: Flat facies, epicanthal folds, Simian crease, brushfield spots. (Mnemonic: Drinking/Down age is 21)<br>
+            • <strong>Edwards (18)</strong>: Micrognathia, low-set ears, clenched hands, rocker-bottom feet. (Mnemonic: Election age is 18)<br>
+            • <strong>Patau (13)</strong>: Microphthalmia, cleft lip/palate, polydactyly. (Mnemonic: Puberty age is 13)
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Structural & Repeats</div>
+          <div class="card-title">Trinucleotide Repeats</div>
+          <div class="card-body">
+            • <strong>Fragile X (CGG)</strong>: Macro-orchidism, long face, large jaw.<br>
+            • <strong>Huntington (CAG)</strong>: Caudate atrophy, chorea, dementia.<br>
+            • <strong>Myotonic Dystrophy (CTG)</strong>: Cataracts, Toupee (balding), Gonadal atrophy.
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Essential Associations</div>
+          <div class="card-title">High-Yield Translocations</div>
+          <div class="card-body">
+            • <strong>t(9;22)</strong>: Philadelphia chromosome. CML (BCR-ABL hybrid).<br>
+            • <strong>t(8;14)</strong>: Burkitt lymphoma (c-myc activation).<br>
+            • <strong>t(14;18)</strong>: Follicular lymphoma (BCL-2 activation).<br>
+            • <strong>t(11;14)</strong>: Mantle cell lymphoma (cyclin D1).<br>
+            • <strong>t(15;17)</strong>: APL (PML-RARα). Responds to ATRA.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Biochemical Pathways</div>
+          <div class="card-title">Collagen Synthesis & Pathology</div>
+          <div class="card-body">
+            • <strong>Vitamin C hydroxylation</strong>: Scurvy (bleeding gums).<br>
+            • <strong>Glycosylation & Triple Helix</strong>: Defect → Osteogenesis Imperfecta.<br>
+            • <strong>Cross-linking</strong>: Ehlers-Danlos & Menkes disease.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FRIDAY ── -->
+    <div class="day-panel hidden" id="day3-fri">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Friday · Week 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Molecular Biology Lab Techniques</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 52–55</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--success);margin-bottom:20px">
+        <div class="card-eyebrow" style="color:var(--success)">High-Yield Techniques Mnemonic</div>
+        <div class="card-title">SNoW DRoP</div>
+        <div class="card-body">
+          • <strong>S</strong>outhern = <strong>D</strong>NA<br>
+          • <strong>N</strong>orthern = <strong>R</strong>NA<br>
+          • <strong>W</strong>estern = <strong>P</strong>rotein<br>
+          • <strong>FISH</strong>: Fluorescence for microdeletions or translocations.<br>
+          • <strong>ELISA</strong>: Uses antibodies to detect specific antigens (direct) or antibodies (indirect).
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Polymerase Chain Reaction (PCR)</div>
+          <div class="card-body">
+            1. <strong>Denaturation</strong> (95°C): DNA strands separate.<br>
+            2. <strong>Annealing</strong> (55°C): Primers bind specific DNA sequence.<br>
+            3. <strong>Elongation</strong> (72°C): Heat-stable Taq polymerase adds dNTPs.<br>
+            <em>Use:</em> Amplifying tiny amounts of DNA for detecting HIV, HBV, etc.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">CRISPR-Cas9 Basics</div>
+          <div class="card-body">
+            • <strong>Guide RNA (gRNA)</strong>: Homologous to target DNA sequence.<br>
+            • <strong>Cas9</strong>: Endonuclease that cleaves target DNA.<br>
+            • Can be repaired via Non-homologous end joining (creates frameshifts/mutations) or Homology-directed repair (inserts new DNA sequence).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SATURDAY ── -->
+    <div class="day-panel hidden" id="day3-sat">
+      <div class="day-header-bar" style="background:var(--phase3);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Saturday · Week 3</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Review & Comprehensive Q&A</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-title">Weekly Consolidation</div>
+        <div class="card-body">
+          Review all "Genetics" and "Molecular Biology" sections of First Aid. Ensure all Anki cards for Weeks 1–3 are matured. Redo any UWorld questions in this subject category that you missed earlier this week.
+        </div>
+      </div>
     </div>
   </section>
+
+  <section class="section" id="section-week4">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Week 4 — <span>Cell Biology &amp; Pathology Basics</span></h2>
+        <p class="section-sub">Cell cycle regulation · Apoptosis vs Necrosis · Inflammation · Neoplasia basics</p>
+      </div>
+    </div>
+
+    <!-- Day tabs -->
+    <div class="filter-tabs" id="week4-tabs">
+      <button class="filter-tab active" onclick="showDay4('mon',this)">Monday</button>
+      <button class="filter-tab" onclick="showDay4('tue',this)">Tuesday</button>
+      <button class="filter-tab" onclick="showDay4('wed',this)">Wednesday</button>
+      <button class="filter-tab" onclick="showDay4('thu',this)">Thursday</button>
+      <button class="filter-tab" onclick="showDay4('fri',this)">Friday</button>
+      <button class="filter-tab" onclick="showDay4('sat',this)">Saturday</button>
+    </div>
+
+    <!-- ── MONDAY ── -->
+    <div class="day-panel active" id="day4-mon">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Monday · Week 4</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Cell Cycle &amp; Regulation</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 81–83</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Key Regulators</div>
+          <div class="card-title">Cyclins, CDKs, &amp; Checkpoints</div>
+          <div class="card-body">
+            • <strong>Cyclins / CDKs</strong>: Cyclins activate CDKs, which phosphorylate proteins to drive the cell cycle.<br>
+            • <strong>p53 &amp; Rb</strong>: p53 induces p21 → inhibits CDKs → hypophosphorylation (activation) of Rb → inhibition of G1-S progression.<br>
+            • <strong>Cell Types</strong>:<br>
+              &nbsp;&nbsp;- <em>Permanent (G0)</em>: Neurons, skeletal/cardiac muscle, RBCs.<br>
+              &nbsp;&nbsp;- <em>Stable (G0/G1)</em>: Hepatocytes, lymphocytes.<br>
+              &nbsp;&nbsp;- <em>Labile (Never in G0)</em>: Bone marrow, gut epithelium, skin.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Clinical High Yield</div>
+          <div class="card-title">Cell Cycle Pathology</div>
+          <div class="card-body">
+            • <strong>Li-Fraumeni Syndrome</strong>: Germline p53 mutation → multiple tumors (SBLA: Sarcoma, Breast, Leukemia, Adrenal).<br>
+            • <strong>Retinoblastoma</strong>: Rb mutation → leukocoria in kids.<br>
+            • <strong>Nissl substance</strong>: RER in neurons; permanent stay in G0 explains why stroke recovery is limited.
+          </div>
+        </div>
+      </div>
+
+      <!-- Q&A Check - Week 4 Monday -->
+      <div class="qa-block">
+        <div class="qa-header">
+          <span class="qa-num">Question 1</span>
+          <span class="qa-source">Cell Bio · Cycle Regulation</span>
+          <span class="qa-difficulty qa-diff-med">Medium</span>
+        </div>
+        <div class="qa-vignette">
+          A researcher identifies a cell type that remains in the G0 phase and does not regenerate after injury.
+        </div>
+        <div class="qa-stem">Which of the following is an example of such a cell?</div>
+        <div class="qa-options" id="w4mon1-opts">
+          <div class="qa-option" onclick="selectOption('w4mon1','A',false)"><span class="qa-letter">A</span> Hepatocytes</div>
+          <div class="qa-option" onclick="selectOption('w4mon1','B',true)"><span class="qa-letter">B</span> Neurons</div>
+          <div class="qa-option" onclick="selectOption('w4mon1','C',false)"><span class="qa-letter">C</span> Bone Marrow Stem Cells</div>
+          <div class="qa-option" onclick="selectOption('w4mon1','D',false)"><span class="qa-letter">D</span> Intestinal Epithelium</div>
+        </div>
+        <button class="qa-reveal-btn" onclick="revealAnswer('w4mon1')">Show Answer</button>
+        <div class="qa-explanation" id="w4mon1-exp">
+          <div class="qa-exp-label">✓ Correct Answer: B — Neurons</div>
+          <div class="qa-exp-text">
+          <strong>Neurons</strong> are "permanent" cells that stay in G0. Stable cells (like hepatocytes) can re-enter the cycle, and labile cells (like marrow/gut) never leave it.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TUESDAY ── -->
+    <div class="day-panel hidden" id="day4-tue">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Tuesday · Week 4</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Apoptosis vs Necrosis</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 84–86</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Programmed Cell Death</div>
+          <div class="card-title">Apoptosis Pathways</div>
+          <div class="card-body">
+            • <strong>Intrinsic</strong>: Regulated strictly by Bcl-2 family. Bax/Bak form pores in mitochondria → Cytochrome C release → Caspases activated.<br>
+            • <strong>Extrinsic</strong>: Ligand receptor interactions (FasL binding to Fas/CD95) or Immune cell (CD8+ T-cell releasing perforin/granzyme B).
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Cellular Stress</div>
+          <div class="card-title">Free Radical Injury</div>
+          <div class="card-body">
+            • <strong>Generation</strong>: Radiation (hydrolyzes water), Oxygen toxicity (ARDS, ROP), Reperfusion injury.<br>
+            • <strong>Scavengers</strong>: Catalase, Superoxide dismutase (SOD), Glutathione peroxidase (requires selenium), Vitamins A/C/E.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEDNESDAY ── -->
+    <div class="day-panel hidden" id="day4-wed">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Wednesday · Week 4</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Cellular Adaptation & Inflammation</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 87–95</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
+        <div class="card-eyebrow" style="color:var(--phase1)">Inflammatory Cascade</div>
+        <div class="card-title">Leukocyte Extravasation Steps</div>
+        <div class="card-body" style="column-count:2;column-gap:20px">
+          1. <strong>Margination &amp; Rolling</strong>: Mediated by Selectins (E-selectin, P-selectin on endothelium binding Sialyl-Lewis X on leukocyte).<br>
+          2. <strong>Adhesion</strong>: Mediated by Integrins (Mac-1, LFA-1 on leukocyte) binding to ICAM-1/VCAM-1 on endothelium.<br>
+          3. <strong>Transmigration (Diapedesis)</strong>: Mediated by PECAM-1 (CD31).<br>
+          4. <strong>Migration (Chemotaxis)</strong>: Leukocytes travel through interstitium driven by chemokines (C5a, IL-8, LTB4, kallikrein).
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Granulomatous Inflammation</div>
+          <div class="card-body">
+            • Th1 cells secrete <strong>IFN-γ</strong>, activating macrophages.<br>
+            • Macrophages secrete <strong>TNF-α</strong>, forming/maintaining granulomas (epithelioid histiocytes &amp; multinucleated giant cells).<br>
+            <em>*Anti-TNF drugs can cause latent TB to reactivate.</em>
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Wound Healing Phases</div>
+          <div class="card-body">
+            • <strong>Inflammatory</strong> (Day 0-3): Platelets, neutrophils, macrophages.<br>
+            • <strong>Proliferative</strong> (Day 3-Wks): Granulation tissue, angiogenesis, type III collagen.<br>
+            • <strong>Remodeling</strong> (Wks-Mo): Type III collagen replaced by Type I collagen.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── THURSDAY ── -->
+    <div class="day-panel hidden" id="day4-thu">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Thursday · Week 4</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Neoplasia & Tumor Markers</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 96–105</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Drive Proliferation (1 hit)</div>
+          <div class="card-title">Major Oncogenes</div>
+          <div class="card-body">
+            • <strong>ALK</strong>: Lung adenocarcinoma.<br>
+            • <strong>BRAF</strong>: Melanoma, Non-Hodgkin lymphoma.<br>
+            • <strong>c-KIT</strong>: Gastrointestinal stromal tumor (GIST).<br>
+            • <strong>c-MYC</strong>: Burkitt lymphoma.<br>
+            • <strong>HER2/neu</strong>: Breast and gastric carcinomas.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-eyebrow" style="color:var(--phase1)">Loss of Function (2 hits)</div>
+          <div class="card-title">Tumor Suppressor Genes</div>
+          <div class="card-body">
+            • <strong>APC</strong>: Colorectal cancer (FAP).<br>
+            • <strong>BRCA1/2</strong>: Breast, ovarian, and pancreatic cancer.<br>
+            • <strong>VHL</strong>: von Hippel-Lindau disease, Renal cell carcinoma.<br>
+            • <strong>WT1</strong>: Wilms tumor (nephroblastoma).<br>
+            • <strong>p53 / Rb</strong>: Li-Fraumeni / Retinoblastoma, Osteosarcoma.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FRIDAY ── -->
+    <div class="day-panel hidden" id="day4-fri">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Friday · Week 4</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Rapid Pathology Pass</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 106–110</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-title">Metastasis & Amyloid</div>
+        <div class="card-body">
+          • <strong>Metastasis (Bone)</strong>: PB-KTL (Prostate, Breast, Kidney, Thyroid, Lung).<br>
+          • <strong>Amyloidosis</strong>: AL (Primary, Light chain), AA (Secondary, SAA protein).<br>
+          • <strong>Lipofuscin</strong>: "Wear and tear" pigment; sign of free radical injury and lipid peroxidation.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SATURDAY ── -->
+    <div class="day-panel hidden" id="day4-sat">
+      <div class="day-header-bar" style="background:var(--phase4);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Saturday · Week 4</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">✅ Foundation Phase Checkpoint</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:20px;border-left:4px solid var(--phase4)">
+        <div class="card-title">End of Month 1 Review</div>
+        <div class="card-body">
+          You have completed the <strong>Foundation Phase</strong> (Biochemistry, Genetics, Cell Bio, Pathology). Take a full practice block (40 Qs) mixed from these topics today. If your score is &lt;50%, revisit Week 1 Enzyme Kinetics/Metabolism before starting Organ Systems.
+        </div>
+      </div>
+    </div>
 
 </div><!-- /main -->
 
@@ -3125,7 +3665,25 @@ function showDay(id, btn) {
 function showDay2(id, btn) {
   document.querySelectorAll('#section-week2 .day-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
   document.querySelectorAll('#week2-tabs .filter-tab').forEach(b => b.classList.remove('active'));
-  const panel = document.getElementById('day-' + id);
+  const panel = document.getElementById('day2-' + id);
+  if (panel) { panel.classList.remove('hidden'); panel.classList.add('active'); }
+  btn.classList.add('active');
+}
+
+// ══ DAY SWITCHER — WEEK 3 ══
+function showDay3(id, btn) {
+  document.querySelectorAll('#section-week3 .day-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('#week3-tabs .filter-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('day3-' + id);
+  if (panel) { panel.classList.remove('hidden'); panel.classList.add('active'); }
+  btn.classList.add('active');
+}
+
+// ══ DAY SWITCHER — WEEK 4 ══
+function showDay4(id, btn) {
+  document.querySelectorAll('#section-week4 .day-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('#week4-tabs .filter-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('day4-' + id);
   if (panel) { panel.classList.remove('hidden'); panel.classList.add('active'); }
   btn.classList.add('active');
 }
