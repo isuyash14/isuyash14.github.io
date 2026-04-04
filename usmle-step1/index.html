@@ -1094,6 +1094,12 @@ input.t-input[type="date"] { width: 130px; }
     <a class="nav-item" onclick="showSection('week4')">
       <span class="icon">🔬</span> Week 4: Cell Biology & Pathology
     </a>
+    <a class="nav-item" onclick="showSection('week5')">
+      <span class="icon">🛡️</span> Week 5: Immunology I
+    </a>
+    <a class="nav-item" onclick="showSection('week6')">
+      <span class="icon">🧫</span> Week 6: Immunology II & Micro
+    </a>
   </div>
 
   <div class="sidebar-footer">
@@ -3334,6 +3340,356 @@ input.t-input[type="date"] { width: 130px; }
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="section" id="section-week5">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Week 5 — <span>Immunology I</span></h2>
+        <p class="section-sub">Innate &amp; Adaptive overview · B &amp; T cell development · MHC · Complement system</p>
+      </div>
+    </div>
+
+    <div class="filter-tabs" id="week5-tabs">
+      <button class="filter-tab active" onclick="showDay5('mon',this)">Monday</button>
+      <button class="filter-tab" onclick="showDay5('tue',this)">Tuesday</button>
+      <button class="filter-tab" onclick="showDay5('wed',this)">Wednesday</button>
+      <button class="filter-tab" onclick="showDay5('thu',this)">Thursday</button>
+      <button class="filter-tab" onclick="showDay5('fri',this)">Friday</button>
+      <button class="filter-tab" onclick="showDay5('sat',this)">Saturday</button>
+    </div>
+
+    <!-- ── MONDAY ── -->
+    <div class="day-panel active" id="day5-mon">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Monday · Week 5</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Innate vs Adaptive Immunity</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 110–115</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-eyebrow" style="color:var(--phase2)">Rapid vs Targeted</div>
+          <div class="card-title">Immune System Overview</div>
+          <div class="card-body">
+            • <strong>Innate</strong>: Germline encoded, non-specific, rapid (min/hrs), no memory. Uses CRP, complement, TLRs.<br>
+            • <strong>Adaptive</strong>: Recombination based, highly specific, slow (days/wks), has memory. Uses T/B cells, Antibodies.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-eyebrow" style="color:var(--phase2)">Self vs Non-Self</div>
+          <div class="card-title">MHC I &amp; II</div>
+          <div class="card-body">
+            • <strong>MHC I</strong>: Found on all nucleated cells (not RBCs). Presents endogenous antigens to CD8+ cells. Uses β2-microglobulin.<br>
+            • <strong>MHC II</strong>: Found on APCs (Dendritic, Macrophages, B cells). Presents exogenous antigens to CD4+ cells. Uses Invariant chain.
+          </div>
+        </div>
+      </div>
+
+      <!-- Q&A Check - Week 5 Monday -->
+      <div class="qa-block">
+        <div class="qa-header">
+          <span class="qa-num">Question 1</span>
+          <span class="qa-source">Immunology · HLA Associations</span>
+          <span class="qa-difficulty qa-diff-easy">Easy</span>
+        </div>
+        <div class="qa-vignette">
+          A 22-year-old male presents with chronic low back pain and morning stiffness that improves with exercise. Radiographs show "bamboo spine" (fusion of vertebrae).
+        </div>
+        <div class="qa-stem">This patient's condition is most strongly associated with which of the following HLA subtypes?</div>
+        <div class="qa-options" id="w5mon1-opts">
+          <div class="qa-option" onclick="selectOption('w5mon1','A',false)"><span class="qa-letter">A</span> HLA-DR2</div>
+          <div class="qa-option" onclick="selectOption('w5mon1','B',false)"><span class="qa-letter">B</span> HLA-DR4</div>
+          <div class="qa-option" onclick="selectOption('w5mon1','C',true)"><span class="qa-letter">C</span> HLA-B27</div>
+          <div class="qa-option" onclick="selectOption('w5mon1','D',false)"><span class="qa-letter">D</span> HLA-DQ8</div>
+        </div>
+        <button class="qa-reveal-btn" onclick="revealAnswer('w5mon1')">Show Answer</button>
+        <div class="qa-explanation" id="w5mon1-exp">
+          <div class="qa-exp-label">✓ Correct Answer: C — HLA-B27</div>
+          <div class="qa-exp-text">
+            <strong>Ankylosing spondylitis</strong> is a seronegative spondyloarthropathy strongly associated with HLA-B27 (an MHC I subtype). Mnemonic: <strong>"B27 — 27 letters in Ankylosing Spondylitis and Reiters"</strong> (not really, but it helps!)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TUESDAY ── -->
+    <div class="day-panel hidden" id="day5-tue">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Tuesday · Week 5</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">B-Cell Development &amp; Antibodies</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 116–122</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">Antibody Isotypes (GAMED)</div>
+        <div class="card-body">
+          • <strong>IgG</strong>: Main secondary response, crosses placenta, opsonizes.<br>
+          • <strong>IgA</strong>: Secretory (monomer in blood, dimer in secretions). Found in tears, saliva, breast milk.<br>
+          • <strong>IgM</strong>: Primary response, pentamer (most efficient at complement activation).<br>
+          • <strong>IgE</strong>: Type I Hypersensitivity, parasite immunity (activates eosinophils).
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEDNESDAY ── -->
+    <div class="day-panel hidden" id="day5-wed">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Wednesday · Week 5</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">T-Cell Development &amp; Cytokines</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 123–130</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">T-Cell Lifecycle</div>
+        <div class="card-body">
+          • <strong>Positive Selection</strong>: Cortex; do you recognize self-MHC? (Death by neglect if not).<br>
+          • <strong>Negative Selection</strong>: Medulla; do you bind too strongly to self-Ag? (Deletion if yes).<br>
+          • <strong>Th1</strong>: Secretes IFN-γ, IL-2. Activates Macrophages/CD8s. Induced by IL-12.<br>
+          • <strong>Th2</strong>: Secretes IL-4, IL-5, IL-10, IL-13. Help B cells. Induced by IL-4.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── THURSDAY ── -->
+    <div class="day-panel hidden" id="day5-thu">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Thursday · Week 5</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Complement System</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 131–135</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">Pathways &amp; Components</div>
+        <div class="card-body">
+          • <strong>Classical</strong>: IgG or IgM mediated.<br>
+          • <strong>Alternative</strong>: Spontaneous or Microbial surface.<br>
+          • <strong>Opsonins</strong>: C3b (binds bacteria).<br>
+          • <strong>Anaphylatoxins</strong>: C3a, C4a, C5a.<br>
+          • <strong>MAC</strong>: C5b-9 (Deficiency → Neisseria infections).
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FRIDAY ── -->
+    <div class="day-panel hidden" id="day5-fri">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Friday · Week 5</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Transplant &amp; HLA</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 136–138</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">Rejection Types</div>
+        <div class="card-body">
+          • <strong>Hyperacute</strong>: Min/Hrs. Pre-existing antibodies (Type II). Thrombosis.<br>
+          • <strong>Acute</strong>: Days/Mo. CD8+ T cells against donor MHC (Type IV).<br>
+          • <strong>Chronic</strong>: Mo/Yrs. CD4+ T cells, small vessel obliterative fibrosis.<br>
+          • <strong>GVHD</strong>: Grafted T cells attack host. Common in bone marrow transplants.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SATURDAY ── -->
+    <div class="day-panel hidden" id="day5-sat">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Saturday · Week 5</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Review &amp; Q&amp;A Block</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Weekly Summary</div>
+        <div class="card-body">
+          Focus on T/B cell selection and Complement. These are high-yield mechanims. Ensure you can identify isotypes by function.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="section-week6">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Week 6 — <span>Immunology II &amp; Microbiology Intro</span></h2>
+        <p class="section-sub">Hypersensitivities · Immunodeficiencies · Bacterial structure · Staining</p>
+      </div>
+    </div>
+
+    <div class="filter-tabs" id="week6-tabs">
+      <button class="filter-tab active" onclick="showDay6('mon',this)">Monday</button>
+      <button class="filter-tab" onclick="showDay6('tue',this)">Tuesday</button>
+      <button class="filter-tab" onclick="showDay6('wed',this)">Wednesday</button>
+      <button class="filter-tab" onclick="showDay6('thu',this)">Thursday</button>
+      <button class="filter-tab" onclick="showDay6('fri',this)">Friday</button>
+      <button class="filter-tab" onclick="showDay6('sat',this)">Saturday</button>
+    </div>
+
+    <!-- ── MONDAY ── -->
+    <div class="day-panel active" id="day6-mon">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Monday · Week 6</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Hypersensitivities (ACID)</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 139–141</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">Types I–IV</div>
+        <div class="card-body">
+          • <strong>Type I (Anaphylactic)</strong>: IgE, Mast cells, Histamine. Fast.<br>
+          • <strong>Type II (Cytotoxic)</strong>: IgG/IgM against fixed antigens. Rheumatic fever, Goodpasture.<br>
+          • <strong>Type III (Immune Complex)</strong>: Ag-Ab complexes, complement. SLE, PSGN.<br>
+          • <strong>Type IV (Delayed)</strong>: T-cells. PPD, Contact dermatitis, MS.
+        </div>
+      </div>
+
+      <!-- Q&A Check - Week 6 Monday -->
+      <div class="qa-block">
+        <div class="qa-header">
+          <span class="qa-num">Question 2</span>
+          <span class="qa-source">Immunology · Hypersensitivity</span>
+          <span class="qa-difficulty qa-diff-med">Medium</span>
+        </div>
+        <div class="qa-vignette">
+          A patient develops fever, rash, and arthralgia 10 days after receiving a horse-derived antitoxin for diphtheria. Laboratory findings show low C3/C4 levels.
+        </div>
+        <div class="qa-stem">Which type of hypersensitivity reaction is occurring in this patient?</div>
+        <div class="qa-options" id="w6mon1-opts">
+          <div class="qa-option" onclick="selectOption('w6mon1','A',false)"><span class="qa-letter">A</span> Type I</div>
+          <div class="qa-option" onclick="selectOption('w6mon1','B',false)"><span class="qa-letter">B</span> Type II</div>
+          <div class="qa-option" onclick="selectOption('w6mon1','C',true)"><span class="qa-letter">C</span> Type III</div>
+          <div class="qa-option" onclick="selectOption('w6mon1','D',false)"><span class="qa-letter">D</span> Type IV</div>
+        </div>
+        <button class="qa-reveal-btn" onclick="revealAnswer('w6mon1')">Show Answer</button>
+        <div class="qa-explanation" id="w6mon1-exp">
+          <div class="qa-exp-label">✓ Correct Answer: C — Type III</div>
+          <div class="qa-exp-text">
+            This is <strong>Serum Sickness</strong>, a systemic Type III reaction where immune complexes (Ag-Ab) deposit in tissues, activate complement (leading to low C3/C4), and cause vasculitis/rash.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TUESDAY ── -->
+    <div class="day-panel hidden" id="day6-tue">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Tuesday · Week 6</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Immunodeficiencies (B &amp; T Cells)</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 142–148</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">Key Disorders</div>
+        <div class="card-body">
+          • <strong>X-linked Agammaglobulinemia</strong>: BTK defect. Low B cells. Recurrent bacterial infections.<br>
+          • <strong>IgA Deficiency</strong>: Most common. Asymptomatic or airway/GI infections. Anaphylaxis during transfusion.<br>
+          • <strong>DiGeorge</strong>: 22q11 deletion. Thymic aplasia → no T cells. Hypocalcemia.<br>
+          • <strong>SCID</strong>: IL-2R gamma chain or ADA deficiency. Triad: Failure to thrive, diarrhea, thrush.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEDNESDAY ── -->
+    <div class="day-panel hidden" id="day6-wed">
+      <div class="day-header-bar" style="background:var(--phase2);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Wednesday · Week 6</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Phagocyte &amp; Complement Defects</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 149–152</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
+        <div class="card-title">Mechanisms &amp; Findings</div>
+        <div class="card-body">
+          • <strong>Chronic Granulomatous Disease</strong>: NADPH oxidase defect. Catalase(+) infections. Nitroblue tetrazolium(-) test.<br>
+          • <strong>Chediak-Higashi</strong>: Microtubule defect. Giant granules in neutrophils. Albinism.<br>
+          • <strong>Leukocyte Adhesion Defect</strong>: Integrity defect. Late umbilical cord separation.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── THURSDAY ── -->
+    <div class="day-panel hidden" id="day6-thu">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Thursday · Week 6</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Bacterial Structure &amp; Gram Staining</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 153–160</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
+        <div class="card-title">Morphology &amp; Stains</div>
+        <div class="card-body">
+          • <strong>Gram(+)</strong>: Thick peptidoglycan, Teichoic acid. Purple.<br>
+          • <strong>Gram(-)</strong>: Thin peptidoglycan, LPS (endotoxin) in outer membrane. Pink.<br>
+          • <strong>Giemsa</strong>: Chlamydia, Borrelia, Rickettsia, Trypanosomes, Plasmodium.<br>
+          • <strong>PAS</strong>: Whipple disease (Tropheryma whipplei).
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FRIDAY ── -->
+    <div class="day-panel hidden" id="day6-fri">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Friday · Week 6</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Bacterial Genetics &amp; Toxins</div>
+        </div>
+        <div style="text-align:right">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 161–168</div>
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
+        <div class="card-title">Vertical vs Horizontal Transfer</div>
+        <div class="card-body">
+          • <strong>Transformation</strong>: Uptake of naked DNA.<br>
+          • <strong>Conjugation</strong>: F+ plasmid via sex pilus.<br>
+          • <strong>Transduction</strong>: Phage mediated (Generalized or Specialized).<br>
+          • <strong>Transposition</strong>: "Jumping genes" (Transposons).
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SATURDAY ── -->
+    <div class="day-panel hidden" id="day6-sat">
+      <div class="day-header-bar" style="background:var(--phase1);border-radius:10px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:4px">Saturday · Week 6</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;color:white">Review &amp; Q&amp;A Block</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Weekly Summary</div>
+        <div class="card-body">
+          Hypersensitivities are tested frequently with vignettes. Be ready for "Delayed Type" questions involving PPD. In Micro, focus on the Gram stain exceptions.
+        </div>
+      </div>
+    </div>
+  </section>
 
 </div><!-- /main -->
 
@@ -3684,6 +4040,22 @@ function showDay4(id, btn) {
   document.querySelectorAll('#section-week4 .day-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
   document.querySelectorAll('#week4-tabs .filter-tab').forEach(b => b.classList.remove('active'));
   const panel = document.getElementById('day4-' + id);
+  if (panel) { panel.classList.remove('hidden'); panel.classList.add('active'); }
+  btn.classList.add('active');
+}
+
+function showDay5(id, btn) {
+  document.querySelectorAll('#section-week5 .day-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('#week5-tabs .filter-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('day5-' + id);
+  if (panel) { panel.classList.remove('hidden'); panel.classList.add('active'); }
+  btn.classList.add('active');
+}
+
+function showDay6(id, btn) {
+  document.querySelectorAll('#section-week6 .day-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('#week6-tabs .filter-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('day6-' + id);
   if (panel) { panel.classList.remove('hidden'); panel.classList.add('active'); }
   btn.classList.add('active');
 }
