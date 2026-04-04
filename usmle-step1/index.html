@@ -3377,12 +3377,16 @@ input.t-input[type="date"] { width: 130px; }
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
         <div class="card" style="border-top:3px solid var(--phase2)">
           <div class="card-eyebrow" style="color:var(--phase2)">Rapid vs Targeted</div>
           <div class="card-title">Immune System Overview</div>
           <div class="card-body">
-            • <strong>Innate</strong>: Germline encoded, non-specific, rapid (min/hrs), no memory. Uses CRP, complement, TLRs.<br>
-            • <strong>Adaptive</strong>: Recombination based, highly specific, slow (days/wks), has memory. Uses T/B cells, Antibodies.
+            • <strong>Innate</strong>: Germline encoded, non-specific. Uses <strong>TLRs</strong> (e.g. TLR4 recognizes LPS).<br>
+            • <strong>Adaptive</strong>: Recombination based, highly specific. Uses T/B cells, Antibodies.<br>
+            • <strong>Acute Phase Reactants</strong>: <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<em>Positive (Upregulated):</em> CRP (opsonin), Ferritin, Fibrinogen, Hepcidin.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<em>Negative (Downregulated):</em> Albumin, Transferrin.
           </div>
         </div>
         <div class="card" style="border-top:3px solid var(--phase2)">
@@ -3433,13 +3437,23 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 116–122</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">Antibody Isotypes (GAMED)</div>
-        <div class="card-body">
-          • <strong>IgG</strong>: Main secondary response, crosses placenta, opsonizes.<br>
-          • <strong>IgA</strong>: Secretory (monomer in blood, dimer in secretions). Found in tears, saliva, breast milk.<br>
-          • <strong>IgM</strong>: Primary response, pentamer (most efficient at complement activation).<br>
-          • <strong>IgE</strong>: Type I Hypersensitivity, parasite immunity (activates eosinophils).
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Antibody Isotypes (GAMED)</div>
+          <div class="card-body">
+            • <strong>IgG</strong>: Main secondary response, crosses placenta, opsonizes.<br>
+            • <strong>IgA</strong>: Secretory (dimer). Found in tears, saliva, breast milk.<br>
+            • <strong>IgM</strong>: Primary response, pentamer (complement activation).<br>
+            • <strong>IgE</strong>: Type I Hypersensitivity, parasite immunity.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Structure &amp; Generation</div>
+          <div class="card-body">
+            • <strong>Fab Region</strong>: "Fragment antigen binding". Determines idiotype. Contains variable regions. Only 1 Ag binding site per Fab.<br>
+            • <strong>Fc Region</strong>: "Fragment crystallizable". Determines isotype (IgM, IgD, etc). Binds complement and macrophages.<br>
+            • <strong>V(D)J Recombination</strong>: Occurs in the bone marrow (antigen independent). Defines Ag specificity.
+          </div>
         </div>
       </div>
     </div>
@@ -3455,13 +3469,23 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 123–130</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">T-Cell Lifecycle</div>
-        <div class="card-body">
-          • <strong>Positive Selection</strong>: Cortex; do you recognize self-MHC? (Death by neglect if not).<br>
-          • <strong>Negative Selection</strong>: Medulla; do you bind too strongly to self-Ag? (Deletion if yes).<br>
-          • <strong>Th1</strong>: Secretes IFN-γ, IL-2. Activates Macrophages/CD8s. Induced by IL-12.<br>
-          • <strong>Th2</strong>: Secretes IL-4, IL-5, IL-10, IL-13. Help B cells. Induced by IL-4.
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">T-Cell Lifecycle</div>
+          <div class="card-body">
+            • <strong>Positive Selection</strong>: Cortex; do you recognize self-MHC? (Death by neglect if not).<br>
+            • <strong>Negative Selection</strong>: Medulla; do you bind too strongly to self-Ag? (Deletion if yes).<br>
+            • <strong>Th1</strong>: Secretes IFN-γ, IL-2. Activates Macrophages/CD8s. Induced by IL-12.<br>
+            • <strong>Th2</strong>: Secretes IL-4, IL-5, IL-10, IL-13. Help B cells. Induced by IL-4.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Regulatory T Cells (Tregs)</div>
+          <div class="card-body">
+            • <strong>Markers</strong>: CD3, CD4, CD25, and FOXP3 transcription factor.<br>
+            • <strong>Function</strong>: Suppress CD4/CD8 T-cell effector functions. Produce anti-inflammatory cytokines (IL-10, TGF-β).<br>
+            • <strong>IPEX Syndrome</strong>: Mutation in FOXP3. Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked. Commonly presents in male infants with severe diarrhea and diabetes.
+          </div>
         </div>
       </div>
     </div>
@@ -3477,14 +3501,23 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 131–135</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">Pathways &amp; Components</div>
-        <div class="card-body">
-          • <strong>Classical</strong>: IgG or IgM mediated.<br>
-          • <strong>Alternative</strong>: Spontaneous or Microbial surface.<br>
-          • <strong>Opsonins</strong>: C3b (binds bacteria).<br>
-          • <strong>Anaphylatoxins</strong>: C3a, C4a, C5a.<br>
-          • <strong>MAC</strong>: C5b-9 (Deficiency → Neisseria infections).
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Pathways &amp; Components</div>
+          <div class="card-body">
+            • <strong>Classical</strong>: IgG or IgM mediated.<br>
+            • <strong>Alternative</strong>: Spontaneous or Microbial surface.<br>
+            • <strong>Opsonins</strong>: C3b (binds bacteria).<br>
+            • <strong>Anaphylatoxins</strong>: C3a, C4a, C5a.<br>
+            • <strong>MAC</strong>: C5b-9 (Deficiency → Neisseria infections).
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Complement Inhibitors &amp; Deficiencies</div>
+          <div class="card-body">
+            • <strong>DAF (CD55) &amp; MIRL (CD59)</strong>: Protect host cells from complement. Deficiency causes <strong>Paroxysmal Nocturnal Hemoglobinuria (PNH)</strong> (dark urine in AM).<br>
+            • <strong>C1 esterase inhibitor</strong>: Deficiency causes <strong>Hereditary Angioedema</strong>. ACE inhibitors are absolutely contraindicated!
+          </div>
         </div>
       </div>
     </div>
@@ -3500,13 +3533,25 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 136–138</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">Rejection Types</div>
-        <div class="card-body">
-          • <strong>Hyperacute</strong>: Min/Hrs. Pre-existing antibodies (Type II). Thrombosis.<br>
-          • <strong>Acute</strong>: Days/Mo. CD8+ T cells against donor MHC (Type IV).<br>
-          • <strong>Chronic</strong>: Mo/Yrs. CD4+ T cells, small vessel obliterative fibrosis.<br>
-          • <strong>GVHD</strong>: Grafted T cells attack host. Common in bone marrow transplants.
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Rejection Types</div>
+          <div class="card-body">
+            • <strong>Hyperacute</strong>: Min/Hrs. Pre-existing antibodies (Type II). Thrombosis.<br>
+            • <strong>Acute</strong>: Days/Mo. CD8+ T cells against donor MHC (Type IV).<br>
+            • <strong>Chronic</strong>: Mo/Yrs. CD4+ T cells, small vessel obliterative fibrosis.<br>
+            • <strong>GVHD</strong>: Grafted T cells attack host. Common in bone marrow/liver transplants.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">HLA Associations (High Yield)</div>
+          <div class="card-body">
+            • <strong>A3</strong>: Hemochromatosis.<br>
+            • <strong>B8</strong>: Addison disease, Myasthenia gravis, Graves disease.<br>
+            • <strong>DQ2/DQ8</strong>: Celiac disease (<em>I 8 2 much gluten at DQ</em>).<br>
+            • <strong>DR2</strong>: Multiple sclerosis, Hay fever, SLE, Goodpasture.<br>
+            • <strong>DR3/DR4</strong>: Type 1 Diabetes Mellitus, Rheumatoid arthritis.
+          </div>
         </div>
       </div>
     </div>
@@ -3556,13 +3601,26 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 139–141</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">Types I–IV</div>
-        <div class="card-body">
-          • <strong>Type I (Anaphylactic)</strong>: IgE, Mast cells, Histamine. Fast.<br>
-          • <strong>Type II (Cytotoxic)</strong>: IgG/IgM against fixed antigens. Rheumatic fever, Goodpasture.<br>
-          • <strong>Type III (Immune Complex)</strong>: Ag-Ab complexes, complement. SLE, PSGN.<br>
-          • <strong>Type IV (Delayed)</strong>: T-cells. PPD, Contact dermatitis, MS.
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Types I–IV (ACID)</div>
+          <div class="card-body">
+            • <strong>Type I (Anaphylactic)</strong>: IgE, Mast cells, Histamine. Fast.<br>
+            • <strong>Type II (Cytotoxic)</strong>: IgG/IgM against fixed antigens. Rheumatic fever, Goodpasture.<br>
+            • <strong>Type III (Immune Complex)</strong>: Ag-Ab complexes, complement. SLE, PSGN.<br>
+            • <strong>Type IV (Delayed)</strong>: T-cells. PPD, Contact dermatitis, MS.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">High-Yield Autoantibodies</div>
+          <div class="card-body">
+            • <strong>Anti-dsDNA, anti-Smith</strong>: SLE.<br>
+            • <strong>Anti-histone</strong>: Drug-induced lupus.<br>
+            • <strong>Anti-centromere</strong>: CREST syndrome.<br>
+            • <strong>Anti-Scl-70 (anti-DNA topoisomerase I)</strong>: Systemic scleroderma.<br>
+            • <strong>Anti-CCP</strong>: Rheumatoid arthritis (most specific).<br>
+            • <strong>Antimitochondrial</strong>: Primary biliary cholangitis.
+          </div>
         </div>
       </div>
 
@@ -3604,13 +3662,22 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 142–148</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">Key Disorders</div>
-        <div class="card-body">
-          • <strong>X-linked Agammaglobulinemia</strong>: BTK defect. Low B cells. Recurrent bacterial infections.<br>
-          • <strong>IgA Deficiency</strong>: Most common. Asymptomatic or airway/GI infections. Anaphylaxis during transfusion.<br>
-          • <strong>DiGeorge</strong>: 22q11 deletion. Thymic aplasia → no T cells. Hypocalcemia.<br>
-          • <strong>SCID</strong>: IL-2R gamma chain or ADA deficiency. Triad: Failure to thrive, diarrhea, thrush.
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">B &amp; T-Cell Disorders</div>
+          <div class="card-body">
+            • <strong>X-linked Agammaglobulinemia</strong>: BTK defect. Low B cells. Recurrent bacterial infections.<br>
+            • <strong>IgA Deficiency</strong>: Most common. Asymptomatic or airway/GI infections. Anaphylaxis during transfusion.<br>
+            • <strong>DiGeorge</strong>: 22q11 deletion. Thymic aplasia → no T cells. Hypocalcemia.<br>
+            • <strong>SCID</strong>: IL-2R gamma chain or ADA deficiency. Triad: Failure to thrive, diarrhea, thrush.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Combined Immunodeficiencies</div>
+          <div class="card-body">
+            • <strong>Wiskott-Aldrich</strong>: Mutation in WAS gene. Mnemonic: <strong>WATER</strong> (Wiskott-Aldrich, Thrombocytopenia, Eczema, Recurrent infections).<br>
+            • <strong>Hyper-IgE (Job) Syndrome</strong>: STAT3 mutation. Mnemonic: <strong>FATED</strong> (Facies [coarse], Abscesses [cold staph], Teeth [retained primary], IgE [elevated], Dermatologic [eczema]).
+          </div>
         </div>
       </div>
     </div>
@@ -3626,12 +3693,21 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 149–152</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase2);margin-bottom:20px">
-        <div class="card-title">Mechanisms &amp; Findings</div>
-        <div class="card-body">
-          • <strong>Chronic Granulomatous Disease</strong>: NADPH oxidase defect. Catalase(+) infections. Nitroblue tetrazolium(-) test.<br>
-          • <strong>Chediak-Higashi</strong>: Microtubule defect. Giant granules in neutrophils. Albinism.<br>
-          • <strong>Leukocyte Adhesion Defect</strong>: Integrity defect. Late umbilical cord separation.
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Mechanisms &amp; Findings</div>
+          <div class="card-body">
+            • <strong>Chronic Granulomatous Disease</strong>: NADPH oxidase defect. Catalase(+) infections (S. aureus, Aspergillus, Serratia).<br>
+            • <strong>Chediak-Higashi</strong>: Microtubule defect (LYST gene). Giant granules in neutrophils. Albinism, peripheral neuropathy.<br>
+            • <strong>Leukocyte Adhesion Defect</strong>: Integrity defect. Late umbilical cord separation. No pus at infection sites.
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase2)">
+          <div class="card-title">Diagnostic Testing</div>
+          <div class="card-body">
+            • <strong>Dihydrorhodamine (DHR) test</strong>: Gold standard for CGD. Flow cytometry based; measures respiratory burst (superoxide production). Decreased fluorescence in CGD.<br>
+            • <strong>Nitroblue tetrazolium (NBT) test</strong>: Older test. CGD neutrophils fail to turn blue.
+          </div>
         </div>
       </div>
     </div>
@@ -3647,13 +3723,22 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 153–160</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
-        <div class="card-title">Morphology &amp; Stains</div>
-        <div class="card-body">
-          • <strong>Gram(+)</strong>: Thick peptidoglycan, Teichoic acid. Purple.<br>
-          • <strong>Gram(-)</strong>: Thin peptidoglycan, LPS (endotoxin) in outer membrane. Pink.<br>
-          • <strong>Giemsa</strong>: Chlamydia, Borrelia, Rickettsia, Trypanosomes, Plasmodium.<br>
-          • <strong>PAS</strong>: Whipple disease (Tropheryma whipplei).
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Morphology &amp; Stains</div>
+          <div class="card-body">
+            • <strong>Gram(+)</strong>: Thick peptidoglycan, Teichoic acid. Purple.<br>
+            • <strong>Gram(-)</strong>: Thin peptidoglycan, LPS (endotoxin) in outer membrane. Pink.<br>
+            • <strong>Giemsa</strong>: Chlamydia, Borrelia, Rickettsia, Trypanosomes, Plasmodium.<br>
+            • <strong>PAS</strong>: Whipple disease (Tropheryma whipplei).
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Encapsulated &amp; Spore Formers</div>
+          <div class="card-body">
+            • <strong>Encapsulated</strong>: Mnemonic: <em>Please SHINE my SKiS</em> (P. aeruginosa, S. pneumoniae, H. influenzae, N. meningitidis, E. coli, S. typhi, K. pneumoniae, S. agalactiae). Quellung reaction (+).<br>
+            • <strong>Spore Formers</strong>: Found in soil. Mnemonic: <em>B. anthracis, B. cereus, C. botulinum, C. difficile, C. perfringens, C. tetani</em>.
+          </div>
         </div>
       </div>
     </div>
@@ -3669,13 +3754,22 @@ input.t-input[type="date"] { width: 130px; }
           <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:13px;color:white">First Aid pp. 161–168</div>
         </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--phase1);margin-bottom:20px">
-        <div class="card-title">Vertical vs Horizontal Transfer</div>
-        <div class="card-body">
-          • <strong>Transformation</strong>: Uptake of naked DNA.<br>
-          • <strong>Conjugation</strong>: F+ plasmid via sex pilus.<br>
-          • <strong>Transduction</strong>: Phage mediated (Generalized or Specialized).<br>
-          • <strong>Transposition</strong>: "Jumping genes" (Transposons).
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Vertical vs Horizontal Transfer</div>
+          <div class="card-body">
+            • <strong>Transformation</strong>: Uptake of naked DNA.<br>
+            • <strong>Conjugation</strong>: F+ plasmid via sex pilus.<br>
+            • <strong>Transduction</strong>: Phage mediated.<br>
+            • <strong>Transposition</strong>: "Jumping genes" (Transposons).
+          </div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--phase1)">
+          <div class="card-title">Exotoxins vs. Endotoxins</div>
+          <div class="card-body">
+            • <strong>Exotoxins</strong>: Secreted by G(+) and G(-). High toxicity. Polypeptide. Mnemonic markers: <em>Diphtheria/Pseudomonas (EF-2), Tetanus/Botulinum (SNARE)</em>.<br>
+            • <strong>Endotoxins</strong>: Lipid A component of LPS in G(-) outer membrane. Induces IL-1, IL-6, TNF-α. Low toxicity but causes fever, shock, DIC.
+          </div>
         </div>
       </div>
     </div>
