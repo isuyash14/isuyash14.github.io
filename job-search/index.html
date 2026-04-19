@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Search Intelligence — Suyash Singh</title>
+  <meta name="description" content="Real-time job search dashboard tracking Data Engineering opportunities at top-tier tech companies." />
+  <link rel="canonical" href="https://suyashsingh.com/job-search" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:        #080c14;
+      --bg-2:      #0c0c0c;
+      --bg-card:   rgba(255,255,255,.035);
+      --bg-hover:  rgba(0,82,204,.12);
+      --border:    rgba(255,255,255,.07);
+      --border-b:  rgba(255,255,255,.12);
+      --blue:      #0052cc;
+      --blue-lt:   #60a5fa;
+      --text:      rgba(255,255,255,.88);
+      --text-dim:  rgba(255,255,255,.45);
+      --text-mute: rgba(255,255,255,.22);
+      --green:     #22c55e;
+      --amber:     #f59e0b;
+      --red:       #ef4444;
+    }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    @keyframes pulse { 0%{transform:scale(1);opacity:.9} 100%{transform:scale(2.4);opacity:0} }
+
+    .fade-1 { animation: fadeUp .7s .1s both; }
+    .fade-2 { animation: fadeUp .7s .25s both; }
+    .fade-3 { animation: fadeUp .7s .4s both; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      background: rgba(8,12,20,.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: .7rem 0;
+    }
+    .nav-inner {
+      max-width: 1320px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .nav-logo {
+      display:flex; align-items:center; gap:.75rem; text-decoration:none;
+    }
+    .nav-logo .mark {
+      width:28px; height:28px; background:var(--blue);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .nav-logo .mark span {
+      font-family:'Bebas Neue'; color:white; font-size:.9rem; letter-spacing:.05em;
+    }
+    .nav-logo .wordmark {
+      font-family:'IBM Plex Mono'; font-size:.65rem; font-weight:600;
+      letter-spacing:.1em; color:white;
+    }
+    .nav-logo .sub {
+      font-family:'IBM Plex Mono'; font-size:.46rem; letter-spacing:.14em;
+      color: var(--text-dim); display:block;
+    }
+    .nav-right { display:flex; align-items:center; gap:1.25rem; }
+    .nav-link {
+      font-family:'IBM Plex Mono'; font-size:.56rem; font-weight:500;
+      letter-spacing:.12em; color:var(--text-dim); text-decoration:none;
+      transition: color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color:white; }
+    .nav-back {
+      font-family:'IBM Plex Mono'; font-size:.56rem; font-weight:500;
+      letter-spacing:.12em; color:var(--text-mute); text-decoration:none;
+      transition: color .2s;
+    }
+    .nav-back:hover { color:white; }
+    .live-dot {
+      display:flex; align-items:center; gap:.45rem;
+      font-family:'IBM Plex Mono'; font-size:.52rem; letter-spacing:.14em; color:var(--text-dim);
+    }
+    .live-dot .dot {
+      position:relative; width:6px; height:6px; border-radius:50%; background:var(--green);
+    }
+    .live-dot .dot::before {
+      content:''; position:absolute; inset:0; border-radius:50%;
+      background:var(--green); animation:pulse 1.6s ease-out infinite;
+    }
+    .refresh-badge {
+      font-family:'IBM Plex Mono'; font-size:.5rem; letter-spacing:.1em;
+      color:var(--text-mute); border:1px solid var(--border); padding:.25rem .65rem;
+      white-space:nowrap;
+    }
+    .refresh-badge span { color:var(--blue-lt); }
+
+    /* ── HERO HEADER (compact - one line) ── */
+    .hero {
+      padding: 3.8rem 0 0;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(0,82,204,.04) 0%, transparent 100%);
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 0 0;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(0,82,204,.06) 0%, transparent 100%);
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 52px 52px; opacity: .8;
+    }
+    .hero-inner {
+      max-width:1320px; margin:0 auto; padding:2rem 1.5rem 3.5rem;
+      display:grid; grid-template-columns: 58% 42%; gap:4rem; align-items: center; position:relative;
+    }
+    .hero-title-block { display:flex; flex-direction: column; gap:.5rem; }
+    .eyebrow {
+      font-family:'IBM Plex Mono'; font-size:.55rem; font-weight:600;
+      letter-spacing:.3em; color:var(--blue); margin-bottom: 1rem;
+    }
+    h1 {
+      font-family:'Bebas Neue'; font-size:clamp(3.5rem, 9vw, 8.5rem);
+      line-height:.88; letter-spacing:.02em; color:white; margin-bottom: 1.5rem;
+    }
+    h1 .accent { color:var(--blue-lt); }
+    h1 .stroke { -webkit-text-stroke: 1.5px white; color: transparent; }
+    .hero-sub {
+      font-family:'EB Garamond'; font-size:1.15rem; letter-spacing:.02em;
+      color:var(--text-dim); max-width:520px; line-height:1.7;
+    }
+
+    .hero-right {
+      display: flex; flex-direction: column; gap: 2rem;
+      padding-right: 2.5rem; /* Push left from right edge */
+      margin-left: -1rem; /* Nudge slightly left */
+    }
+
+    .prep-box {
+      background: var(--bg-card); 
+      border: 1px solid var(--border-b); 
+      padding: 2rem; 
+      position: relative; 
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    }
+    .prep-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .prep-box:hover .accent-bar-blue { box-shadow: 0 0 16px var(--blue); }
+    .prep-box:hover .accent-bar-amber { box-shadow: 0 0 16px var(--amber); }
+
+    .accent-bar-blue { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--blue); transition: box-shadow 0.3s;}
+    .accent-bar-amber { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--amber); transition: box-shadow 0.3s;}
+
+    .stats-grid {
+      display:grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border);
+    }
+    .stat-card {
+      background: var(--bg-card); padding: 1.5rem; text-align: left;
+    }
+    .stat-val {
+      font-family:'Bebas Neue'; font-size: 2.2rem; color: white; line-height: 1; margin-bottom: .25rem;
+    }
+    .stat-label {
+      font-family:'IBM Plex Mono'; font-size: .52rem; letter-spacing: .12em; color: var(--text-mute);
+    }
+
+    /* ── STAT CARDS (TOP) ── */
+    .stats-grid {
+      max-width:1320px; margin:0 auto; padding:2rem 1.5rem;
+      display:grid; grid-template-columns:repeat(5,1fr); gap:1px;
+      background:var(--border);
+    }
+    .stat-card {
+      background:var(--bg); padding:1.75rem 1.5rem;
+      transition: background .25s;
+    }
+    .stat-card:hover { background: rgba(0,82,204,.08); }
+    .stat-label {
+      font-family:'IBM Plex Mono'; font-size:.52rem; font-weight:600;
+      letter-spacing:.22em; color:var(--text-mute); margin-bottom:.6rem;
+    }
+    .stat-value {
+      font-family:'Bebas Neue'; font-size:clamp(2rem,4vw,3.5rem);
+      line-height:1; color:white; letter-spacing:.02em;
+    }
+    .stat-value .unit { color:var(--blue); }
+    .stat-sub {
+      font-family:'IBM Plex Mono'; font-size:.52rem; letter-spacing:.1em;
+      color:var(--text-mute); margin-top:.4rem;
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      background:var(--blue); overflow:hidden; padding:10px 0;
+    }
+    .ticker-track {
+      display:flex; gap:2.5rem; white-space:nowrap;
+      animation:marquee 30s linear infinite; width:max-content;
+    }
+    .ticker-item {
+      font-family:'IBM Plex Mono'; font-size:.58rem; font-weight:600;
+      letter-spacing:.15em; color:rgba(255,255,255,.85);
+    }
+    .ticker-sep { color:rgba(255,255,255,.3); margin-right:.5rem; }
+
+    /* ── COMPANY BREAKDOWN ── */
+    .section {
+      max-width:1320px; margin:0 auto; padding:3rem 1.5rem;
+    }
+    .section-header {
+      display:flex; justify-content:space-between; align-items:flex-end;
+      margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;
+    }
+    .section-title {
+      font-family:'Bebas Neue'; font-size:clamp(1.6rem,3vw,2.5rem);
+      letter-spacing:.04em; color:white; line-height:1;
+    }
+    .section-count {
+      font-family:'IBM Plex Mono'; font-size:.58rem; letter-spacing:.15em;
+      color:var(--text-mute);
+    }
+
+    .company-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1px;
+      background:var(--border);
+    }
+    .company-card {
+      background:var(--bg-card); padding:1.25rem 1.25rem;
+      cursor:default; transition: background .2s;
+      border-left: 2px solid transparent;
+    }
+    .company-card:hover {
+      background: rgba(0,82,204,.1);
+      border-left-color: var(--blue);
+    }
+    .company-card.is-active { border-left-color: var(--blue); background:rgba(0,82,204,.08); }
+    .company-card .co-name {
+      font-family:'IBM Plex Mono'; font-size:.68rem; font-weight:600;
+      letter-spacing:.08em; color:white; margin-bottom:.5rem;
+    }
+    .company-card .co-count {
+      font-family:'Bebas Neue'; font-size:2.2rem; line-height:1;
+      color:white; letter-spacing:.02em;
+    }
+    .company-card .co-count .unit { color:var(--blue); font-size:1.2rem; }
+    .company-card .co-label {
+      font-family:'IBM Plex Mono'; font-size:.46rem; letter-spacing:.12em;
+      color:var(--text-mute); margin-top:.25rem;
+    }
+    .co-bar {
+      margin-top:.75rem; height:2px; background:rgba(255,255,255,.06); border-radius:1px;
+    }
+    .co-bar-fill { height:100%; background:var(--blue); border-radius:1px; transition:width .6s; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;
+      margin-bottom:1.5rem;
+    }
+    .filter-btn {
+      font-family:'IBM Plex Mono'; font-size:.56rem; font-weight:600;
+      letter-spacing:.12em; padding:.4rem .85rem; border:1px solid var(--border-b);
+      background:transparent; color:var(--text-dim); cursor:pointer;
+      transition: all .2s; white-space:nowrap;
+    }
+    .filter-btn:hover { border-color:var(--blue); color:white; }
+    .filter-btn.active { background:var(--blue); border-color:var(--blue); color:white; }
+    .filter-count {
+      font-family:'IBM Plex Mono'; font-size:.48rem; letter-spacing:.1em;
+      color:var(--text-mute); margin-left:auto; padding-top:.2rem;
+    }
+
+    /* ── JOB TABLE ── */
+    .job-table-wrap {
+      border:1px solid var(--border); overflow:hidden;
+    }
+    .job-table {
+      width:100%; border-collapse:collapse;
+    }
+    .job-table thead tr {
+      border-bottom:1px solid var(--border-b);
+    }
+    .job-table th {
+      font-family:'IBM Plex Mono'; font-size:.5rem; font-weight:600;
+      letter-spacing:.2em; color:var(--text-mute); text-align:left;
+      padding:.9rem 1.25rem; white-space:nowrap;
+      background:rgba(255,255,255,.02);
+    }
+    .job-row {
+      border-bottom:1px solid var(--border);
+      transition: background .18s;
+      cursor:pointer;
+    }
+    .job-row:last-child { border-bottom:none; }
+    .job-row:hover { background: var(--bg-hover); }
+    .job-row td { padding:.9rem 1.25rem; vertical-align:middle; }
+
+    .job-id {
+      font-family:'IBM Plex Mono'; font-size:.52rem; letter-spacing:.1em;
+      color:var(--text-mute); white-space:nowrap;
+    }
+    .job-company {
+      font-family:'IBM Plex Mono'; font-size:.62rem; font-weight:600;
+      letter-spacing:.06em; color:white; white-space:nowrap;
+    }
+    .job-title {
+      font-family:'EB Garamond'; font-size:1rem; color:var(--text);
+      line-height:1.35;
+    }
+    .job-title a {
+      color:inherit; text-decoration:none;
+      transition: color .18s;
+    }
+    .job-title a:hover { color:var(--blue-lt); }
+    .job-badge {
+      display:inline-block;
+      font-family:'IBM Plex Mono'; font-size:.46rem; font-weight:600;
+      letter-spacing:.12em; padding:.18rem .55rem;
+      border:1px solid; white-space:nowrap;
+    }
+    .badge-elite { color:#f59e0b; border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.06); }
+    .badge-senior { color:var(--blue-lt); border-color:rgba(96,165,250,.3); background:rgba(96,165,250,.06); }
+    .badge-staff { color:#a78bfa; border-color:rgba(167,139,250,.3); background:rgba(167,139,250,.06); }
+    .badge-new { color:var(--green); border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.06); }
+
+    .job-date {
+      font-family:'IBM Plex Mono'; font-size:.5rem; letter-spacing:.08em;
+      color:var(--text-mute); white-space:nowrap;
+    }
+    .job-action {
+      font-family:'IBM Plex Mono'; font-size:.52rem; font-weight:600;
+      letter-spacing:.1em; color:var(--blue); text-decoration:none;
+      white-space:nowrap; padding:.35rem .75rem;
+      border:1px solid rgba(0,82,204,.4);
+      transition: all .2s; display:inline-block;
+    }
+    .job-action:hover {
+      background:var(--blue); color:white;
+    }
+
+    /* ── CATEGORY SECTION ── */
+    .divider {
+      border:none; border-top:1px solid var(--border);
+      margin: 0 1.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top:1px solid var(--border); padding:2rem 0;
+      margin-top:4rem;
+    }
+    .footer-inner {
+      max-width:1320px; margin:0 auto; padding:0 1.5rem;
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:1rem;
+    }
+    .footer-logo {
+      font-family:'Bebas Neue'; font-size:1.1rem; letter-spacing:.1em; color:white;
+    }
+    .footer-logo span { color:var(--blue); }
+    .footer-meta {
+      font-family:'IBM Plex Mono'; font-size:.5rem; letter-spacing:.1em;
+      color:var(--text-mute);
+    }
+    .footer-links { display:flex; gap:1.5rem; }
+    .footer-links a {
+      font-family:'IBM Plex Mono'; font-size:.52rem; letter-spacing:.12em;
+      color:var(--text-mute); text-decoration:none; transition:color .2s;
+    }
+    .footer-links a:hover { color:white; }
+
+    /* ── TREND SECTION ── */
+    .trend-section {
+      background: rgba(0,82,204,.06);
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .trend-grid {
+      max-width:1320px; margin:0 auto; padding:2rem 1.5rem;
+      display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border);
+    }
+    .trend-card {
+      background:var(--bg); padding:1.5rem;
+    }
+    .trend-card-label {
+      font-family:'IBM Plex Mono'; font-size:.5rem; font-weight:600;
+      letter-spacing:.22em; color:var(--text-mute); margin-bottom:.75rem;
+    }
+    .trend-card-title {
+      font-family:'IBM Plex Mono'; font-size:.68rem; font-weight:600;
+      letter-spacing:.06em; color:white; margin-bottom:.5rem; line-height:1.4;
+    }
+    .trend-card-body {
+      font-family:'EB Garamond'; font-size:.9rem; color:var(--text-dim);
+      line-height:1.65;
+    }
+    .trend-tag {
+      display:inline-block; margin-top:.75rem;
+      font-family:'IBM Plex Mono'; font-size:.46rem; font-weight:600;
+      letter-spacing:.12em; padding:.2rem .55rem;
+      border:1px solid rgba(0,82,204,.4); color:var(--blue-lt);
+    }
+    /* ── TELEGRAM SECTION ── */
+    .tg-section {
+      max-width:1320px; margin:2rem auto; padding:0 1.5rem;
+    }
+    .tg-card {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1.5rem; flex-wrap:wrap;
+      background:var(--bg-card); border:1px solid var(--border-b);
+      padding:1.5rem 2rem;
+      border-left:3px solid var(--blue);
+    }
+    .tg-left { display:flex; align-items:center; gap:1.25rem; }
+    .tg-icon {
+      font-size:1.75rem; flex-shrink:0; line-height:1;
+    }
+    .tg-title {
+      font-family:'IBM Plex Mono'; font-size:.72rem; font-weight:600;
+      letter-spacing:.1em; color:white; margin-bottom:.3rem;
+    }
+    .tg-desc {
+      font-family:'EB Garamond'; font-size:.9rem; color:var(--text-dim); line-height:1.5;
+    }
+    .tg-actions { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .tg-btn {
+      font-family:'IBM Plex Mono'; font-size:.58rem; font-weight:600;
+      letter-spacing:.12em; padding:.55rem 1.25rem;
+      text-decoration:none; transition:all .2s; white-space:nowrap; cursor:pointer;
+    }
+    .tg-btn-primary { background:var(--blue); color:white; border:1px solid var(--blue); }
+    .tg-btn-primary:hover { background:#003d99; border-color:#003d99; }
+    .tg-btn-ghost { background:transparent; color:var(--text-dim); border:1px solid var(--border-b); }
+    .tg-btn-ghost:hover { border-color:var(--blue); color:white; }
+    .tg-commands {
+      display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;
+    }
+    .tg-cmd {
+      font-family:'IBM Plex Mono'; font-size:.48rem; letter-spacing:.08em;
+      color:var(--text-mute); border:1px solid var(--border); padding:.2rem .5rem;
+      cursor:default;
+    }
+
+    /* ── LEARNING HUB ── */
+    .learning-hub { background: rgba(255,255,255,.01); border-top:1px solid var(--border); }
+    .roadmap-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border);
+      margin-top: 1.5rem;
+    }
+    .roadmap-card { background: var(--bg); padding: 1.5rem; position: relative; }
+    .roadmap-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 0;
+      background: var(--blue); transition: width .4s ease-in-out;
+    }
+    .roadmap-card:hover::after { width: 100%; }
+    .roadmap-week {
+      font-family: 'IBM Plex Mono'; font-size: .5rem; font-weight: 600;
+      letter-spacing: .2em; color: var(--blue-lt); margin-bottom: .5rem;
+    }
+    .roadmap-title {
+      font-family: 'Bebas Neue'; font-size: 1.25rem; letter-spacing: .02em;
+      color: white; margin-bottom: .75rem;
+    }
+    .roadmap-tasks { list-style: none; }
+    .roadmap-task {
+      font-family: 'IBM Plex Mono'; font-size: .52rem; color: var(--text-dim);
+      margin-bottom: .4rem; display: flex; align-items: flex-start; gap: .5rem;
+    }
+    .roadmap-task::before { content: '○'; color: var(--text-mute); }
+    .roadmap-task.done::before { content: '●'; color: var(--green); }
+
+    .intel-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .intel-card {
+      background: var(--bg-card); border: 1px solid var(--border-b); padding: 1.25rem;
+      transition: transform .2s, border-color .2s;
+    }
+    .intel-card:hover { transform: translateY(-3px); border-color: var(--blue); }
+    .intel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .intel-co { font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: .05em; color: white; }
+    .intel-weight { font-family: 'IBM Plex Mono'; font-size: .48rem; color: var(--amber); letter-spacing: .1em; }
+    .intel-topics { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .intel-tag {
+      font-family: 'IBM Plex Mono'; font-size: .4rem; padding: .15rem .45rem;
+      border: 1px solid var(--border); color: var(--text-mute);
+    }
+    .intel-quote {
+      font-family: 'EB Garamond'; font-size: .85rem; font-style: italic;
+      color: var(--text-dim); line-height: 1.5; border-left: 2px solid var(--blue);
+      padding-left: .75rem;
+    }
+
+    .heatmap-section { margin-top: 3rem; }
+    .heatmap-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: .8rem; }
+    .heatmap-label {
+      font-family: 'IBM Plex Mono'; font-size: .55rem; width: 140px;
+      color: var(--text-dim); letter-spacing: .05em;
+    }
+    .heatmap-bar-wrap { flex: 1; height: 6px; background: rgba(255,255,255,.05); border-radius: 3px; position: relative; }
+    .heatmap-bar {
+      height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-lt));
+      border-radius: 3px; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .heatmap-val { font-family: 'IBM Plex Mono'; font-size: .5rem; color: var(--text-mute); width: 30px; text-align: right; }
+
+    /* ── WEB-STYLE CTA SECTION ── */
+    .web-cta { margin: 4rem auto; max-width: 1320px; padding: 0 1.5rem; }
+    .web-cta-inner {
+      display: flex; gap: 4rem; align-items: center; background: var(--bg-card);
+      border: 1px solid var(--border-b); padding: 4rem; position: relative;
+    }
+    .web-cta-visual {
+      flex: 0 0 320px; height: 400px; background: var(--bg);
+      border: 1px solid var(--blue); position: relative;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 20px 20px 0px rgba(0,82,204,.1);
+    }
+    .web-cta-visual::before {
+      content: 'LIVE JOB ALERTS'; font-family: 'Bebas Neue'; font-size: 3rem;
+      color: white; line-height: .9; text-align: center; letter-spacing: .05em;
+    }
+    .web-cta-visual .visual-cursor {
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      color: var(--blue); font-family: 'IBM Plex Mono'; font-size: 1.5rem;
+      animation: blink 1s step-end infinite;
+    }
+    .web-cta-content { flex: 1; }
+    .web-cta-eyebrow {
+      font-family: 'IBM Plex Mono'; font-size: .55rem; font-weight: 600;
+      letter-spacing: .25em; color: var(--blue-lt); margin-bottom: 1rem;
+    }
+    .web-cta-title {
+      font-family: 'Bebas Neue'; font-size: 3.5rem; color: white;
+      line-height: 1; letter-spacing: .02em; margin-bottom: 1.5rem;
+    }
+    .web-cta-describe {
+      font-family: 'EB Garamond'; font-size: 1.1rem; color: var(--text-dim);
+      line-height: 1.6; margin-bottom: 2rem; max-width: 500px;
+    }
+    .web-cta-bullets { margin-bottom: 2.5rem; }
+    .web-cta-bullet {
+      font-family: 'IBM Plex Mono'; font-size: .65rem; color: white;
+      margin-bottom: .6rem; display: flex; align-items: center; gap: .75rem;
+    }
+    .web-cta-btn {
+      display: inline-block; background: var(--blue); color: white;
+      font-family: 'IBM Plex Mono'; font-size: .65rem; font-weight: 600;
+      padding: 1.25rem 2.5rem; text-decoration: none; letter-spacing: .1em;
+      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,82,204,0.3);
+    }
+    .web-cta-btn:hover {
+      transform: translateY(-4px); background: #0066ee;
+      box-shadow: 0 15px 40px rgba(0,82,204,0.4);
+    }
+
+    @media (max-width:1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .hero-right { order: -1; } /* Stats above text on mobile for impact */
+      .web-cta-inner { flex-direction: column; padding: 3rem; text-align: center; }
+      .web-cta-visual { flex: 0 0 300px; width: 100%; height: 300px; }
+      .web-cta-describe { margin-left: auto; margin-right: auto; }
+      .web-cta-bullet { justify-content: center; }
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      position:relative; flex:1; max-width:360px;
+    }
+    .search-input {
+      width:100%; background:rgba(255,255,255,.04); border:1px solid var(--border-b);
+      color:white; font-family:'IBM Plex Mono'; font-size:.62rem; letter-spacing:.06em;
+      padding:.55rem 1rem; outline:none; transition:border-color .2s;
+    }
+    .search-input::placeholder { color:var(--text-mute); }
+    .search-input:focus { border-color:var(--blue); }
+
+    ::-webkit-scrollbar { width:3px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:var(--blue); border-radius:2px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="https://suyashsingh.com" class="nav-logo">
+        <div class="mark"><span>SS</span></div>
+        <div>
+          <div class="wordmark">SUYASH SINGH</div>
+          <span class="sub">LIVE JOB UPDATES</span>
+        </div>
+      </a>
+      <div class="nav-right">
+        <a href="index.html" class="nav-link active">JOBS</a>
+        <a href="/intelligence-hub" class="nav-link">INTERVIEW INTEL</a>
+        <div class="live-dot">
+          <div class="dot"></div>
+          LIVE FEED
+        </div>
+        <div class="refresh-badge">REFRESHED <span id="nav-refresh-time">—</span></div>
+        <a href="https://suyashsingh.com" class="nav-back">← PORTFOLIO</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (expanded branding) -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-title-block">
+          <div class="eyebrow">/ WATCHTOWER HQ</div>
+          <h1>
+            JOB SEARCH<br>
+            <span class="accent">COMMAND</span><br>
+            <span class="stroke">CENTER</span><span style="animation:blink 1s step-end infinite;color:var(--blue);font-family:'IBM Plex Mono';font-size:.3em;vertical-align:top;margin-left:.08em">|</span>
+          </h1>
+        </div>
+        <p class="hero-sub">Autonomous intelligence tracking Data Engineering at elite tech companies. Aggregating signals at exabyte scale.</p>
+      </div>
+
+      <div class="hero-right">
+        <div class="prep-box">
+          <div class="accent-bar-blue"></div>
+          <div style="font-family:'IBM Plex Mono'; font-size:.5rem; letter-spacing:.15em; color:var(--blue-lt); margin-bottom:1.25rem;">/ WATCHTOWER LIVE</div>
+          <div style="font-family: 'Bebas Neue'; font-size: 2.2rem; color: white; line-height: 1; margin-bottom: 1rem;">GET INSTANT ALERTS</div>
+          <div style="font-family: 'EB Garamond'; font-size: 1rem; color: var(--text-dim); margin-bottom: 2rem;">Receive push notifications for top-tier Data Engineering roles directly via Telegram.</div>
+          <a href="https://t.me/WatchTowerLive_Bot" style="display: inline-block; background: var(--blue); color: white; font-family: 'IBM Plex Mono'; font-size: .6rem; font-weight: 600; padding: .8rem 1.5rem; text-decoration: none; letter-spacing: .1em;" target="_blank">CONNECT BOT →</a>
+        </div>
+
+        <div class="prep-box">
+          <div class="accent-bar-amber"></div>
+          <div style="font-family:'IBM Plex Mono'; font-size:.5rem; letter-spacing:.15em; color:var(--amber); margin-bottom:1.25rem;">/ INTERVIEW PREP</div>
+          <div style="font-family: 'Bebas Neue'; font-size: 2.2rem; color: white; line-height: 1; margin-bottom: 1rem;">INTELLIGENCE HUB</div>
+          <div style="font-family: 'EB Garamond'; font-size: 1rem; color: var(--text-dim); margin-bottom: 2rem;">Explore core architecture and coding drills tailored for elite Data Engineering interviews.</div>
+          <a href="/intelligence-hub" style="display: inline-block; background: var(--amber); color: #080c14; font-family: 'IBM Plex Mono'; font-size: .6rem; font-weight: 600; padding: .8rem 1.5rem; text-decoration: none; letter-spacing: .1em;">ENTER PORTAL →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT CARDS -->
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-card fade-1">
+      <div class="stat-label">TOTAL POSITIONS</div>
+      <div class="stat-value" id="stat-total">37<span class="unit">+</span></div>
+      <div class="stat-sub">ACTIVELY MONITORED</div>
+    </div>
+    <div class="stat-card fade-1">
+      <div class="stat-label">COMPANIES</div>
+      <div class="stat-value">17<span class="unit"></span></div>
+      <div class="stat-sub">ELITE TIER TARGETS</div>
+    </div>
+    <div class="stat-card fade-2">
+      <div class="stat-label">ELITE ROLES</div>
+      <div class="stat-value" id="stat-elite">—</div>
+      <div class="stat-sub">STAFF / SR. LEVEL</div>
+    </div>
+    <div class="stat-card fade-2">
+      <div class="stat-label">LAST SCAN</div>
+      <div class="stat-value" style="font-size:clamp(1.2rem,2.5vw,2rem);" id="stat-last">TODAY</div>
+      <div class="stat-sub">AUTO-CRAWL · 6HR CYCLE</div>
+    </div>
+    <div class="stat-card fade-3">
+      <div class="stat-label">TOP MARKET</div>
+      <div class="stat-value" style="font-size:clamp(1rem,2vw,1.6rem);">AIRBNB</div>
+      <div class="stat-sub">5 OPEN POSITIONS</div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-sep">◆</span>AIRBNB · 5 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>DATABRICKS · 4 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>STRIPE · 2 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>ANTHROPIC · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>JANESTREET · 3 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>FIGMA · 2 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>ROBINHOOD · 2 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>COINBASE · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>PINTEREST · 3 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>NEURALINK · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>CLOUDFLARE · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>AIRTABLE · 3 AI ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>TOGETHERAI · 3 ROLES</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ticker-sep">◆</span>AIRBNB · 5 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>DATABRICKS · 4 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>STRIPE · 2 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>ANTHROPIC · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>JANESTREET · 3 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>FIGMA · 2 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>ROBINHOOD · 2 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>COINBASE · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>PINTEREST · 3 ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>NEURALINK · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>CLOUDFLARE · 1 ROLE</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>AIRTABLE · 3 AI ROLES</span>
+      <span class="ticker-item"><span class="ticker-sep">◆</span>TOGETHERAI · 3 ROLES</span>
+    </div>
+  </div>
+
+  <!-- COMPANY BREAKDOWN -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">/ COMPANY BREAKDOWN</div>
+        <div class="section-title">MARKET COVERAGE</div>
+      </div>
+      <div class="section-count">17 COMPANIES · 37 TOTAL POSITIONS</div>
+    </div>
+    <div class="company-grid" id="company-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- JOB LISTINGS -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">/ LIVE POSITIONS</div>
+        <div class="section-title">ALL JOB LISTINGS</div>
+      </div>
+    </div>
+
+    <!-- Filters + Search -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">ALL <span style="opacity:.5;margin-left:.3rem">37</span></button>
+      <button class="filter-btn" data-filter="Staff" onclick="setFilter('Staff',this)">STAFF</button>
+      <button class="filter-btn" data-filter="Senior" onclick="setFilter('Senior',this)">SENIOR</button>
+      <button class="filter-btn" data-filter="Manager" onclick="setFilter('Manager',this)">MANAGER</button>
+      <button class="filter-btn" data-filter="Analytics" onclick="setFilter('Analytics',this)">ANALYTICS</button>
+      <button class="filter-btn" data-filter="Platform" onclick="setFilter('Platform',this)">PLATFORM</button>
+      <div class="search-wrap" style="margin-left:auto">
+        <input class="search-input" type="text" placeholder="Search company or role..." id="search-input" oninput="doSearch(this.value)">
+      </div>
+      <div class="filter-count" id="filter-count">Showing 37 of 37</div>
+    </div>
+
+    <div class="job-table-wrap">
+      <table class="job-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>COMPANY</th>
+            <th>ROLE</th>
+            <th>LEVEL</th>
+            <th>DETECTED</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="job-tbody">
+          <!-- Rendered by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">SUYASH<span>.</span>SINGH</div>
+      <div class="footer-links">
+        <a href="https://suyashsingh.com">PORTFOLIO</a>
+        <a href="https://www.linkedin.com/in/isuyash14/" target="_blank">LINKEDIN</a>
+        <a href="https://x.com/isuyash14" target="_blank">𝕏 · 40K</a>
+      </div>
+      <div class="footer-meta">PROJECT WATCHTOWER · AUTONOMOUS JOB INTELLIGENCE · © 2026</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══════════════════ DATA ═══════════════════ */
+    const JOBS = [
+      { id:29, company:"Airbnb",      title:"Staff Software Engineer, Data Engineering",              link:"https://careers.airbnb.com/positions/7095225?gh_jid=7095225",   date:"2026-04-18" },
+      { id:28, company:"Airbnb",      title:"Staff Analytics Engineer",                                link:"https://careers.airbnb.com/positions/7733495?gh_jid=7733495",   date:"2026-04-18" },
+      { id:27, company:"Airbnb",      title:"Senior Staff Data Engineer, Marketplaces DNA",            link:"https://careers.airbnb.com/positions/7463663?gh_jid=7463663",   date:"2026-04-18" },
+      { id:26, company:"Airbnb",      title:"Senior Data Engineer, Payments",                          link:"https://careers.airbnb.com/positions/7256787?gh_jid=7256787",   date:"2026-04-18" },
+      { id:25, company:"Airbnb",      title:"Senior Data Engineer, BizTech",                           link:"https://careers.airbnb.com/positions/7640881?gh_jid=7640881",   date:"2026-04-18" },
+      { id:7,  company:"Airtable",    title:"AI Analytics Engineer (Marketing Analytics)",             link:"https://job-boards.greenhouse.io/airtable/jobs/8434307002",      date:"2026-04-18" },
+      { id:6,  company:"Airtable",    title:"AI Analytics Engineer (Business Analytics)",              link:"https://job-boards.greenhouse.io/airtable/jobs/8470036002",      date:"2026-04-18" },
+      { id:5,  company:"Airtable",    title:"AI Analytics Engineer (AI & Analytics Platform)",         link:"https://job-boards.greenhouse.io/airtable/jobs/8434287002",      date:"2026-04-18" },
+      { id:4,  company:"Anthropic",   title:"Data Engineer, Safeguards",                               link:"https://job-boards.greenhouse.io/anthropic/jobs/5156057008",     date:"2026-04-18" },
+      { id:22, company:"Brex",        title:"Data Engineer",                                           link:"https://www.brex.com/careers/8366850002?gh_jid=8366850002",     date:"2026-04-18" },
+      { id:21, company:"Brex",        title:"Data Engineer",                                           link:"https://www.brex.com/careers/8510493002?gh_jid=8510493002",     date:"2026-04-18" },
+      { id:33, company:"Cloudflare",  title:"Analytics Engineer, FinTech",                             link:"https://boards.greenhouse.io/cloudflare/jobs/7649684",           date:"2026-04-19" },
+      { id:34, company:"Coinbase",    title:"Senior Analytics Engineer (Platform - Financial Analytics)",link:"https://www.coinbase.com/careers/positions/7736521",          date:"2026-04-19" },
+      { id:12, company:"Databricks",  title:"Sr. Product Manager, Data Engineering",                   link:"https://databricks.com/company/careers/open-positions/job?gh_jid=6322654002", date:"2026-04-18" },
+      { id:11, company:"Databricks",  title:"Manager, Big Data Architecture – Professional Services",  link:"https://databricks.com/company/careers/open-positions/job?gh_jid=8439078002", date:"2026-04-18" },
+      { id:3,  company:"Databricks",  title:"Sr. Software Engineer - Data Engineering",                link:"https://databricks.com/company/careers/open-positions/job?gh_jid=8300574002", date:"2026-04-18" },
+      { id:2,  company:"Databricks",  title:"Sr Analytics Engineer - GTM Strategy and Operations",     link:"https://databricks.com/company/careers/open-positions/job?gh_jid=8479036002", date:"2026-04-18" },
+      { id:35, company:"Elastic",     title:"Data Engineer II - Platform Analytics",                   link:"https://jobs.elastic.co/jobs?gh_jid=7614519",                    date:"2026-04-19" },
+      { id:37, company:"Figma",       title:"Data Platform Engineer",                                  link:"https://boards.greenhouse.io/figma/jobs/5840332004",             date:"2026-04-19" },
+      { id:1,  company:"Figma",       title:"Data Engineer",                                           link:"https://boards.greenhouse.io/figma/jobs/5220003004",             date:"2026-04-18" },
+      { id:24, company:"Instacart",   title:"Senior Analytics Engineer, Marketing",                    link:"https://instacart.careers/job/?gh_jid=7754354",                  date:"2026-04-18" },
+      { id:23, company:"Instacart",   title:"Data Engineering Manager, Core Experience & Incentives",  link:"https://instacart.careers/job/?gh_jid=7786900",                  date:"2026-04-18" },
+      { id:15, company:"Jane Street", title:"Data Engineer",                                           link:"https://job-boards.greenhouse.io/janestreet/jobs/7668113002",    date:"2026-04-18" },
+      { id:14, company:"Jane Street", title:"Data Engineer",                                           link:"https://job-boards.greenhouse.io/janestreet/jobs/6558007002",    date:"2026-04-18" },
+      { id:13, company:"Jane Street", title:"Data Engineer",                                           link:"https://job-boards.greenhouse.io/janestreet/jobs/7229633002",    date:"2026-04-18" },
+      { id:16, company:"Jump Trading",title:"Data Engineer | Post Trade Analytics",                    link:"https://www.jumptrading.com/hr/job?gh_jid=7495806",              date:"2026-04-18" },
+      { id:36, company:"Neuralink",   title:"Software Engineer, Data Engineering",                     link:"https://boards.greenhouse.io/neuralink/jobs/6521553003",          date:"2026-04-19" },
+      { id:32, company:"Pinterest",   title:"Staff Data Engineer, tvScientific",                        link:"https://www.pinterestcareers.com/jobs/?gh_jid=7642253",          date:"2026-04-18" },
+      { id:31, company:"Pinterest",   title:"Staff Data Engineer, tvScientific",                        link:"https://www.pinterestcareers.com/jobs/?gh_jid=7642270",          date:"2026-04-18" },
+      { id:30, company:"Pinterest",   title:"Sr. Data Engineer, tvScientific",                          link:"https://www.pinterestcareers.com/jobs/?gh_jid=7642272",          date:"2026-04-18" },
+      { id:20, company:"Robinhood",   title:"Senior Software Engineer, Data Engineering",               link:"https://boards.greenhouse.io/robinhood/jobs/4738660",            date:"2026-04-18" },
+      { id:19, company:"Robinhood",   title:"Senior Analytics Engineer, Corporate Strategy",            link:"https://boards.greenhouse.io/robinhood/jobs/7346630",            date:"2026-04-18" },
+      { id:18, company:"Stripe",      title:"Staff Engineer, Data Engineering Solutions",               link:"https://stripe.com/jobs/search?gh_jid=7548037",                  date:"2026-04-18" },
+      { id:17, company:"Stripe",      title:"Engineering Manager, Data Engineering Solutions",          link:"https://stripe.com/jobs/search?gh_jid=7496118",                  date:"2026-04-18" },
+      { id:10, company:"Together AI", title:"Staff Analytics Engineer — Data Warehouse",               link:"https://job-boards.greenhouse.io/togetherai/jobs/5101651007",     date:"2026-04-18" },
+      { id:9,  company:"Together AI", title:"Senior Data Engineer",                                    link:"https://job-boards.greenhouse.io/togetherai/jobs/4737079007",     date:"2026-04-18" },
+      { id:8,  company:"Together AI", title:"Finance Analytics Engineer",                               link:"https://job-boards.greenhouse.io/togetherai/jobs/5108385007",     date:"2026-04-18" },
+    ];
+
+    /* ═══════════════════ REFRESH TIMESTAMP ═══════════════════ */
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', hour12:true });
+    const dateStr2 = now.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+    document.getElementById('nav-refresh-time').textContent = dateStr2 + ' · ' + timeStr;
+
+    /* ═══════════════════ BADGE LOGIC ═══════════════════ */
+    function getBadge(title) {
+      const t = title.toLowerCase();
+      if (t.includes('senior staff')) return { cls:'badge-elite', label:'SR. STAFF' };
+      if (t.includes('staff'))    return { cls:'badge-staff',  label:'STAFF' };
+      if (t.includes('principal')) return { cls:'badge-elite', label:'PRINCIPAL' };
+      if (t.includes('manager'))  return { cls:'badge-senior', label:'MANAGER' };
+      if (t.includes('senior') || t.includes('sr.')) return { cls:'badge-senior', label:'SENIOR' };
+      if (t.includes('ai '))      return { cls:'badge-new',    label:'AI ROLE' };
+      return null;
+    }
+
+    /* ═══════════════════ COMPANY GRID ═══════════════════ */
+    const companies = {};
+    JOBS.forEach(j => {
+      companies[j.company] = (companies[j.company] || 0) + 1;
+    });
+    const maxCount = Math.max(...Object.values(companies));
+
+    const grid = document.getElementById('company-grid');
+    Object.entries(companies).sort((a,b) => b[1]-a[1]).forEach(([co, cnt]) => {
+      const card = document.createElement('div');
+      card.className = 'company-card';
+      card.setAttribute('data-co', co);
+      card.onclick = () => filterByCompany(co, card);
+      card.innerHTML = `
+        <div class="co-name">${co.toUpperCase()}</div>
+        <div class="co-count">${cnt}<span class="unit"> ROLE${cnt>1?'S':''}</span></div>
+        <div class="co-label">OPEN POSITIONS</div>
+        <div class="co-bar"><div class="co-bar-fill" style="width:${Math.round(cnt/maxCount*100)}%"></div></div>
+      `;
+      grid.appendChild(card);
+    });
+
+    /* ═══════════════════ STAT: ELITE ═══════════════════ */
+    const eliteCount = JOBS.filter(j => {
+      const t = j.title.toLowerCase();
+      return t.includes('staff') || t.includes('principal') || t.includes('senior');
+    }).length;
+    document.getElementById('stat-elite').innerHTML = eliteCount + '<span class="unit">+</span>';
+
+    /* ═══════════════════ TABLE RENDER ═══════════════════ */
+    let activeFilter = 'all';
+    let activeCompany = null;
+    let searchQuery = '';
+
+    function renderTable() {
+      const tbody = document.getElementById('job-tbody');
+      const visible = JOBS.filter(j => {
+        const matchFilter = activeFilter === 'all' || j.title.toLowerCase().includes(activeFilter.toLowerCase());
+        const matchCo = !activeCompany || j.company === activeCompany;
+        const matchSearch = !searchQuery ||
+          j.company.toLowerCase().includes(searchQuery) ||
+          j.title.toLowerCase().includes(searchQuery);
+        return matchFilter && matchCo && matchSearch;
+      });
+
+      document.getElementById('filter-count').textContent =
+        `Showing ${visible.length} of ${JOBS.length}`;
+
+      tbody.innerHTML = visible.map(j => {
+        const badge = getBadge(j.title);
+        const badgeHtml = badge
+          ? `<span class="job-badge ${badge.cls}">${badge.label}</span>`
+          : '';
+        const dateStr = j.date.split('-').slice(1).join('/') + ' \'26';
+        return `
+          <tr class="job-row" onclick="window.open('${j.link}','_blank')">
+            <td class="job-id">#J${j.id}</td>
+            <td class="job-company">${j.company.toUpperCase()}</td>
+            <td class="job-title"><a href="${j.link}" target="_blank" onclick="event.stopPropagation()">${j.title}</a></td>
+            <td>${badgeHtml}</td>
+            <td class="job-date">${dateStr}</td>
+            <td><a class="job-action" href="${j.link}" target="_blank" onclick="event.stopPropagation()">VIEW →</a></td>
+          </tr>`;
+      }).join('');
+    }
+
+    function setFilter(f, btn) {
+      activeFilter = f;
+      activeCompany = null;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.company-card').forEach(c => c.classList.remove('is-active'));
+      renderTable();
+    }
+
+    function filterByCompany(co, card) {
+      if (activeCompany === co) {
+        activeCompany = null;
+        card.classList.remove('is-active');
+      } else {
+        activeCompany = co;
+        document.querySelectorAll('.company-card').forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+        activeFilter = 'all';
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-filter="all"]').classList.add('active');
+      }
+      renderTable();
+    }
+
+    function doSearch(q) {
+      searchQuery = q.toLowerCase();
+      activeCompany = null;
+      document.querySelectorAll('.company-card').forEach(c => c.classList.remove('is-active'));
+      renderTable();
+    }
+
+    function copyBotCmd() {
+      navigator.clipboard.writeText('/scan').then(() => {
+        const btn = document.querySelector('.tg-btn-ghost');
+        btn.textContent = 'COPIED ✓';
+        setTimeout(() => btn.textContent = 'COPY /scan COMMAND', 2000);
+      });
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>

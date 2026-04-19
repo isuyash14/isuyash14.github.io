@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Intelligence — Suyash Singh</title>
+  <meta name="description" content="Data Engineering interview trends, roadmaps, and company-specific intel." />
+  <link rel="canonical" href="https://suyashsingh.com/job-search/intel" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:        #080c14;
+      --bg-2:      #0c0c0c;
+      --bg-card:   rgba(255,255,255,.035);
+      --bg-hover:  rgba(0,82,204,.12);
+      --border:    rgba(255,255,255,.07);
+      --border-b:  rgba(255,255,255,.12);
+      --blue:      #0052cc;
+      --blue-lt:   #60a5fa;
+      --text:      rgba(255,255,255,.88);
+      --text-dim:  rgba(255,255,255,.45);
+      --text-mute: rgba(255,255,255,.22);
+      --green:     #22c55e;
+      --amber:     #f59e0b;
+      --red:       #ef4444;
+    }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes pulse { 0%{transform:scale(1);opacity:.9} 100%{transform:scale(2.4);opacity:0} }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      background: rgba(8,12,20,.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: .7rem 0;
+    }
+    .nav-inner {
+      max-width: 1320px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .nav-logo {
+      display:flex; align-items:center; gap:.75rem; text-decoration:none;
+    }
+    .nav-logo .mark {
+      width:28px; height:28px; background:var(--blue);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .nav-logo .mark span {
+      font-family:'Bebas Neue'; color:white; font-size:.9rem; letter-spacing:.05em;
+    }
+    .nav-logo .wordmark {
+      font-family:'IBM Plex Mono'; font-size:.65rem; font-weight:600;
+      letter-spacing:.1em; color:white;
+    }
+    .nav-logo .sub {
+      font-family:'IBM Plex Mono'; font-size:.46rem; letter-spacing:.14em;
+      color: var(--text-dim); display:block;
+    }
+    .nav-right { display:flex; align-items:center; gap:1.25rem; }
+    .nav-link {
+      font-family:'IBM Plex Mono'; font-size:.56rem; font-weight:500;
+      letter-spacing:.12em; color:var(--text-dim); text-decoration:none;
+      transition: color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color:white; }
+    .nav-back {
+      font-family:'IBM Plex Mono'; font-size:.56rem; font-weight:500;
+      letter-spacing:.12em; color:var(--text-mute); text-decoration:none;
+      transition: color .2s;
+    }
+    .nav-back:hover { color:white; }
+    .live-dot {
+      display:flex; align-items:center; gap:.45rem;
+      font-family:'IBM Plex Mono'; font-size:.52rem; letter-spacing:.14em; color:var(--text-dim);
+    }
+    .live-dot .dot {
+      position:relative; width:6px; height:6px; border-radius:50%; background:var(--green);
+    }
+    .live-dot .dot::before {
+      content:''; position:absolute; inset:0; border-radius:50%;
+      background:var(--green); animation:pulse 1.6s ease-out infinite;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 0 0;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(0,82,204,.06) 0%, transparent 100%);
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 52px 52px; opacity: .8;
+    }
+    .hero-inner {
+      max-width:1320px; margin:0 auto; padding:2rem 1.5rem 3.5rem;
+      display:grid; grid-template-columns: 58% 42%; gap:4rem; align-items: center; position:relative;
+    }
+    .hero-title-block { display:flex; flex-direction: column; gap:.5rem; }
+    .eyebrow {
+      font-family:'IBM Plex Mono'; font-size:.55rem; font-weight:600;
+      letter-spacing:.3em; color:var(--blue); margin-bottom: 1rem;
+    }
+    h1 {
+      font-family:'Bebas Neue'; font-size:clamp(3.5rem, 9vw, 8.5rem);
+      line-height:.88; letter-spacing:.02em; color:white; margin-bottom: 1.5rem;
+    }
+    h1 .accent { color:var(--blue-lt); }
+    h1 .stroke { -webkit-text-stroke: 1.5px white; color: transparent; }
+    .hero-sub {
+      font-family:'EB Garamond'; font-size:1.15rem; letter-spacing:.02em;
+      color:var(--text-dim); max-width:520px; line-height:1.7;
+    }
+
+    .hero-right { display: flex; flex-direction: column; gap: 2rem; }
+    .prep-box {
+      background: var(--bg-card); border: 1px solid var(--border-b); padding: 2rem;
+      position: relative; overflow: hidden;
+    }
+    .prep-box::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--blue);
+    }
+    .prep-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .prep-stat-val { font-family: 'Bebas Neue'; font-size: 1.8rem; color: white; line-height: 1; }
+    .prep-stat-label { font-family: 'IBM Plex Mono'; font-size: .52rem; letter-spacing: .1em; color: var(--text-mute); margin-top: .2rem; }
+
+    /* ── CONTENT ── */
+    .section {
+      max-width:1320px; margin:0 auto; padding:3rem 1.5rem;
+    }
+    .section-header {
+      display:flex; justify-content:space-between; align-items:flex-end;
+      margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;
+    }
+    .section-title {
+      font-family:'Bebas Neue'; font-size:clamp(1.6rem,3vw,2.5rem);
+      letter-spacing:.04em; color:white; line-height:1;
+    }
+    .section-count {
+      font-family:'IBM Plex Mono'; font-size:.58rem; letter-spacing:.15em;
+      color:var(--text-mute);
+    }
+
+    /* ── LEARNING HUB ── */
+    .questions-accordion {
+      display: flex; flex-direction: column; gap: 1px; background: var(--border);
+      margin-top: 1.5rem; border: 1px solid var(--border);
+    }
+    .q-detail { background: var(--bg-card); transition: all 0.3s ease; }
+    .q-detail[open] { background: var(--bg); }
+    .q-summary {
+      padding: 1.5rem; cursor: pointer; list-style: none; position: relative;
+    }
+    .q-summary::-webkit-details-marker { display: none; }
+    .q-summary::after {
+      content: '+'; position: absolute; right: 1.5rem; top: 1.5rem;
+      font-family: 'IBM Plex Mono'; color: var(--blue-lt);
+      font-size: 1.2rem; transition: transform 0.3s;
+    }
+    .q-detail[open] .q-summary::after { content: '−'; }
+    .q-meta {
+      font-family: 'IBM Plex Mono'; font-size: .5rem; font-weight: 600;
+      letter-spacing: .2em; color: var(--blue-lt); margin-bottom: .5rem;
+    }
+    .q-title {
+      font-family: 'Bebas Neue'; font-size: 1.25rem; letter-spacing: .02em;
+      color: white; margin-right: 2rem;
+    }
+    .q-answer {
+      padding: 0 1.5rem 1.5rem; font-family: 'Open Sans', sans-serif; font-size: 1rem;
+      color: var(--text-dim); line-height: 1.6; border-top: 1px dashed rgba(255,255,255,0.05); margin-top: 1rem; padding-top: 1rem;
+    }
+    .q-answer p { margin-bottom: .75rem; }
+    .q-companies strong { font-family: 'IBM Plex Mono'; font-size: .5rem; color: var(--text-mute); letter-spacing: .1em; text-transform: uppercase; }
+
+    .intel-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .intel-card {
+      background: var(--bg-card); border: 1px solid var(--border-b); padding: 1.25rem;
+      transition: transform .2s, border-color .2s;
+    }
+    .intel-card:hover { transform: translateY(-3px); border-color: var(--blue); }
+    .intel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .intel-co { font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: .05em; color: white; }
+    .intel-weight { font-family: 'IBM Plex Mono'; font-size: .48rem; color: var(--amber); letter-spacing: .1em; }
+    .intel-topics { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .intel-tag {
+      font-family: 'IBM Plex Mono'; font-size: .4rem; padding: .15rem .45rem;
+      border: 1px solid var(--border); color: var(--text-mute);
+    }
+    .intel-quote {
+      font-family: 'EB Garamond'; font-size: .85rem; font-style: italic;
+      color: var(--text-dim); line-height: 1.5; border-left: 2px solid var(--blue);
+      padding-left: .75rem;
+    }
+
+    .heatmap-section { margin-top: 3rem; }
+    .heatmap-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: .8rem; }
+    .heatmap-label {
+      font-family: 'IBM Plex Mono'; font-size: .55rem; width: 140px;
+      color: var(--text-dim); letter-spacing: .05em;
+    }
+    .heatmap-bar-wrap { flex: 1; height: 6px; background: rgba(255,255,255,.05); border-radius: 3px; position: relative; }
+    .heatmap-bar {
+      height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-lt));
+      border-radius: 3px; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .heatmap-val { font-family: 'IBM Plex Mono'; font-size: .5rem; color: var(--text-mute); width: 30px; text-align: right; }
+
+    /* ── TELEGRAM ── */
+    .tg-section {
+      max-width:1320px; margin:2rem auto; padding:0 1.5rem;
+    }
+    .tg-card {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1.5rem; flex-wrap:wrap;
+      background:var(--bg-card); border:1px solid var(--border-b);
+      padding:1.5rem 2rem;
+      border-left:3px solid var(--blue);
+    }
+    .tg-left { display:flex; align-items:center; gap:1.25rem; }
+    .tg-icon { font-size:1.75rem; }
+    .tg-title { font-family: 'IBM Plex Mono'; font-size: .72rem; font-weight: 600; color: white; margin-bottom: .3rem; }
+    .tg-desc { font-family: 'EB Garamond'; font-size: .9rem; color: var(--text-dim); line-height: 1.5; }
+    .tg-btn {
+      font-family: 'IBM Plex Mono'; font-size: .58rem; font-weight: 600;
+      padding: .55rem 1.25rem; text-decoration: none; background: var(--blue); color: white;
+    }
+
+    /* ── WEB-STYLE CTA SECTION ── */
+    .web-cta { margin: 4rem auto; max-width: 1320px; padding: 0 1.5rem; }
+    .web-cta-inner {
+      display: flex; gap: 4rem; align-items: center; background: var(--bg-card);
+      border: 1px solid var(--border-b); padding: 4rem; position: relative;
+    }
+    .web-cta-visual {
+      flex: 0 0 320px; height: 400px; background: var(--bg);
+      border: 1px solid var(--blue); position: relative;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 20px 20px 0px rgba(0,82,204,.1);
+    }
+    .web-cta-visual::before {
+      content: 'LIVE JOB ALERTS'; font-family: 'Bebas Neue'; font-size: 3rem;
+      color: white; line-height: .9; text-align: center; letter-spacing: .05em;
+    }
+    .web-cta-visual .visual-cursor {
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      color: var(--blue); font-family: 'IBM Plex Mono'; font-size: 1.5rem;
+      animation: blink 1s step-end infinite;
+    }
+    .web-cta-content { flex: 1; }
+    .web-cta-eyebrow {
+      font-family: 'IBM Plex Mono'; font-size: .55rem; font-weight: 600;
+      letter-spacing: .25em; color: var(--blue-lt); margin-bottom: 1rem;
+    }
+    .web-cta-title {
+      font-family: 'Bebas Neue'; font-size: 3.5rem; color: white;
+      line-height: 1; letter-spacing: .02em; margin-bottom: 1.5rem;
+    }
+    .web-cta-describe {
+      font-family: 'EB Garamond'; font-size: 1.1rem; color: var(--text-dim);
+      line-height: 1.6; margin-bottom: 2rem; max-width: 500px;
+    }
+    .web-cta-bullets { margin-bottom: 2.5rem; }
+    .web-cta-bullet {
+      font-family: 'IBM Plex Mono'; font-size: .65rem; color: white;
+      margin-bottom: .6rem; display: flex; align-items: center; gap: .75rem;
+    }
+    .web-cta-btn {
+      display: inline-block; background: var(--blue); color: white;
+      font-family: 'IBM Plex Mono'; font-size: .65rem; font-weight: 600;
+      padding: 1.25rem 2.5rem; text-decoration: none; letter-spacing: .1em;
+      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,82,204,0.3);
+    }
+    .web-cta-btn:hover {
+      transform: translateY(-4px); background: #0066ee;
+      box-shadow: 0 15px 40px rgba(0,82,204,0.4);
+    }
+
+    @media (max-width:1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .hero-right { order: -1; }
+      .web-cta-inner { flex-direction: column; padding: 3rem; text-align: center; }
+      .web-cta-visual { flex: 0 0 300px; width: 100%; height: 300px; }
+      .web-cta-describe { margin-left: auto; margin-right: auto; }
+      .web-cta-bullet { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="https://suyashsingh.com" class="nav-logo">
+        <div class="mark"><span>SS</span></div>
+        <div>
+          <div class="wordmark">SUYASH SINGH</div>
+          <span class="sub">INTERVIEW INTELLIGENCE</span>
+        </div>
+      </a>
+      <div class="nav-right">
+        <a href="/job-search" class="nav-link">JOBS</a>
+        <a href="intel.html" class="nav-link active">INTERVIEW INTEL</a>
+        <div class="live-dot">
+          <div class="dot"></div>
+          LIVE FEED
+        </div>
+        <a href="https://suyashsingh.com" class="nav-back">← PORTFOLIO</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (expanded branding) -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-title-block">
+          <div class="eyebrow">/ PROJECT CRACKER HQ</div>
+          <h1>
+            INTERVIEW<br>
+            <span class="accent">PREP</span><br>
+            <span class="stroke">INTELLIGENCE</span><span style="animation:blink 1s step-end infinite;color:var(--blue);font-family:'IBM Plex Mono';font-size:.3em;vertical-align:top;margin-left:.08em">|</span>
+          </h1>
+        </div>
+        <p class="hero-sub">Deep-dive trends, 8-week structured roadmaps, and company-specific intel for Data Engineering at scale.</p>
+      </div>
+
+      <div class="hero-right">
+        <div class="prep-box">
+          <div style="font-family:'IBM Plex Mono'; font-size:.5rem; letter-spacing:.15em; color:var(--blue-lt); margin-bottom:1.25rem;">/ QUESTION BANK KPIS</div>
+          <div class="prep-stat-grid">
+            <div>
+              <div class="prep-stat-val">15</div>
+              <div class="prep-stat-label">ACTIVE DRILLS</div>
+            </div>
+            <div>
+              <div class="prep-stat-val">5</div>
+              <div class="prep-stat-label">CODING LISTINGS</div>
+            </div>
+            <div>
+              <div class="prep-stat-val">10</div>
+              <div class="prep-stat-label">THEORY CONCEPTS</div>
+            </div>
+            <div>
+              <div class="prep-stat-val">+1</div>
+              <div class="prep-stat-label">DAILY YIELD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARNING HUB -->
+  <section class="section">
+        <div class="section-header">
+      <div>
+        <div class="eyebrow">/ DEEP DIVE</div>
+        <div class="section-title">THEORY QUESTIONS</div>
+      </div>
+      <div class="section-count">10 CORE CONCEPTS</div>
+    </div>
+
+    <!-- THEORY ACCORDION -->
+    <div class="questions-accordion">
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">SYS DESIGN ★★★★★ · ANTHROPIC</div>
+          <div class="q-title">ML INFRA, LLM PIPELINES, DATA DRIFT</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> "Design a data pipeline to ingest 10TB of training data daily for an LLM..."</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Data Lake Storage: Land raw JSON/text data in S3/GCS using an object storage tier optimized for high throughput.</li>
+                <li style="margin-bottom: .75rem;">Compute Engine: Use Apache Spark or Ray clusters to process and tokenize the 10TB of text in parallel.</li>
+                <li style="margin-bottom: .75rem;">Quality Filters: Implement deduplication via MinHash, PII scrubbing, and heuristic quality filtering at the partition level.</li>
+                <li style="margin-bottom: .75rem;">Orchestration: Schedule the DAG daily using Apache Airflow, triggering streaming/batch ingest jobs.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">CODING ★★★★★ · OPENAI</div>
+          <div class="q-title">RELIABILITY, IDEMPOTENCY, HEAPS/GRAPHS</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> "Design a system that can re-run ML training pipelines idempotently after a crash."</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">State Management: Persist pipeline state and checkpoints externally to an object store (S3) at the end of each epoch.</li>
+                <li style="margin-bottom: .75rem;">Idempotent Writes: Ensure all intermediate writing tasks use atomic commits (e.g., uploading to a temporary directory and renaming).</li>
+                <li style="margin-bottom: .75rem;">Deterministic Data Loading: Seed random number generators and use consistent hash-based partitioning across nodes.</li>
+                <li style="margin-bottom: .75rem;">Orchestrator Tracking: Use a metadata store like MLflow to track run lineage and resume exactly from the last successful checkpoint.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">RELIABILITY ★★★★★ · STRIPE</div>
+          <div class="q-title">CDC, CONSISTENCY, DIST. ALGO</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> "Idempotency is the #1 keyword. Know exactly-once processing for ledgers."</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Unique Constraints: Use unique idempotency keys in the database schema (e.g., transaction_id + event_type).</li>
+                <li style="margin-bottom: .75rem;">Append-Only Logs: Implement an Event Sourcing pattern where updates are appended to an immutable ledger (Kafka).</li>
+                <li style="margin-bottom: .75rem;">Transaction Boundaries: Wrap consumer updates in atomic DB transactions. If an event is re-delivered, the constraint prevents duplicates.</li>
+                <li style="margin-bottom: .75rem;">Two-Phase Commits: Use exactly-once semantics in streaming frameworks like Flink to coordinate offsets and sinks.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">SQL ★★★★★ · AIRBNB</div>
+          <div class="q-title">WINDOW FX, EXPERIMENTATION, METRICS</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> "Most SQL-heavy DE interview. Know LAG/LEAD and percentile functions."</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Window Functions: Extensively use LAG/LEAD for finding consecutive days, gaps, and islands in user session data.</li>
+                <li style="margin-bottom: .75rem;">Percentiles: Use PERCENTILE_CONT or APPROX_PERCENTILE within window frames to calculate median response times.</li>
+                <li style="margin-bottom: .75rem;">Self-Joins: Optimize overlapping time conditions using range-based joins if window functions cannot express the bounding logic.</li>
+                <li style="margin-bottom: .75rem;">Execution Plans: Understand how window functions trigger sorts in the query planner, and optimize via appropriate clustered indexes.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Data Pipelines · Senior</div>
+          <div class="q-title">Design a Real-Time Feature Store</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Design a system that serves ML features in real-time (< 10ms latency) for a model serving 100k RPS. Also supports batch feature backfilling.</p>
+          <p><strong>Hint:</strong> Use Redis/DynamoDB for latency, and Kafka for streaming ingestion.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Anthropic, OpenAI, Databricks</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Streaming Ingestion: Kafka topics ingest live streaming event data. Apache Flink consumes these topics to compute real-time feature aggregations (e.g., rolling 5-minute sums).</li>
+                <li style="margin-bottom: .75rem;">Online Serving Layer: Flink sinks write directly to an extremely low-latency Key-Value store (Redis/DynamoDB). This tier handles the live 100k RPS queries guaranteeing <10ms P99 retrieval.</li>
+                <li style="margin-bottom: .75rem;">Offline Storage Layer: A Data Lakehouse (S3 + Iceberg) persists the complete historical timeline. Spark handles batch pipelines to calculate heavy offline features.</li>
+                <li style="margin-bottom: .75rem;">State Synchronization: During backfills, batch jobs push to offline storage but also bootstrap the online KV store via bulk load APIs, without blocking real-time updates.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Streaming · Senior</div>
+          <div class="q-title">Design a Real-Time Fraud Detection Pipeline</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Design a streaming data pipeline to detect fraudulent transactions in real-time (< 1 second) at Stripe's scale (millions of transactions/day).</p>
+          <p><strong>Hint:</strong> Push events to Kafka, process with Flink, and query rules against a fast KV store.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Stripe, Coinbase, Robinhood</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Event Ingestion: Route raw transaction payloads into Kafka partitions keyed by user_id for ordered processing.</li>
+                <li style="margin-bottom: .75rem;">Stream Processing: Flink consumes events, querying rapid rule sets and historical aggregations (e.g. transactions per hour).</li>
+                <li style="margin-bottom: .75rem;">State Backend: Use RocksDB within Flink to hold enormous user time-window states locally without network roundtrips.</li>
+                <li style="margin-bottom: .75rem;">Low Latency Lookups: Query external ML features simultaneously from Redis if additional pre-computed risk embeddings are needed.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Data Lakehouse · Staff</div>
+          <div class="q-title">Design a Petabyte-Scale Analytics Platform</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> You are asked to build a new analytics platform for a company with 500TB of data today, growing to 10PB. Design the storage, compute, and query layer.</p>
+          <p><strong>Hint:</strong> Use decoupled storage (S3/Iceberg) and compute (Trino/Spark).</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Databricks, Snowflake, Airbnb</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Storage Layer: Centralize structured and semi-structured payloads in AWS S3 or GCS using Parquet format.</li>
+                <li style="margin-bottom: .75rem;">Table Format: Adopt Apache Iceberg or Delta Lake to afford ACID transactions, schema evolution, and time-travel querying.</li>
+                <li style="margin-bottom: .75rem;">Compute Separation: Provision separate compute clusters (Spark for ETL heavy lifting, Trino/Presto for ad-hoc BI queries).</li>
+                <li style="margin-bottom: .75rem;">Partitioning Strategy: Partition data temporally (by date/hour) to heavily prune files during reporting scans.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Data Quality · Mid</div>
+          <div class="q-title">Design a Data Observability System</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Design a system that automatically detects data quality issues (missing data, schema drift, outliers) across 500 production pipelines and alerts owners.</p>
+          <p><strong>Hint:</strong> Implement statistical checks and Great Expectations validations triggered via Airflow operators.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Palantir, Confluent, Cloudflare</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Metadata Extraction: Use sensors (e.g., Monte Carlo) connected to warehouse logs to extract automated table metrics.</li>
+                <li style="margin-bottom: .75rem;">Statistical Profiling: Run statistical models over standard deviations of row counts to detect volume anomalies.</li>
+                <li style="margin-bottom: .75rem;">Schema Drift: Capture table schemas dynamically and alert on dropped columns or type changes via Slack/PagerDuty hooks.</li>
+                <li style="margin-bottom: .75rem;">Circuit Breakers: Integrate Great Expectations checks inside the Airflow DAG to halt downstream processing upon failure.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Streaming · Senior</div>
+          <div class="q-title">Design a CDC (Change Data Capture) Pipeline</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Design a system to replicate changes from a PostgreSQL OLTP database (1M writes/day) to a data warehouse in near-real-time (<5 min lag), handling schema evolution gracefully.</p>
+          <p><strong>Hint:</strong> Debezium connector on Postgres WAL writing to Kafka, then sink down to Snowflake.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Stripe, Airbnb, Confluent</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Log Mining: Use Debezium to hook into Postgres Logical Replication (WAL) to extract row-level changes with minimal OLTP overhead.</li>
+                <li style="margin-bottom: .75rem;">Message Bus: Debezium streams CDC payloads (Insert, Update, Delete) into Kafka topics mapped per table.</li>
+                <li style="margin-bottom: .75rem;">Schema Evolution: Use Confluent Schema Registry to enforce Avro schemas and map changes safely downstream.</li>
+                <li style="margin-bottom: .75rem;">Sinking: A Kafka Connect Snowflake sink consumes the CDC feed and merges it into target tables via micro-batches.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Cost Optimization · Staff</div>
+          <div class="q-title">Reduce Cloud Data Warehouse Costs by 60%</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Your Snowflake bill is $2M/month and growing. Walk through your investigation and optimization approach.</p>
+          <p><strong>Hint:</strong> Analyze query history for un-clustered scans, check auto-suspend timing, right-size warehouses, and flag non-incremental dbt materializations.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Snowflake, Airbnb, DoorDash</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Account Usage: Query the SNOWFLAKE.ACCOUNT_USAGE schema to identify the most expensive warehouses and longest-running queries.</li>
+                <li style="margin-bottom: .75rem;">Auto-Suspend Tuning: Reduce the auto-suspend threshold on warehouses to 60 seconds to cut down idle credit drain.</li>
+                <li style="margin-bottom: .75rem;">Materialization Efficiency: Convert full-refresh dbt models into incremental models where historical data is immutable.</li>
+                <li style="margin-bottom: .75rem;">Clustering: Implement a cluster key on heavily scanned massive tables to enhance partition pruning and reduce micro-partition scans.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+    </div>
+
+    <a href="#" style="display:block; margin-top:1rem; font-family:'IBM Plex Mono'; font-size:.65rem; color:var(--blue-lt); text-decoration:none; text-align:right; letter-spacing:.05em;">SEE MORE THEORY CONCEPTS →</a>
+
+    <div class="section-header" style="margin-top: 3rem;">
+      <div>
+        <div class="eyebrow">/ DAILY DRILLS</div>
+        <div class="section-title">DAILY INTERVIEW QUESTIONS</div>
+      </div>
+      <div class="section-count">5 ACTIVE QUESTIONS</div>
+    </div>
+
+    <!-- CODING ACCORDION -->
+    <div class="questions-accordion">
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Arrays · Medium</div>
+          <div class="q-title">Sliding Window — Max Sum Subarray of Size K</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Given an array of integers and a number k, find the maximum sum of a subarray of size k.</p>
+          <p><strong>Hint:</strong> Use a sliding window: add the next element, subtract the last element, track the max.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Google, Stripe, OpenAI</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Initialization: Compute the sum of the first k elements and store it as the initial maximum window sum.</li>
+                <li style="margin-bottom: .75rem;">Sliding Mechanism: For element i from k to the end of the array, add the new element and subtract the element at i-k.</li>
+                <li style="margin-bottom: .75rem;">Tracking: Compare the newly computed window sum against the global maximum and update if larger.</li>
+                <li style="margin-bottom: .75rem;">Time Complexity: This approach evaluates in strict O(n) time and O(1) space, as it passes through the array exactly once.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Hash Maps · Medium</div>
+          <div class="q-title">Two Sum / Group Anagrams</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Given a list of strings, group all anagrams together.</p>
+          <p><strong>Hint:</strong> Sort each string as a key in a hashmap — anagrams will share the same sorted key.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Airbnb, Databricks</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Key Generation: For each string, sort its characters alphabetically to generate a standard signature (e.g., eat -> aet).</li>
+                <li style="margin-bottom: .75rem;">Dictionary Mapping: Use a Hash Map where the sorted signature is the key, and the value is a list of the original strings.</li>
+                <li style="margin-bottom: .75rem;">Alternative Keying: To avoid the O(K log K) string sort, create a 26-element character frequency array and cast it to a tuple as the dict key.</li>
+                <li style="margin-bottom: .75rem;">Time Complexity: Sorting takes O(N * K log K). The character array approach drops this to O(N * K).</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Graphs · Hard</div>
+          <div class="q-title">Task Scheduler / Topological Sort</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Given a list of tasks and their prerequisites, find a valid execution order (or detect a cycle).</p>
+          <p><strong>Hint:</strong> Use Kahn's algorithm (BFS-based topological sort). Track in-degrees.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Anthropic, Palantir, Stripe</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Graph Construction: Build an adjacency list to represent prerequisites as directed edges, and an array to track in-degrees for each node.</li>
+                <li style="margin-bottom: .75rem;">Queue Initialization: Identify all nodes (tasks) with an in-degree of 0 (no prerequisites) and push them onto a queue.</li>
+                <li style="margin-bottom: .75rem;">BFS Traversal: Pop a node, append to the sorted list, and decrement the in-degree of its neighbors. If a neighbor reaches 0, enqueue it.</li>
+                <li style="margin-bottom: .75rem;">Cycle Detection: If the processed node count equals the total tasks, return the order. Otherwise, a cycle exists (return empty or error).</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Recursion / DP · Easy</div>
+          <div class="q-title">Fibonacci with Memoization</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Implement Fibonacci using recursion, then optimize with memoization, then with DP.</p>
+          <p><strong>Hint:</strong> Cache results in a dict (top-down). Then build bottom-up to eliminate the call stack.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Meta, Amazon</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Naive Recursion: Base case if n <= 1 return n. Else return fib(n-1) + fib(n-2). Pathological O(2^n) time.</li>
+                <li style="margin-bottom: .75rem;">Top-Down Memoization: Pass a dictionary/array into the recursion. Store computed results. Drops time to O(N) by preventing duplicate sub-trees.</li>
+                <li style="margin-bottom: .75rem;">Bottom-Up DP: Use a loop from 2 to N, maintaining an array of solutions. Time is O(N), Space is O(N).</li>
+                <li style="margin-bottom: .75rem;">Constant Space DP: Realize we only need the last two variables. Track a and b. Swap them. Drops Space to strict O(1).</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+      <details class="q-detail">
+        <summary class="q-summary">
+          <div class="q-meta">Heaps · Hard</div>
+          <div class="q-title">Top K Frequent Elements</div>
+        </summary>
+        <div class="q-answer">
+          <p><strong>Prompt:</strong> Given an array, return the k most frequent elements.</p>
+          <p><strong>Hint:</strong> Use a min-heap of size k. Or bucket sort by frequency for O(n) solution.</p>
+          <p class="q-companies"><strong>Tagged at:</strong> Databricks, Confluent, Stripe</p>
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Hash Map Counting: First pass, iterate through the array compiling a frequency map of value -> count. O(N).</li>
+                <li style="margin-bottom: .75rem;">Min-Heap Approach: Push keys into a priority queue/min-heap based on frequency. Maintain size K. Total time O(N log K).</li>
+                <li style="margin-bottom: .75rem;">Bucket Sort Optimization: Create an array of lists buckets where the index is the frequency. Time drops to strict O(N).</li>
+                <li style="margin-bottom: .75rem;">Extraction: Iterate the buckets backwards (from max possible frequency N down to 1), appending items until K is reached.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </details>
+    </div>
+    
+    <a href="#" style="display:block; margin-top:1rem; font-family:'IBM Plex Mono'; font-size:.65rem; color:var(--blue-lt); text-decoration:none; text-align:right; letter-spacing:.05em;">SEE ALL CODING DRILLS →</a>
+
+    <!-- TOPIC HEATMAP -->
+    <div class="heatmap-section">
+      <div class="eyebrow">/ UNIVERSAL FUNDAMENTALS HEATMAP</div>
+      <div style="margin-top:1.5rem">
+        <div class="heatmap-row"><div class="heatmap-label">SYSTEM DESIGN</div><div class="heatmap-bar-wrap"><div class="heatmap-bar" style="width:100%"></div></div><div class="heatmap-val">10/10</div></div>
+        <div class="heatmap-row"><div class="heatmap-label">SQL WINDOW FX</div><div class="heatmap-bar-wrap"><div class="heatmap-bar" style="width:90%"></div></div><div class="heatmap-val">9/10</div></div>
+        <div class="heatmap-row"><div class="heatmap-label">PIPELINE RELIABILITY</div><div class="heatmap-bar-wrap"><div class="heatmap-bar" style="width:90%"></div></div><div class="heatmap-val">9/10</div></div>
+        <div class="heatmap-row"><div class="heatmap-label">SPARK INTERNALS</div><div class="heatmap-bar-wrap"><div class="heatmap-bar" style="width:80%"></div></div><div class="heatmap-val">8/10</div></div>
+        <div class="heatmap-row"><div class="heatmap-label">LEETCODE DSA</div><div class="heatmap-bar-wrap"><div class="heatmap-bar" style="width:80%"></div></div><div class="heatmap-val">8/10</div></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer style="border-top:1px solid var(--border); padding:2rem 1.5rem; margin-top:4rem; display:flex; justify-content:space-between; align-items:center; font-family:'IBM Plex Mono'; font-size:.5rem; color:var(--text-mute);">
+    <div>PROJECT WATCHTOWER · © 2026</div>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="/job-search" style="color:inherit; text-decoration:none;">LIVE LISTINGS</a>
+      <a href="https://suyashsingh.com" style="color:inherit; text-decoration:none;">PORTFOLIO</a>
+    
+          <details style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 1rem; border-left: 2px solid var(--amber);">
+            <summary style="font-family: 'Open Sans', sans-serif; font-size: 0.95rem; font-weight: normal; color: var(--amber); cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; gap: 0.5rem;">
+              ▶ Show expert answer
+            </summary>
+            <div style="margin-top: 1rem;">
+              <ul style="padding-left: 1.25rem; margin-bottom: 0;">
+                <li style="margin-bottom: .75rem;">Hash Map Counting: First pass, iterate through the array compiling a frequency map of value -> count. O(N).</li>
+                <li style="margin-bottom: .75rem;">Min-Heap Approach: Push keys into a priority queue/min-heap based on frequency. Maintain size K. Total time O(N log K).</li>
+                <li style="margin-bottom: .75rem;">Bucket Sort Optimization: Create an array of lists `buckets` where the index is the frequency. Time drops to strict O(N).</li>
+                <li style="margin-bottom: .75rem;">Extraction: Iterate the buckets backwards (from max possible frequency N down to 1), appending items until K is reached.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+  </footer>
+
+</body>
+</html>
